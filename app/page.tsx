@@ -138,7 +138,7 @@ export default function Home() {
               <ul className="mt-6 space-y-3 text-sm text-zinc-600 dark:text-zinc-400">
                 {proFeatures.map((f) => (<li key={f} className="flex items-start gap-2"><span className="mt-0.5 text-blue-500">&#10003;</span>{f}</li>))}
               </ul>
-              <Link href="/editor" className="mt-6 block rounded-lg bg-blue-600 py-2 text-center text-sm font-medium text-white hover:bg-blue-700">Start Free, Upgrade Later</Link>
+              <Link href="/editor?upgrade=true" className="mt-6 block rounded-lg bg-blue-600 py-2 text-center text-sm font-medium text-white hover:bg-blue-700">Start Free, Upgrade Later</Link>
             </div>
           </div>
         </section>
