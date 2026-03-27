@@ -47,6 +47,83 @@ export default function EditorPage() {
   const [className, setClassName] = useState("");
   const svgRef = useRef<SVGSVGElement>(null);
 
+  // ─── Pro tier state ─────────────────────────────────────────────────────────
+
+  const [tier, setTier] = useState<"free" | "pro">("free");
+  const [proEmail, setProEmail] = useState<string | null>(null);
+  const [showUpgrade, setShowUpgrade] = useState(false);
+  const [upgradeEmail, setUpgradeEmail] = useState("");
+  const [upgradePlan, setUpgradePlan] = useState<"monthly" | "yearly">("yearly");
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+
+  const isPro = tier === "pro";
+
+  // ─── Check license on mount ─────────────────────────────────────────────────
+
+  useEffect(() => {
+    const stored = localStorage.getItem("proEmail");
+    if (stored) {
+      setProEmail(stored);
+      setUpgradeEmail(stored);
+      fetch(`/api/license?email=${encodeURIComponent(stored)}`)
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.tier === "pro") setTier("pro");
+        })
+        .catch(() => {});
+    }
+
+    // Check for upgrade query param from landing page
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("upgrade") === "true") {
+      setShowUpgrade(true);
+      window.history.replaceState({}, "", "/editor");
+    }
+
+    // Check for post-checkout redirect
+    if (params.get("upgraded") === "true") {
+      const email = localStorage.getItem("proEmail");
+      if (email) {
+        fetch(`/api/license?email=${encodeURIComponent(email)}`)
+          .then((r) => r.json())
+          .then((data) => {
+            if (data.tier === "pro") setTier("pro");
+          })
+          .catch(() => {});
+      }
+      window.history.replaceState({}, "", "/editor");
+    }
+  }, []);
+
+  // ─── Checkout ─────────────────────────────────────────────────────────────
+
+  async function handleCheckout() {
+    if (!upgradeEmail.trim()) return;
+    setCheckoutLoading(true);
+    try {
+      localStorage.setItem("proEmail", upgradeEmail.toLowerCase().trim());
+      setProEmail(upgradeEmail.toLowerCase().trim());
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: upgradeEmail.toLowerCase().trim(),
+          plan: upgradePlan,
+        }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        setError(data.error || "Failed to start checkout");
+        setCheckoutLoading(false);
+      }
+    } catch {
+      setError("Failed to start checkout");
+      setCheckoutLoading(false);
+    }
+  }
+
   // ─── Load class on mount ───────────────────────────────────────────────────
 
   useEffect(() => {
@@ -85,7 +162,7 @@ export default function EditorPage() {
     const res = await fetch("/api/classes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: className.trim() }),
+      body: JSON.stringify({ name: className.trim(), email: proEmail }),
     });
     if (!res.ok) {
       const data = await res.json();
@@ -106,7 +183,11 @@ export default function EditorPage() {
     const res = await fetch("/api/students", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ classId: currentClass.id, name: newStudentName.trim() }),
+      body: JSON.stringify({
+        classId: currentClass.id,
+        name: newStudentName.trim(),
+        email: proEmail,
+      }),
     });
     if (!res.ok) {
       const data = await res.json();
@@ -159,7 +240,7 @@ export default function EditorPage() {
       const res = await fetch("/api/students", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ classId: currentClass.id, names }),
+        body: JSON.stringify({ classId: currentClass.id, names, email: proEmail }),
       });
       if (!res.ok) {
         const data = await res.json();
@@ -283,15 +364,89 @@ export default function EditorPage() {
     );
   }
 
+  // ─── Upgrade Modal ─────────────────────────────────────────────────────────
+
+  const upgradeModal = showUpgrade && (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+      <div className="mx-4 w-full max-w-md rounded-xl bg-white p-6 dark:bg-zinc-900">
+        <h2 className="text-xl font-bold text-zinc-900 dark:text-white">
+          Upgrade to Pro
+        </h2>
+        <p className="mt-2 text-sm text-zinc-500">
+          Unlimited classes, all layouts, clean PDF, student notes, and more.
+        </p>
+
+        <div className="mt-4">
+          <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
+            Email address
+          </label>
+          <input
+            type="email"
+            value={upgradeEmail}
+            onChange={(e) => setUpgradeEmail(e.target.value)}
+            placeholder="you@school.edu"
+            className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
+          />
+        </div>
+
+        <div className="mt-4 flex gap-3">
+          <button
+            onClick={() => setUpgradePlan("yearly")}
+            className={`flex-1 rounded-lg border-2 p-3 text-left text-sm ${
+              upgradePlan === "yearly"
+                ? "border-blue-600 bg-blue-50 dark:bg-blue-900/20"
+                : "border-zinc-200 dark:border-zinc-700"
+            }`}
+          >
+            <div className="font-semibold text-zinc-900 dark:text-white">
+              $29.99/year
+            </div>
+            <div className="text-xs text-zinc-500">Save 37%</div>
+          </button>
+          <button
+            onClick={() => setUpgradePlan("monthly")}
+            className={`flex-1 rounded-lg border-2 p-3 text-left text-sm ${
+              upgradePlan === "monthly"
+                ? "border-blue-600 bg-blue-50 dark:bg-blue-900/20"
+                : "border-zinc-200 dark:border-zinc-700"
+            }`}
+          >
+            <div className="font-semibold text-zinc-900 dark:text-white">
+              $3.99/month
+            </div>
+            <div className="text-xs text-zinc-500">Flexible</div>
+          </button>
+        </div>
+
+        <div className="mt-6 flex gap-2">
+          <button
+            onClick={() => setShowUpgrade(false)}
+            className="flex-1 rounded-lg border border-zinc-300 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleCheckout}
+            disabled={checkoutLoading || !upgradeEmail.trim()}
+            className="flex-1 rounded-lg bg-blue-600 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+          >
+            {checkoutLoading ? "Redirecting..." : "Continue to Payment"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
   if (!currentClass) {
     return (
       <div className="flex h-screen items-center justify-center">
+        {upgradeModal}
         <div className="w-full max-w-md rounded-xl border border-zinc-200 bg-white p-8 dark:border-zinc-800 dark:bg-zinc-900">
           <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">
             Create Your Class
           </h1>
           <p className="mt-2 text-sm text-zinc-500">
-            Free tier: 1 class, up to 25 students
+            {isPro ? "Pro: Unlimited classes" : "Free tier: 1 class, up to 25 students"}
           </p>
           {error && (
             <p className="mt-3 text-sm text-red-500">{error}</p>
@@ -312,6 +467,14 @@ export default function EditorPage() {
               Create
             </button>
           </div>
+          {!isPro && (
+            <button
+              onClick={() => setShowUpgrade(true)}
+              className="mt-4 w-full text-center text-sm text-blue-600 hover:underline"
+            >
+              Upgrade to Pro for unlimited classes
+            </button>
+          )}
         </div>
       </div>
     );
@@ -319,6 +482,8 @@ export default function EditorPage() {
 
   return (
     <div className="flex h-screen flex-col">
+      {upgradeModal}
+
       {/* Header */}
       <header className="flex items-center justify-between border-b border-zinc-200 px-4 py-3 dark:border-zinc-800 print:hidden">
         <div>
@@ -326,10 +491,23 @@ export default function EditorPage() {
             {currentClass.name}
           </h1>
           <p className="text-xs text-zinc-500">
-            {students.length}/25 students &middot; {seatedIds.size} seated
+            {students.length}{isPro ? "" : "/25"} students &middot; {seatedIds.size} seated
+            {isPro && (
+              <span className="ml-2 rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
+                Pro
+              </span>
+            )}
           </p>
         </div>
         <div className="flex items-center gap-2">
+          {!isPro && (
+            <button
+              onClick={() => setShowUpgrade(true)}
+              className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-600 hover:bg-blue-100 dark:border-blue-800 dark:bg-blue-900/20 dark:text-blue-400"
+            >
+              Upgrade
+            </button>
+          )}
           <button
             onClick={shuffleStudents}
             className="rounded-lg border border-zinc-300 px-3 py-1.5 text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
@@ -571,16 +749,18 @@ export default function EditorPage() {
                 );
               })}
 
-              {/* Watermark */}
-              <text
-                x={svgW / 2}
-                y={svgH - 10}
-                textAnchor="middle"
-                fontSize={10}
-                className="fill-zinc-300 dark:fill-zinc-700 print:fill-zinc-400"
-              >
-                Made with Classroom Seating Chart Maker (Free)
-              </text>
+              {/* Watermark — only shown for free tier */}
+              {!isPro && (
+                <text
+                  x={svgW / 2}
+                  y={svgH - 10}
+                  textAnchor="middle"
+                  fontSize={10}
+                  className="fill-zinc-300 dark:fill-zinc-700 print:fill-zinc-400"
+                >
+                  Made with Classroom Seating Chart Maker (Free)
+                </text>
+              )}
             </svg>
           </div>
 

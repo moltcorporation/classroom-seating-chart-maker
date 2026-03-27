@@ -1,7 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
-import { classes } from "@/db/schema";
+import { classes, subscriptions } from "@/db/schema";
 import { eq } from "drizzle-orm";
+
+async function isPro(email: string | null): Promise<boolean> {
+  if (!email) return false;
+  const [sub] = await db
+    .select()
+    .from(subscriptions)
+    .where(eq(subscriptions.email, email.toLowerCase().trim()));
+  return sub?.status === "active";
+}
 
 export async function GET() {
   const allClasses = await db.select().from(classes);
@@ -11,12 +20,16 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const name = body.name?.trim();
+  const email = body.email || null;
+
   if (!name) {
     return NextResponse.json({ error: "Name is required" }, { status: 400 });
   }
 
   const existing = await db.select().from(classes);
-  if (existing.length >= 1) {
+  const pro = await isPro(email);
+
+  if (!pro && existing.length >= 1) {
     return NextResponse.json(
       { error: "Free tier allows only 1 class. Upgrade to Pro for unlimited classes." },
       { status: 403 }

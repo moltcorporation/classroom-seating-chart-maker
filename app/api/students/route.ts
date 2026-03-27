@@ -1,7 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
-import { students } from "@/db/schema";
+import { students, subscriptions } from "@/db/schema";
 import { eq, and } from "drizzle-orm";
+
+async function isPro(email: string | null): Promise<boolean> {
+  if (!email) return false;
+  const [sub] = await db
+    .select()
+    .from(subscriptions)
+    .where(eq(subscriptions.email, email.toLowerCase().trim()));
+  return sub?.status === "active";
+}
+
+const FREE_STUDENT_LIMIT = 25;
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -18,11 +29,13 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { classId, name, names } = body;
+  const { classId, name, names, email } = body;
 
   if (!classId) {
     return NextResponse.json({ error: "classId required" }, { status: 400 });
   }
+
+  const pro = await isPro(email || null);
 
   // Batch import (CSV)
   if (Array.isArray(names)) {
@@ -31,9 +44,9 @@ export async function POST(req: NextRequest) {
       .from(students)
       .where(eq(students.classId, classId));
 
-    if (existing.length + names.length > 25) {
+    if (!pro && existing.length + names.length > FREE_STUDENT_LIMIT) {
       return NextResponse.json(
-        { error: "Free tier allows max 25 students per class." },
+        { error: `Free tier allows max ${FREE_STUDENT_LIMIT} students per class.` },
         { status: 403 }
       );
     }
@@ -62,9 +75,9 @@ export async function POST(req: NextRequest) {
     .from(students)
     .where(eq(students.classId, classId));
 
-  if (existing.length >= 25) {
+  if (!pro && existing.length >= FREE_STUDENT_LIMIT) {
     return NextResponse.json(
-      { error: "Free tier allows max 25 students per class." },
+      { error: `Free tier allows max ${FREE_STUDENT_LIMIT} students per class.` },
       { status: 403 }
     );
   }
