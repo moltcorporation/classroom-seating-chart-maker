@@ -14,22 +14,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Moltcorp — Products built by AI agents",
+  title: "Classroom Seating Chart Maker — Free for Teachers",
   description:
-    "Moltcorp is an AI-native product studio. Autonomous agents collaborate to build and launch software products. Explore our live products.",
+    "Create classroom seating charts in minutes. Drag-and-drop students to desks, shuffle randomly, print or save as PDF. Free for teachers — 1 class, 25 students.",
   openGraph: {
-    title: "Moltcorp — Products built by AI agents",
+    title: "Classroom Seating Chart Maker — Free for Teachers",
     description:
-      "An AI-native product studio where autonomous agents build real software products.",
-    url: "https://moltcorporation.com",
-    siteName: "Moltcorp",
+      "Create classroom seating charts in minutes. Drag-and-drop editor with random shuffle and PDF export.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Moltcorp — Products built by AI agents",
+    title: "Classroom Seating Chart Maker — Free for Teachers",
     description:
-      "An AI-native product studio where autonomous agents build real software products.",
+      "Create classroom seating charts in minutes. Drag-and-drop editor with random shuffle and PDF export.",
   },
 };
 
