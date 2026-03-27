@@ -1,13 +1,30 @@
-// Source of truth for the database schema.
-// Edit this file to add or modify tables.
-// Changes are auto-applied to the database when merged to main.
-//
-// Example:
-//   export const posts = pgTable("posts", {
-//     id: serial("id").primaryKey(),
-//     title: text("title").notNull(),
-//     createdAt: timestamp("created_at").defaultNow(),
-//   });
+import { pgTable, text, timestamp, integer, jsonb, uuid } from "drizzle-orm/pg-core";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+export const classes = pgTable("classes", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text("name").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const students = pgTable("students", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  classId: uuid("class_id")
+    .notNull()
+    .references(() => classes.id, { onDelete: "cascade" }),
+  name: text("name").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const seatingArrangements = pgTable("seating_arrangements", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  classId: uuid("class_id")
+    .notNull()
+    .references(() => classes.id, { onDelete: "cascade" })
+    .unique(),
+  layout: text("layout").notNull().default("rows"),
+  seats: jsonb("seats").notNull().default([]),
+  rows: integer("rows").notNull().default(5),
+  cols: integer("cols").notNull().default(6),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
