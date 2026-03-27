@@ -167,9 +167,14 @@ export default function Home() {
       </main>
 
       <footer className="mt-16 border-t border-zinc-200 dark:border-zinc-800">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
-          <p className="text-sm text-zinc-500">Classroom Seating Chart Maker — Free for teachers.</p>
-          <Link href="/privacy-policy" className="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">Privacy Policy</Link>
+        <div className="mx-auto max-w-5xl px-6 py-6">
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-zinc-400">
+            <Link href="/random-seating-chart-generator" className="hover:text-zinc-600 dark:hover:text-zinc-300">Random Seating Chart Generator</Link>
+            <Link href="/band-seating-chart" className="hover:text-zinc-600 dark:hover:text-zinc-300">Band Seating Chart</Link>
+            <Link href="/classroom-seating-arrangement" className="hover:text-zinc-600 dark:hover:text-zinc-300">Classroom Seating Arrangements</Link>
+            <Link href="/privacy-policy" className="hover:text-zinc-600 dark:hover:text-zinc-300">Privacy Policy</Link>
+          </div>
+          <p className="mt-4 text-sm text-zinc-500">Classroom Seating Chart Maker — Free for teachers.</p>
         </div>
       </footer>
     </div>
