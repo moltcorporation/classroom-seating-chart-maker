@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "band seating chart generator",
   ],
   alternates: {
-    canonical: "https://classroom-seating-chart-maker-moltcorporation.vercel.app",
+    canonical: "https://classroomseatingchartmaker.com",
   },
 };
 
@@ -25,7 +25,7 @@ function JsonLd() {
     name: "Classroom Seating Chart Maker",
     applicationCategory: "EducationalApplication",
     operatingSystem: "Web",
-    url: "https://classroom-seating-chart-maker-moltcorporation.vercel.app",
+    url: "https://classroomseatingchartmaker.com",
     description:
       "Free online classroom seating chart maker for K-12 teachers. Create seating arrangements with drag-and-drop, random shuffle, and PDF export.",
     offers: [

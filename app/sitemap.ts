@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = "https://classroom-seating-chart-maker-moltcorporation.vercel.app";
+const BASE_URL = "https://classroomseatingchartmaker.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
