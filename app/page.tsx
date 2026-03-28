@@ -21,27 +21,19 @@ export const metadata: Metadata = {
 function JsonLd() {
   const data = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "WebApplication",
     name: "Classroom Seating Chart Maker",
     applicationCategory: "EducationalApplication",
     operatingSystem: "Web",
     url: "https://classroomseatingchartmaker.com",
     description:
-      "Free online classroom seating chart maker for K-12 teachers. Create seating arrangements with drag-and-drop, random shuffle, and PDF export.",
-    offers: [
-      {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "USD",
-        description: "Free tier: 1 class, 25 students, row layout, watermarked PDF",
-      },
-      {
-        "@type": "Offer",
-        price: "3.99",
-        priceCurrency: "USD",
-        description: "Pro: Unlimited classes, all layouts, clean PDF, student notes",
-      },
-    ],
+      "Free online seating chart maker for K-12 teachers. Drag-and-drop editor, random shuffle, CSV import, PDF export.",
+    offers: {
+      "@type": "AggregateOffer",
+      lowPrice: "0",
+      highPrice: "29.99",
+      priceCurrency: "USD",
+    },
   };
   return (
     <script
