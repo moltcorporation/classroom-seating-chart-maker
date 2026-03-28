@@ -17,6 +17,25 @@ export const metadata: Metadata = {
   },
 };
 
+const faqItems = [
+  {
+    q: "How do you arrange seating for a concert band?",
+    a: "Concert bands typically seat woodwinds (flutes, clarinets, oboes) front-left, brass (trumpets, trombones, tubas) center-right, and percussion in the back row. First-chair players sit at the front of each section. The director stands center-front with clear sightlines to every section leader.",
+  },
+  {
+    q: "What is the standard orchestra seating arrangement?",
+    a: "The standard orchestra layout places first violins to the conductor's left, second violins to the right (or behind firsts), violas center-left, cellos center-right, and double basses behind cellos. Woodwinds sit behind strings, brass behind woodwinds, and percussion in the back.",
+  },
+  {
+    q: "How often should band directors change seating charts?",
+    a: "Most directors update seating after chair auditions, typically once per quarter or semester. Some rearrange for specific concert pieces that require different balance. Keep separate charts for concert formation, rehearsal seating, and sectionals so you can switch quickly.",
+  },
+  {
+    q: "Can I use this for marching band formations?",
+    a: "Our editor works best for indoor concert seating. For marching band drill charts, you can use the free-form desk placement to map approximate positions, but dedicated drill design software is better for precise field formations.",
+  },
+];
+
 function JsonLd() {
   const app = {
     "@context": "https://schema.org",
@@ -41,10 +60,23 @@ function JsonLd() {
       { "@type": "ListItem", position: 2, name: "Band Seating Chart Generator", item: "https://classroomseatingchartmaker.com/band-seating-chart" },
     ],
   };
+  const faq = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(app) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
     </>
   );
 }
@@ -154,7 +186,14 @@ export default function BandSeatingChart() {
               Chair placement matters for sound balance. First-chair players sit at section fronts, carrying the melody. The director needs clear sightlines to every section leader. Our editor gives you flexible desk placement so you can create the exact curved layout your ensemble uses — not just rigid rows.
             </p>
             <p>
-              Many directors maintain multiple charts: one for concert formation, one for rehearsal, one for marching warmups, and sometimes individual section charts for sectionals. With our tool, each configuration saves separately so you can switch between them in seconds.
+              Many directors maintain multiple charts: one for concert formation, one for rehearsal, one for marching warmups, and sometimes individual section charts for sectionals. With our tool, each configuration saves separately so you can switch between them in seconds. Browse our{" "}
+              <Link
+                href="/seating-chart-templates"
+                className="text-blue-600 underline hover:text-blue-700 dark:text-blue-400"
+              >
+                seating chart templates
+              </Link>{" "}
+              for ready-made layouts you can customize.
             </p>
           </div>
         </section>
@@ -180,6 +219,25 @@ export default function BandSeatingChart() {
           </div>
         </section>
 
+        <section className="mt-20">
+          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Frequently Asked Questions</h2>
+          <div className="mx-auto mt-8 max-w-3xl space-y-4">
+            {faqItems.map((item) => (
+              <details
+                key={item.q}
+                className="group rounded-xl border border-zinc-200 dark:border-zinc-800"
+              >
+                <summary className="cursor-pointer px-6 py-4 font-medium text-zinc-900 dark:text-white">
+                  {item.q}
+                </summary>
+                <p className="px-6 pb-4 text-sm text-zinc-600 dark:text-zinc-400">
+                  {item.a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </section>
+
         <section className="mt-20 rounded-xl border border-zinc-200 bg-zinc-50 p-8 text-center dark:border-zinc-800 dark:bg-zinc-900">
           <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">Ready to seat your ensemble?</h2>
           <p className="mt-2 text-zinc-600 dark:text-zinc-400">Create a band seating chart in minutes. Free for directors — no signup needed.</p>
@@ -195,6 +253,8 @@ export default function BandSeatingChart() {
           <p className="mt-1 text-xs text-zinc-400">From the makers of <a href="https://nametracingmaker.com" className="underline hover:text-zinc-600 dark:hover:text-zinc-300">Tracing Worksheet Maker</a></p>
           <div className="flex gap-4">
             <Link href="/" className="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">Home</Link>
+            <Link href="/seating-chart-templates" className="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">Seating Chart Templates</Link>
+            <Link href="/classroom-seating-arrangement" className="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">Seating Arrangements</Link>
             <Link href="/privacy-policy" className="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">Privacy Policy</Link>
           </div>
         </div>
