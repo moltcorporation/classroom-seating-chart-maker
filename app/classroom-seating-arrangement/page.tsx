@@ -2,15 +2,16 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Classroom Seating Arrangement Guide & Generator | Free for Teachers",
+  title: "Classroom Seating Arrangement Ideas & Templates | Free for Teachers",
   description:
-    "Explore classroom seating arrangements: rows, clusters, U-shape, horseshoe, and lab layouts. Learn when to use each and create your arrangement with our free drag-and-drop tool.",
+    "Explore classroom seating arrangement ideas: rows, clusters, U-shape, horseshoe, pairs, and lab layouts. Find the best seating arrangement for your classroom and create it with our free generator.",
   keywords: [
+    "classroom seating arrangement templates",
+    "classroom seating arrangement generator",
+    "seating arrangement in classroom",
+    "best seating arrangement for classroom",
+    "seating arrangement ideas classroom",
     "classroom seating arrangement",
-    "classroom seating layout",
-    "classroom desk arrangement",
-    "seating arrangement for classroom",
-    "classroom setup ideas",
   ],
   alternates: {
     canonical: "https://classroomseatingchartmaker.com/classroom-seating-arrangement",
@@ -41,10 +42,57 @@ function JsonLd() {
       { "@type": "ListItem", position: 2, name: "Classroom Seating Arrangements", item: "https://classroomseatingchartmaker.com/classroom-seating-arrangement" },
     ],
   };
+  const faq = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What is the best seating arrangement for a classroom?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "The best seating arrangement depends on your teaching style. Traditional rows work best for lectures and testing. Cluster groups are ideal for collaborative projects. U-shape or horseshoe layouts promote class discussions. Most teachers switch between arrangements depending on the activity.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How often should I change my classroom seating arrangement?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Most teachers change seating every 4-6 weeks. Regular rotation helps students build new relationships, prevents cliques from forming, and gives everyone a chance at different spots in the room. Some teachers also switch layouts for different activities within the same week.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What seating arrangement works best for group work?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Cluster groups of 4-6 desks pushed together are the best arrangement for group work. Students face each other, making discussion and collaboration natural. Pairs (two desks side by side) work well for partner activities and think-pair-share exercises.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How do I create a seating arrangement for my classroom?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Use our free Classroom Seating Chart Maker to create your arrangement. Choose a layout (rows, clusters, U-shape, or custom), add your students, and drag desks into position. You can save multiple arrangements for the same class and export to PDF.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What seating arrangement is best for classroom management?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Traditional rows are generally best for classroom management because students face forward with limited peer interaction. For classes that need moderate collaboration with good sight lines, the U-shape gives the teacher access to every student while maintaining structure.",
+        },
+      },
+    ],
+  };
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(app) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
     </>
   );
 }
@@ -72,6 +120,13 @@ const arrangements = [
     desc: "Desks arranged in a U or horseshoe create an open center with students facing each other. This arrangement promotes class discussion because every student can see who is speaking. Teachers can walk into the center to engage with any student directly.",
   },
   {
+    title: "Pairs / Partner Desks",
+    bestFor: "Think-pair-share, peer tutoring, partner reading",
+    pros: ["Built-in partner for activities", "Easier to manage than large groups", "Good balance of focus and collaboration"],
+    cons: ["Limited to one partner", "Can create dependency on one peer", "Odd-numbered classes leave someone out"],
+    desc: "Two desks pushed together create natural partnerships throughout the room. Pairs strike a balance between individual focus and collaboration — students have a built-in partner for think-pair-share, peer editing, and practice activities without the distraction of a full group. Especially effective for younger students who need structure in their collaboration.",
+  },
+  {
     title: "Lab / Workstation",
     bestFor: "Science labs, computer rooms, art studios, makerspaces",
     pros: ["Designed for hands-on work", "Shared resources at each station", "Easy cleanup zones"],
@@ -94,7 +149,7 @@ export default function ClassroomSeatingArrangement() {
       <main className="mx-auto max-w-5xl px-6 py-16">
         <section className="text-center">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-5xl">
-            Classroom Seating Arrangements
+            Classroom Seating Arrangement Ideas & Templates
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
             The right seating arrangement transforms classroom behavior and engagement. Explore layouts for every teaching style, then build your arrangement with our free drag-and-drop tool.
@@ -149,7 +204,9 @@ export default function ClassroomSeatingArrangement() {
               Consider your room. Narrow rooms work better with rows. Square rooms open up options for clusters and U-shapes. Rooms with fixed furniture (lab benches, computer desks) dictate the layout — focus on optimizing student placement within the constraints you have.
             </p>
             <p>
-              Think about the mix. Many teachers use different arrangements for different activities — rows for testing days, clusters for project work, U-shape for Friday discussions. Our editor lets you save multiple arrangements for the same class so you can switch layouts without rebuilding from scratch.
+              Think about the mix. Many teachers use different arrangements for different activities — rows for testing days, clusters for project work, U-shape for Friday discussions. Our editor lets you save multiple arrangements for the same class so you can switch layouts without rebuilding from scratch. Browse our{" "}
+              <Link href="/seating-chart-templates" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline">seating chart templates</Link>{" "}
+              for ready-made layouts you can customize.
             </p>
           </div>
         </section>
@@ -180,6 +237,26 @@ export default function ClassroomSeatingArrangement() {
             <Link href="/#pricing" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
               See pricing &rarr;
             </Link>
+          </div>
+        </section>
+
+        <section className="mt-20">
+          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Frequently Asked Questions</h2>
+          <div className="mt-8 max-w-3xl mx-auto space-y-6">
+            {[
+              { q: "What is the best seating arrangement for a classroom?", a: "The best seating arrangement depends on your teaching style. Traditional rows work best for lectures and testing. Cluster groups are ideal for collaborative projects. U-shape or horseshoe layouts promote class discussions. Most teachers switch between arrangements depending on the activity." },
+              { q: "How often should I change my classroom seating arrangement?", a: "Most teachers change seating every 4-6 weeks. Regular rotation helps students build new relationships, prevents cliques from forming, and gives everyone a chance at different spots in the room." },
+              { q: "What seating arrangement works best for group work?", a: "Cluster groups of 4-6 desks pushed together are the best arrangement for group work. Pairs (two desks side by side) work well for partner activities and think-pair-share exercises." },
+              { q: "How do I create a seating arrangement for my classroom?", a: "Use our free Classroom Seating Chart Maker to create your arrangement. Choose a layout, add your students, and drag desks into position. You can save multiple arrangements and export to PDF." },
+              { q: "What seating arrangement is best for classroom management?", a: "Traditional rows are generally best for classroom management because students face forward with limited peer interaction. The U-shape gives the teacher access to every student while maintaining structure." },
+            ].map((item) => (
+              <details key={item.q} className="group rounded-xl border border-zinc-200 dark:border-zinc-800">
+                <summary className="cursor-pointer px-6 py-4 font-medium text-zinc-900 dark:text-white">
+                  {item.q}
+                </summary>
+                <p className="px-6 pb-4 text-sm text-zinc-600 dark:text-zinc-400">{item.a}</p>
+              </details>
+            ))}
           </div>
         </section>
 
