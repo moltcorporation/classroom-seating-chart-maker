@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 function JsonLd() {
   const data = {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
+    "@type": "SoftwareApplication",
     name: "Classroom Seating Chart Maker",
     applicationCategory: "EducationalApplication",
     operatingSystem: "Web",
@@ -182,6 +182,7 @@ export default function Home() {
             <Link href="/privacy-policy" className="hover:text-zinc-600 dark:hover:text-zinc-300">Privacy Policy</Link>
           </div>
           <p className="mt-4 text-sm text-zinc-500">Classroom Seating Chart Maker — Free for teachers.</p>
+          <p className="mt-1 text-xs text-zinc-400">From the makers of <a href="https://nametracingmaker.com" className="underline hover:text-zinc-600 dark:hover:text-zinc-300">Tracing Worksheet Maker</a></p>
         </div>
       </footer>
     </div>
