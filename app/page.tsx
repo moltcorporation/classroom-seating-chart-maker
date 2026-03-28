@@ -156,6 +156,21 @@ export default function Home() {
           <p className="mt-2 text-zinc-600 dark:text-zinc-400">Create your first classroom seating chart in under 2 minutes. No signup, no credit card.</p>
           <Link href="/editor" className="mt-6 inline-block rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">Create Your Seating Chart</Link>
         </section>
+        <section className="mt-20">
+          <h3 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">More Free Teacher Tools</h3>
+          <div className="mt-6 mx-auto max-w-xl">
+            <a
+              href="https://nametracingmaker.com"
+              className="block rounded-xl border border-zinc-200 p-6 hover:border-blue-300 hover:shadow-sm transition dark:border-zinc-800 dark:hover:border-blue-700"
+            >
+              <h4 className="text-lg font-semibold text-zinc-900 dark:text-white">Tracing Worksheet Maker</h4>
+              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+                Generate printable name, letter, and number tracing worksheets. Perfect for preschool and kindergarten classrooms.
+              </p>
+              <span className="mt-3 inline-block text-sm font-medium text-blue-600 dark:text-blue-400">Try it free &rarr;</span>
+            </a>
+          </div>
+        </section>
       </main>
 
       <footer className="mt-16 border-t border-zinc-200 dark:border-zinc-800">
