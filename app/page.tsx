@@ -43,6 +43,54 @@ function JsonLd() {
   );
 }
 
+const faqItems = [
+  {
+    q: "How do I create a seating chart?",
+    a: "Click \"Create Your Seating Chart\" to open the editor. Name your class, add students by typing names or importing a CSV, then drag students onto desks. You can also click \"Shuffle\" to randomly assign seats. Print or export as PDF when you're done.",
+  },
+  {
+    q: "Is the classroom seating chart maker free?",
+    a: "Yes! The free tier includes 1 class with up to 25 students, a row desk layout, drag-and-drop editing, random shuffle, CSV import, and PDF export with a small watermark. No signup or credit card required.",
+  },
+  {
+    q: "Can I import student names from a CSV file?",
+    a: "Yes. In the editor, click the CSV import button and upload a file with one student name per row. Names are added to your roster instantly — no need to type each one manually.",
+  },
+  {
+    q: "How do I randomly shuffle seats?",
+    a: "Open your class in the editor and click the \"Shuffle\" button. Students are randomly reassigned to available desks. You can shuffle as many times as you like until you get an arrangement you're happy with.",
+  },
+  {
+    q: "Can I export my seating chart as a PDF?",
+    a: "Yes. Click the print/export button in the editor to generate a PDF of your seating chart. Free users get a watermarked PDF. Pro users ($3.99/mo) get clean, unwatermarked exports ready to post on the classroom wall or share with substitutes.",
+  },
+  {
+    q: "Does it work on tablets and Chromebooks?",
+    a: "Yes. The seating chart generator runs entirely in your browser and works on any device — desktops, laptops, tablets, and Chromebooks. No software to install.",
+  },
+];
+
+function FaqJsonLd() {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
+
 const features = [
   { title: "Drag & Drop Editor", desc: "Drag students from the roster to any desk. Rearrange your classroom seating arrangement with intuitive drag-and-drop.", color: "bg-blue-100 text-blue-600 dark:bg-blue-900/30" },
   { title: "Random Seating Chart Generator", desc: "Randomly assign students to seats with one click. Perfect for new semesters and mixing up classroom dynamics.", color: "bg-green-100 text-green-600 dark:bg-green-900/30" },
@@ -59,6 +107,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <JsonLd />
+      <FaqJsonLd />
       <header className="border-b border-zinc-200 dark:border-zinc-800">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
           <h1 className="text-xl font-bold text-zinc-900 dark:text-white">Classroom Seating Chart Maker</h1>
@@ -176,6 +225,21 @@ export default function Home() {
           <p className="mt-2 text-zinc-600 dark:text-zinc-400">Create your first classroom seating chart in under 2 minutes. No signup, no credit card.</p>
           <Link href="/editor" className="mt-6 inline-block rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">Create Your Seating Chart</Link>
         </section>
+        <section className="mt-20">
+          <h3 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Frequently Asked Questions</h3>
+          <div className="mx-auto mt-8 max-w-3xl divide-y divide-zinc-200 dark:divide-zinc-800">
+            {faqItems.map((item) => (
+              <details key={item.q} className="group py-4">
+                <summary className="flex cursor-pointer items-center justify-between text-left text-base font-medium text-zinc-900 dark:text-white">
+                  {item.q}
+                  <span className="ml-4 shrink-0 text-zinc-400 group-open:rotate-45 transition-transform">+</span>
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
         <section className="mt-20">
           <h3 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">More Free Teacher Tools</h3>
           <div className="mt-6 mx-auto max-w-xl">
