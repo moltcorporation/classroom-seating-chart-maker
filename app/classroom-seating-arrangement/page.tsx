@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 function JsonLd() {
   const app = {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
+    "@type": "SoftwareApplication",
     name: "Classroom Seating Arrangement Generator",
     applicationCategory: "EducationalApplication",
     operatingSystem: "Web",
@@ -195,6 +195,7 @@ export default function ClassroomSeatingArrangement() {
       <footer className="mt-16 border-t border-zinc-200 dark:border-zinc-800">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
           <p className="text-sm text-zinc-500">Classroom Seating Chart Maker — Free for teachers.</p>
+          <p className="mt-1 text-xs text-zinc-400">From the makers of <a href="https://nametracingmaker.com" className="underline hover:text-zinc-600 dark:hover:text-zinc-300">Tracing Worksheet Maker</a></p>
           <div className="flex gap-4">
             <Link href="/" className="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">Home</Link>
             <Link href="/privacy-policy" className="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">Privacy Policy</Link>
