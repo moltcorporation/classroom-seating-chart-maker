@@ -18,9 +18,9 @@ export const metadata: Metadata = {
 };
 
 function JsonLd() {
-  const data = {
+  const app = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "WebApplication",
     name: "Band Seating Chart Generator",
     applicationCategory: "EducationalApplication",
     operatingSystem: "Web",
@@ -33,11 +33,19 @@ function JsonLd() {
       priceCurrency: "USD",
     },
   };
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Classroom Seating Chart Maker", item: "https://classroomseatingchartmaker.com" },
+      { "@type": "ListItem", position: 2, name: "Band Seating Chart Generator", item: "https://classroomseatingchartmaker.com/band-seating-chart" },
+    ],
+  };
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(app) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+    </>
   );
 }
 
