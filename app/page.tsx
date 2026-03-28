@@ -109,6 +109,26 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="mt-20">
+          <h3 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Why Teachers Love This Tool</h3>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { icon: "M13 10V3L4 14h7v7l9-11h-7z", title: "Instant Setup", desc: "Create your seating chart in minutes, not hours.", color: "bg-blue-100 text-blue-600 dark:bg-blue-900/30" },
+              { icon: "M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z", title: "Flexible Layouts", desc: "Row, group, or U-shape arrangements for any classroom.", color: "bg-green-100 text-green-600 dark:bg-green-900/30" },
+              { icon: "M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4", title: "Easy Updates", desc: "Drag and drop to rearrange when students move.", color: "bg-purple-100 text-purple-600 dark:bg-purple-900/30" },
+              { icon: "M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7", title: "Free for Teachers", desc: "Core features always free, no credit card required.", color: "bg-orange-100 text-orange-600 dark:bg-orange-900/30" },
+            ].map((item) => (
+              <div key={item.title} className="text-center">
+                <div className={`mx-auto flex h-12 w-12 items-center justify-center rounded-full ${item.color}`}>
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d={item.icon} /></svg>
+                </div>
+                <h4 className="mt-3 font-semibold text-zinc-900 dark:text-white">{item.title}</h4>
+                <p className="mt-1 text-sm text-zinc-500">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section className="mt-20" id="pricing">
           <h3 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Simple Pricing for Teachers</h3>
           <p className="mt-2 text-center text-zinc-600 dark:text-zinc-400">Start free. Upgrade when you need more.</p>
