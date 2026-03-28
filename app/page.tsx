@@ -263,6 +263,7 @@ export default function Home() {
             <Link href="/random-seating-chart-generator" className="hover:text-zinc-600 dark:hover:text-zinc-300">Random Seating Chart Generator</Link>
             <Link href="/band-seating-chart" className="hover:text-zinc-600 dark:hover:text-zinc-300">Band Seating Chart</Link>
             <Link href="/classroom-seating-arrangement" className="hover:text-zinc-600 dark:hover:text-zinc-300">Classroom Seating Arrangements</Link>
+            <Link href="/seating-chart-templates" className="hover:text-zinc-600 dark:hover:text-zinc-300">Seating Chart Templates</Link>
             <Link href="/privacy-policy" className="hover:text-zinc-600 dark:hover:text-zinc-300">Privacy Policy</Link>
           </div>
           <p className="mt-4 text-sm text-zinc-500">Classroom Seating Chart Maker — Free for teachers.</p>
