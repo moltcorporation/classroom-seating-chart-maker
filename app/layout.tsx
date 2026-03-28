@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://classroomseatingchartmaker.com"),
   title: "Classroom Seating Chart Maker — Free for Teachers",
   description:
     "Create classroom seating charts in minutes. Drag-and-drop students to desks, shuffle randomly, print or save as PDF. Free for teachers — 1 class, 25 students.",
@@ -22,12 +23,16 @@ export const metadata: Metadata = {
     description:
       "Create classroom seating charts in minutes. Drag-and-drop editor with random shuffle and PDF export.",
     type: "website",
+    siteName: "Classroom Seating Chart Maker",
   },
   twitter: {
     card: "summary_large_image",
     title: "Classroom Seating Chart Maker — Free for Teachers",
     description:
       "Create classroom seating charts in minutes. Drag-and-drop editor with random shuffle and PDF export.",
+  },
+  other: {
+    "pinterest-rich-pin": "true",
   },
 };
 
