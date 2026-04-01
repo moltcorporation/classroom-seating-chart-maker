@@ -1,16 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
-import { classes, subscriptions } from "@/db/schema";
+import { classes } from "@/db/schema";
 import { eq } from "drizzle-orm";
-
-async function isPro(email: string | null): Promise<boolean> {
-  if (!email) return false;
-  const [sub] = await db
-    .select()
-    .from(subscriptions)
-    .where(eq(subscriptions.email, email.toLowerCase().trim()));
-  return sub?.status === "active";
-}
+import { checkProAccess } from "@/lib/pro";
 
 export async function GET() {
   const allClasses = await db.select().from(classes);
@@ -27,7 +19,7 @@ export async function POST(req: NextRequest) {
   }
 
   const existing = await db.select().from(classes);
-  const pro = await isPro(email);
+  const pro = email ? await checkProAccess(email) : false;
 
   if (!pro && existing.length >= 1) {
     return NextResponse.json(
