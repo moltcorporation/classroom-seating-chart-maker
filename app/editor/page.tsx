@@ -54,7 +54,7 @@ export default function EditorPage() {
   const [showUpgrade, setShowUpgrade] = useState(false);
   const [upgradeEmail, setUpgradeEmail] = useState("");
   const [upgradePlan, setUpgradePlan] = useState<"monthly" | "yearly">("yearly");
-  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const checkoutLoading = false;
 
   const isPro = tier === "pro";
 
@@ -95,33 +95,18 @@ export default function EditorPage() {
     }
   }, []);
 
-  // ─── Checkout ─────────────────────────────────────────────────────────────
+  // ─── Payment link URLs ─────────────────────────────────────────────────────
 
-  async function handleCheckout() {
+  const PAYMENT_URLS = {
+    monthly: "https://buy.stripe.com/3cI28rg8jc0x3nfaYA3Nm0n",
+    yearly: "https://buy.stripe.com/00wcN55tF2pX0b32s43Nm0o",
+  };
+
+  function handleCheckout() {
     if (!upgradeEmail.trim()) return;
-    setCheckoutLoading(true);
-    try {
-      localStorage.setItem("proEmail", upgradeEmail.toLowerCase().trim());
-      setProEmail(upgradeEmail.toLowerCase().trim());
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: upgradeEmail.toLowerCase().trim(),
-          plan: upgradePlan,
-        }),
-      });
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        setError(data.error || "Failed to start checkout");
-        setCheckoutLoading(false);
-      }
-    } catch {
-      setError("Failed to start checkout");
-      setCheckoutLoading(false);
-    }
+    localStorage.setItem("proEmail", upgradeEmail.toLowerCase().trim());
+    setProEmail(upgradeEmail.toLowerCase().trim());
+    window.location.href = PAYMENT_URLS[upgradePlan];
   }
 
   // ─── Load class on mount ───────────────────────────────────────────────────

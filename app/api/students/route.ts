@@ -1,16 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
-import { students, subscriptions } from "@/db/schema";
+import { students } from "@/db/schema";
 import { eq, and } from "drizzle-orm";
-
-async function isPro(email: string | null): Promise<boolean> {
-  if (!email) return false;
-  const [sub] = await db
-    .select()
-    .from(subscriptions)
-    .where(eq(subscriptions.email, email.toLowerCase().trim()));
-  return sub?.status === "active";
-}
+import { checkProAccess } from "@/lib/pro";
 
 const FREE_STUDENT_LIMIT = 25;
 
@@ -35,7 +27,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "classId required" }, { status: 400 });
   }
 
-  const pro = await isPro(email || null);
+  const pro = email ? await checkProAccess(email) : false;
 
   // Batch import (CSV)
   if (Array.isArray(names)) {
