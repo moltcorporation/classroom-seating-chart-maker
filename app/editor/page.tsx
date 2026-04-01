@@ -90,6 +90,9 @@ export default function EditorPage() {
             if (data.tier === "pro") setTier("pro");
           })
           .catch(() => {});
+      } else {
+        // No stored email — prompt user to verify their purchase
+        setShowUpgrade(true);
       }
       window.history.replaceState({}, "", "/editor");
     }
@@ -104,9 +107,29 @@ export default function EditorPage() {
 
   function handleCheckout() {
     if (!upgradeEmail.trim()) return;
-    localStorage.setItem("proEmail", upgradeEmail.toLowerCase().trim());
-    setProEmail(upgradeEmail.toLowerCase().trim());
-    window.location.href = PAYMENT_URLS[upgradePlan];
+    const email = upgradeEmail.toLowerCase().trim();
+    localStorage.setItem("proEmail", email);
+    setProEmail(email);
+    const url = `${PAYMENT_URLS[upgradePlan]}?prefilled_email=${encodeURIComponent(email)}`;
+    window.location.href = url;
+  }
+
+  function handleVerifyAccess() {
+    if (!upgradeEmail.trim()) return;
+    const email = upgradeEmail.toLowerCase().trim();
+    localStorage.setItem("proEmail", email);
+    setProEmail(email);
+    fetch(`/api/license?email=${encodeURIComponent(email)}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.tier === "pro") {
+          setTier("pro");
+          setShowUpgrade(false);
+        } else {
+          setError("No active Pro subscription found for this email. If you just purchased, it may take a moment to process.");
+        }
+      })
+      .catch(() => setError("Failed to verify access. Please try again."));
   }
 
   // ─── Load class on mount ───────────────────────────────────────────────────
@@ -418,6 +441,14 @@ export default function EditorPage() {
             {checkoutLoading ? "Redirecting..." : "Continue to Payment"}
           </button>
         </div>
+
+        <button
+          onClick={handleVerifyAccess}
+          disabled={!upgradeEmail.trim()}
+          className="mt-3 w-full text-center text-sm text-blue-600 hover:underline disabled:opacity-50 disabled:no-underline"
+        >
+          Already purchased? Verify access
+        </button>
       </div>
     </div>
   );
