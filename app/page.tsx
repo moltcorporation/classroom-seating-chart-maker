@@ -199,8 +199,9 @@ export default function Home() {
               <ul className="mt-6 space-y-3 text-sm text-zinc-600 dark:text-zinc-400">
                 {proFeatures.map((f) => (<li key={f} className="flex items-start gap-2"><span className="mt-0.5 text-blue-500">&#10003;</span>{f}</li>))}
               </ul>
-              <Link href="/editor?upgrade=true" className="mt-6 block rounded-lg bg-blue-600 py-2 text-center text-sm font-medium text-white hover:bg-blue-700">Upgrade to Pro — $29.99/yr</Link>
-              <Link href="/editor?upgrade=true" className="mt-2 block text-center text-xs text-zinc-500 hover:text-blue-600">or $3.99/month</Link>
+              <a href="https://buy.stripe.com/00wcN55tF2pX0b32s43Nm0o" className="mt-6 block rounded-lg bg-blue-600 py-2 text-center text-sm font-medium text-white hover:bg-blue-700">Upgrade to Pro — $29.99/yr</a>
+              <a href="https://buy.stripe.com/3cI28rg8jc0x3nfaYA3Nm0n" className="mt-2 block text-center text-xs text-zinc-500 hover:text-blue-600">or $3.99/month</a>
+              <Link href="/editor?upgrade=true" className="mt-2 block text-center text-xs text-zinc-400 hover:text-blue-600">Already Pro? Verify access</Link>
             </div>
           </div>
         </section>
