@@ -105,109 +105,391 @@ const proFeatures = ["Unlimited classes", "All layouts: groups, U-shape, horsesh
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950">
+    <div className="min-h-screen" style={{ background: "var(--background)" }}>
       <JsonLd />
       <FaqJsonLd />
-      <header className="border-b border-zinc-200 dark:border-zinc-800">
+      <header
+        className="border-b"
+        style={{
+          borderColor: "var(--border)",
+          background: "var(--surface)",
+        }}
+      >
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <h1 className="text-xl font-bold text-zinc-900 dark:text-white">Classroom Seating Chart Maker</h1>
-          <Link href="/editor" className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">Open Editor</Link>
+          <h1
+            className="text-xl font-bold"
+            style={{ color: "var(--foreground)" }}
+          >
+            ✏️ Classroom Seating Chart Maker
+          </h1>
+          <Link
+            href="/editor"
+            className="rounded-lg px-4 py-2 text-sm font-medium text-white hover:shadow-lg transition-all hover:translate-y-[-1px]"
+            style={{
+              background: "linear-gradient(135deg, var(--primary), var(--accent))",
+            }}
+          >
+            Open Editor
+          </Link>
         </div>
       </header>
 
       <main className="mx-auto max-w-5xl px-6 py-16">
-        <section className="text-center">
-          <h2 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-5xl">Free Classroom Seating Chart Maker</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">The easiest seating chart generator for teachers. Add your students, drag them to desks, shuffle for random seating arrangements, and print beautiful classroom seating charts.</p>
-          <div className="mt-8">
-            <Link href="/editor" className="rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">Create Your Seating Chart</Link>
+        <section className="text-center relative">
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 20% 50%, var(--primary) 0%, transparent 50%), radial-gradient(circle at 80% 80%, var(--accent) 0%, transparent 50%)",
+            }}
+          />
+          <div className="relative">
+            <span
+              className="inline-block px-3 py-1 rounded-full text-sm font-medium mb-4"
+              style={{
+                background: "var(--primary-light)",
+                color: "var(--primary)",
+              }}
+            >
+              🎯 For busy teachers
+            </span>
+            <h2
+              className="text-4xl sm:text-5xl font-black tracking-tight mb-4 leading-tight"
+              style={{ color: "var(--foreground)" }}
+            >
+              Create Seating Charts in Minutes
+            </h2>
+            <p
+              className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed"
+              style={{ color: "var(--muted)" }}
+            >
+              Teachers love this tool. Drag students to desks, shuffle for random arrangements, export clean PDFs. No signup, no ads, no nonsense.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/editor"
+                className="rounded-lg px-6 py-3 text-base font-bold text-white hover:shadow-lg transition-all hover:translate-y-[-2px]"
+                style={{
+                  background: "linear-gradient(135deg, var(--primary), var(--accent))",
+                }}
+              >
+                Create Your Seating Chart
+              </Link>
+              <Link
+                href="#pricing"
+                className="rounded-lg px-6 py-3 text-base font-bold transition-all hover:translate-y-[-2px]"
+                style={{
+                  background: "var(--surface)",
+                  color: "var(--primary)",
+                  border: "2px solid var(--border)",
+                }}
+              >
+                See Pro Features
+              </Link>
+            </div>
+            <p
+              className="mt-4 text-sm font-medium"
+              style={{ color: "var(--muted-light)" }}
+            >
+              Free forever: 1 class, 25 students. No signup or credit card required.
+            </p>
           </div>
-          <p className="mt-3 text-sm text-zinc-500">Free forever: 1 class, 25 students. No signup required.</p>
         </section>
 
         <section className="mt-20">
-          <h3 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Everything You Need to Arrange Your Classroom</h3>
-          <div className="mt-8 grid gap-8 sm:grid-cols-3">
-            {features.map((f) => (
-              <div key={f.title} className="rounded-xl border border-zinc-200 p-6 dark:border-zinc-800">
-                <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${f.color}`}>
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+          <h3
+            className="text-center text-3xl font-black leading-tight"
+            style={{ color: "var(--foreground)" }}
+          >
+            Features Designed for Teachers
+          </h3>
+          <div className="mt-8 grid gap-6 sm:grid-cols-3">
+            {features.map((f, i) => {
+              const colors = [
+                { bg: "rgba(107, 91, 123, 0.1)", border: "var(--primary)" },
+                { bg: "rgba(217, 119, 6, 0.1)", border: "var(--accent)" },
+                { bg: "rgba(99, 102, 241, 0.1)", border: "var(--sage)" },
+                { bg: "rgba(14, 165, 233, 0.1)", border: "var(--sky)" },
+                { bg: "rgba(244, 63, 94, 0.1)", border: "var(--rose)" },
+                { bg: "rgba(107, 91, 123, 0.1)", border: "var(--muted)" },
+              ];
+              const color = colors[i % colors.length];
+              return (
+                <div
+                  key={f.title}
+                  className="rounded-xl p-6 border-l-4 transition-all hover:shadow-lg"
+                  style={{
+                    background: color.bg,
+                    borderColor: color.border,
+                  }}
+                >
+                  <div
+                    className="flex h-10 w-10 items-center justify-center rounded-lg"
+                    style={{ background: color.border, color: "white" }}
+                  >
+                    <svg
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                  </div>
+                  <h4
+                    className="mt-4 text-lg font-bold"
+                    style={{ color: "var(--foreground)" }}
+                  >
+                    {f.title}
+                  </h4>
+                  <p
+                    className="mt-2 text-sm leading-relaxed"
+                    style={{ color: "var(--muted)" }}
+                  >
+                    {f.desc}
+                  </p>
                 </div>
-                <h4 className="mt-4 text-lg font-semibold text-zinc-900 dark:text-white">{f.title}</h4>
-                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{f.desc}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
         <section className="mt-20">
-          <h3 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">How to Make a Classroom Seating Chart</h3>
+          <h3
+            className="text-center text-3xl font-black leading-tight"
+            style={{ color: "var(--foreground)" }}
+          >
+            Get Started in 4 Steps
+          </h3>
           <div className="mt-8 grid gap-6 sm:grid-cols-4">
             {[
-              { step: "1", title: "Create a class", desc: "Name your class to get started" },
-              { step: "2", title: "Add students", desc: "Type names or import from CSV" },
-              { step: "3", title: "Arrange seats", desc: "Drag students to desks or shuffle" },
-              { step: "4", title: "Print", desc: "Print or save as PDF" },
+              { step: "1", title: "Name your class", desc: "Give it a fun name" },
+              { step: "2", title: "Add students", desc: "Type or import from CSV" },
+              { step: "3", title: "Arrange & shuffle", desc: "Drag or auto-assign" },
+              { step: "4", title: "Print", desc: "Save as PDF instantly" },
             ].map((item) => (
               <div key={item.step} className="text-center">
-                <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">{item.step}</div>
-                <h4 className="mt-3 font-semibold text-zinc-900 dark:text-white">{item.title}</h4>
-                <p className="mt-1 text-sm text-zinc-500">{item.desc}</p>
+                <div
+                  className="mx-auto flex h-12 w-12 items-center justify-center rounded-full text-sm font-bold text-white"
+                  style={{
+                    background: "linear-gradient(135deg, var(--primary), var(--accent))",
+                  }}
+                >
+                  {item.step}
+                </div>
+                <h4
+                  className="mt-3 font-bold"
+                  style={{ color: "var(--foreground)" }}
+                >
+                  {item.title}
+                </h4>
+                <p
+                  className="mt-1 text-sm"
+                  style={{ color: "var(--muted)" }}
+                >
+                  {item.desc}
+                </p>
               </div>
             ))}
           </div>
         </section>
 
         <section className="mt-20">
-          <h3 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Why Teachers Love This Tool</h3>
+          <h3
+            className="text-center text-3xl font-black leading-tight"
+            style={{ color: "var(--foreground)" }}
+          >
+            Why Teachers Love This
+          </h3>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: "M13 10V3L4 14h7v7l9-11h-7z", title: "Instant Setup", desc: "Create your seating chart in minutes, not hours.", color: "bg-blue-100 text-blue-600 dark:bg-blue-900/30" },
-              { icon: "M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z", title: "Flexible Layouts", desc: "Row, group, or U-shape arrangements for any classroom.", color: "bg-green-100 text-green-600 dark:bg-green-900/30" },
-              { icon: "M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4", title: "Easy Updates", desc: "Drag and drop to rearrange when students move.", color: "bg-purple-100 text-purple-600 dark:bg-purple-900/30" },
-              { icon: "M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7", title: "Free for Teachers", desc: "Core features always free, no credit card required.", color: "bg-orange-100 text-orange-600 dark:bg-orange-900/30" },
+              { icon: "M13 10V3L4 14h7v7l9-11h-7z", title: "Instant Setup", desc: "No complex wizards. Done in minutes.", color: "var(--primary)" },
+              { icon: "M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z", title: "Flexible Layouts", desc: "Rows, groups, U-shape, horseshoe.", color: "var(--accent)" },
+              { icon: "M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4", title: "Easy Rearrange", desc: "Drag & drop. Change anytime.", color: "var(--sage)" },
+              { icon: "M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7", title: "Free Forever", desc: "No credit card, no limits.", color: "var(--sky)" },
             ].map((item) => (
               <div key={item.title} className="text-center">
-                <div className={`mx-auto flex h-12 w-12 items-center justify-center rounded-full ${item.color}`}>
-                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d={item.icon} /></svg>
+                <div
+                  className="mx-auto flex h-12 w-12 items-center justify-center rounded-full text-white"
+                  style={{ background: item.color }}
+                >
+                  <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d={item.icon}
+                    />
+                  </svg>
                 </div>
-                <h4 className="mt-3 font-semibold text-zinc-900 dark:text-white">{item.title}</h4>
-                <p className="mt-1 text-sm text-zinc-500">{item.desc}</p>
+                <h4
+                  className="mt-3 font-bold"
+                  style={{ color: "var(--foreground)" }}
+                >
+                  {item.title}
+                </h4>
+                <p
+                  className="mt-1 text-sm"
+                  style={{ color: "var(--muted)" }}
+                >
+                  {item.desc}
+                </p>
               </div>
             ))}
           </div>
         </section>
 
         <section className="mt-20" id="pricing">
-          <h3 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Simple Pricing for Teachers</h3>
-          <p className="mt-2 text-center text-zinc-600 dark:text-zinc-400">Start free. Upgrade when you need more.</p>
+          <h3
+            className="text-center text-3xl font-black leading-tight"
+            style={{ color: "var(--foreground)" }}
+          >
+            Simple Pricing
+          </h3>
+          <p
+            className="mt-2 text-center text-base"
+            style={{ color: "var(--muted)" }}
+          >
+            Start free. Upgrade only if you need unlimited classes.
+          </p>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 max-w-3xl mx-auto">
-            <div className="rounded-xl border border-zinc-200 p-6 dark:border-zinc-800">
-              <h4 className="text-lg font-semibold text-zinc-900 dark:text-white">Free</h4>
-              <p className="mt-1 text-3xl font-bold text-zinc-900 dark:text-white">$0</p>
-              <p className="text-sm text-zinc-500">Forever free</p>
-              <ul className="mt-6 space-y-3 text-sm text-zinc-600 dark:text-zinc-400">
-                {freeFeatures.map((f) => (<li key={f} className="flex items-start gap-2"><span className="mt-0.5 text-green-500">&#10003;</span>{f}</li>))}
+            <div
+              className="rounded-2xl p-7 border"
+              style={{
+                borderColor: "var(--border)",
+                background: "rgba(255, 255, 255, 0.5)",
+              }}
+            >
+              <h4
+                className="text-lg font-bold"
+                style={{ color: "var(--foreground)" }}
+              >
+                Free
+              </h4>
+              <p
+                className="mt-1 text-4xl font-black"
+                style={{ color: "var(--foreground)" }}
+              >
+                $0
+              </p>
+              <p className="text-sm" style={{ color: "var(--muted)" }}>
+                Forever
+              </p>
+              <ul className="mt-6 space-y-3 text-sm" style={{ color: "var(--muted)" }}>
+                {freeFeatures.map((f) => (
+                  <li key={f} className="flex items-start gap-2">
+                    <span
+                      className="mt-0.5 font-bold"
+                      style={{ color: "var(--sage)" }}
+                    >
+                      ✓
+                    </span>
+                    {f}
+                  </li>
+                ))}
               </ul>
-              <Link href="/editor" className="mt-6 block rounded-lg border border-zinc-300 py-2 text-center text-sm font-medium text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300">Get Started Free</Link>
+              <Link
+                href="/editor"
+                className="mt-6 block rounded-lg py-2 text-center text-sm font-bold transition-all hover:translate-y-[-2px]"
+                style={{
+                  background: "var(--surface)",
+                  color: "var(--primary)",
+                  border: "2px solid var(--border)",
+                }}
+              >
+                Start Free
+              </Link>
             </div>
-            <div className="rounded-xl border-2 border-blue-600 p-6 relative">
-              <span className="absolute -top-3 left-4 rounded-full bg-blue-600 px-3 py-0.5 text-xs font-medium text-white">Most Popular</span>
-              <h4 className="text-lg font-semibold text-zinc-900 dark:text-white">Pro</h4>
-              <p className="mt-1"><span className="text-3xl font-bold text-zinc-900 dark:text-white">$3.99</span><span className="text-sm text-zinc-500">/month</span></p>
-              <p className="text-sm text-zinc-500">or $29.99/year (save 37%)</p>
-              <ul className="mt-6 space-y-3 text-sm text-zinc-600 dark:text-zinc-400">
-                {proFeatures.map((f) => (<li key={f} className="flex items-start gap-2"><span className="mt-0.5 text-blue-500">&#10003;</span>{f}</li>))}
+            <div
+              className="rounded-2xl p-7 border-2 relative"
+              style={{
+                borderColor: "var(--primary)",
+                background: "rgba(107, 91, 123, 0.05)",
+              }}
+            >
+              <span
+                className="absolute -top-4 left-6 text-xs font-bold px-3 py-1 rounded-full text-white"
+                style={{ background: "var(--primary)" }}
+              >
+                🚀 POPULAR
+              </span>
+              <h4
+                className="text-lg font-bold mt-1"
+                style={{ color: "var(--foreground)" }}
+              >
+                Pro
+              </h4>
+              <p className="mt-1">
+                <span
+                  className="text-4xl font-black"
+                  style={{ color: "var(--foreground)" }}
+                >
+                  $3.99
+                </span>
+                <span className="text-sm ml-2" style={{ color: "var(--muted)" }}>
+                  /month
+                </span>
+              </p>
+              <p className="text-xs font-semibold mt-2" style={{ color: "var(--primary)" }}>
+                or $29.99/year (save 37%)
+              </p>
+              <ul className="mt-6 space-y-3 text-sm" style={{ color: "var(--muted)" }}>
+                {proFeatures.map((f) => (
+                  <li key={f} className="flex items-start gap-2">
+                    <span
+                      className="mt-0.5 font-bold"
+                      style={{ color: "var(--primary)" }}
+                    >
+                      ✓
+                    </span>
+                    {f}
+                  </li>
+                ))}
               </ul>
-              <a href="https://buy.stripe.com/00wcN55tF2pX0b32s43Nm0o" className="mt-6 block rounded-lg bg-blue-600 py-2 text-center text-sm font-medium text-white hover:bg-blue-700">Upgrade to Pro — $29.99/yr</a>
-              <a href="https://buy.stripe.com/3cI28rg8jc0x3nfaYA3Nm0n" className="mt-2 block text-center text-xs text-zinc-500 hover:text-blue-600">or $3.99/month</a>
-              <Link href="/editor?upgrade=true" className="mt-2 block text-center text-xs text-zinc-400 hover:text-blue-600">Already Pro? Verify access</Link>
+              <a
+                href="https://buy.stripe.com/00wcN55tF2pX0b32s43Nm0o"
+                className="mt-6 block rounded-lg py-2 text-center text-sm font-bold text-white transition-all hover:translate-y-[-2px] hover:shadow-lg"
+                style={{
+                  background: "linear-gradient(135deg, var(--primary), var(--accent))",
+                }}
+              >
+                Upgrade to Pro — $29.99/yr
+              </a>
+              <a
+                href="https://buy.stripe.com/3cI28rg8jc0x3nfaYA3Nm0n"
+                className="mt-2 block text-center text-xs font-semibold transition-colors hover:underline"
+                style={{ color: "var(--primary)" }}
+              >
+                or $3.99/month
+              </a>
+              <Link
+                href="/editor?upgrade=true"
+                className="mt-2 block text-center text-xs transition-colors hover:underline"
+                style={{ color: "var(--muted-light)" }}
+              >
+                Already Pro? Verify access
+              </Link>
             </div>
           </div>
         </section>
 
         <section className="mt-20">
-          <h3 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Built for Every Classroom</h3>
+          <h3
+            className="text-center text-3xl font-black leading-tight"
+            style={{ color: "var(--foreground)" }}
+          >
+            Built for Every Classroom
+          </h3>
           <div className="mt-8 grid gap-6 sm:grid-cols-3">
             {[
               { title: "Elementary Teachers", desc: "Arrange desks for reading groups, centers, and whole-class instruction." },
@@ -222,28 +504,78 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="mt-20 rounded-xl border border-zinc-200 bg-zinc-50 p-8 text-center dark:border-zinc-800 dark:bg-zinc-900">
-          <h3 className="text-2xl font-bold text-zinc-900 dark:text-white">Ready to organize your classroom?</h3>
-          <p className="mt-2 text-zinc-600 dark:text-zinc-400">Create your first classroom seating chart in under 2 minutes. No signup, no credit card.</p>
-          <Link href="/editor" className="mt-6 inline-block rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">Create Your Seating Chart</Link>
+        <section
+          className="mt-20 rounded-xl p-8 text-center border"
+          style={{
+            background: "var(--surface)",
+            borderColor: "var(--border)",
+          }}
+        >
+          <h3
+            className="text-2xl font-black"
+            style={{ color: "var(--foreground)" }}
+          >
+            Ready to organize your classroom?
+          </h3>
+          <p
+            className="mt-2"
+            style={{ color: "var(--muted)" }}
+          >
+            Create your first seating chart in under 2 minutes. No signup, no credit card.
+          </p>
+          <Link
+            href="/editor"
+            className="mt-6 inline-block rounded-lg px-6 py-3 text-base font-bold text-white hover:shadow-lg transition-all hover:translate-y-[-2px]"
+            style={{
+              background: "linear-gradient(135deg, var(--primary), var(--accent))",
+            }}
+          >
+            Create Your Seating Chart
+          </Link>
         </section>
         <section className="mt-20">
-          <h3 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Frequently Asked Questions</h3>
-          <div className="mx-auto mt-8 max-w-3xl divide-y divide-zinc-200 dark:divide-zinc-800">
+          <h3
+            className="text-center text-3xl font-black leading-tight"
+            style={{ color: "var(--foreground)" }}
+          >
+            Questions? We Have Answers
+          </h3>
+          <div
+            className="mx-auto mt-8 max-w-3xl divide-y"
+            style={{ borderColor: "var(--border)" }}
+          >
             {faqItems.map((item) => (
               <details key={item.q} className="group py-4">
-                <summary className="flex cursor-pointer items-center justify-between text-left text-base font-medium text-zinc-900 dark:text-white">
+                <summary
+                  className="flex cursor-pointer items-center justify-between text-left text-base font-medium transition-colors hover:text-blue-700"
+                  style={{ color: "var(--foreground)" }}
+                >
                   {item.q}
-                  <span className="ml-4 shrink-0 text-zinc-400 group-open:rotate-45 transition-transform">+</span>
+                  <span
+                    className="ml-4 shrink-0 group-open:rotate-45 transition-transform"
+                    style={{ color: "var(--muted-light)" }}
+                  >
+                    +
+                  </span>
                 </summary>
-                <p className="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{item.a}</p>
+                <p
+                  className="mt-3 text-sm leading-relaxed"
+                  style={{ color: "var(--muted)" }}
+                >
+                  {item.a}
+                </p>
               </details>
             ))}
           </div>
         </section>
 
         <section className="mt-20">
-          <h3 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">More Free Teacher Tools</h3>
+          <h3
+            className="text-center text-3xl font-black leading-tight"
+            style={{ color: "var(--foreground)" }}
+          >
+            Part of Our Teacher Toolkit
+          </h3>
           <div className="mt-6 mx-auto max-w-xl">
             <a
               href="https://nametracingmaker.com"

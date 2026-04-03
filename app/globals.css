@@ -1,8 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fffbf0;
+  --foreground: #1f1510;
+  --primary: #6b5b7b;
+  --primary-dark: #5a4a6a;
+  --primary-light: #f4f1f8;
+  --accent: #d97706;
+  --accent-light: #fef3c7;
+  --sky: #0ea5e9;
+  --sky-light: #f0f9ff;
+  --sage: #6366f1;
+  --sage-light: #f0f4ff;
+  --rose: #f43f5e;
+  --rose-light: #ffe4e6;
+  --border: #e5d8e8;
+  --border-dark: #d0c3d8;
+  --muted: #6b5b7b;
+  --muted-light: #8a7a9a;
+  --surface: #faf7f4;
 }
 
 @theme inline {
@@ -14,8 +30,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #1f1510;
+    --foreground: #fffbf0;
+    --border: #3d2d4a;
+    --border-dark: #4d3d5a;
+    --surface: #2a1f30;
+    --muted: #a8989a;
   }
 }
 
@@ -23,4 +43,50 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.65;
+  padding-top: 5px;
+}
+
+/* Colorful top bar for personality */
+body::before {
+  content: "";
+  display: block;
+  height: 4px;
+  background: linear-gradient(90deg, var(--rose), var(--accent), var(--sage), var(--sky), var(--primary));
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+/* Override Tailwind defaults */
+.bg-white { background-color: var(--background) !important; }
+.bg-zinc-50 { background-color: var(--surface) !important; }
+.bg-zinc-100 { background-color: var(--primary-light) !important; }
+.bg-blue-600, .hover\:bg-blue-700:hover {
+  background-color: var(--primary) !important;
+}
+.hover\:bg-blue-700:hover {
+  background-color: var(--primary-dark) !important;
+}
+.text-zinc-900, .dark\:text-white { color: var(--foreground) !important; }
+.text-zinc-600 { color: var(--muted) !important; }
+.text-zinc-500 { color: var(--muted-light) !important; }
+.border-zinc-200, .dark\:border-zinc-800 { border-color: var(--border) !important; }
+.text-blue-600 { color: var(--primary) !important; }
+.text-green-500 { color: var(--sage) !important; }
+
+/* Heading improvements */
+h1, h2, h3 { font-weight: 700 !important; letter-spacing: -0.5px; }
+
+/* Card enhancements */
+.rounded-xl.border {
+  box-shadow: 0 2px 8px rgba(107, 91, 123, 0.06);
+  transition: all 0.2s ease;
+}
+.rounded-xl.border:hover {
+  box-shadow: 0 6px 24px rgba(107, 91, 123, 0.12);
+  border-color: var(--primary) !important;
+  transform: translateY(-2px);
 }
