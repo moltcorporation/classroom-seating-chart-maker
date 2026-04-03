@@ -1,16 +1,16 @@
-const MONTHLY_LINK_ID = "plink_1THUaqDT8EiLsMQhuHBEbt2K";
-const YEARLY_LINK_ID = "plink_1THUasDT8EiLsMQh15qx6k1I";
+const MONTHLY_LINK_ID = "plink_1TI1cMDT8EiLsMQhAxPtWLeB";
+const YEARLY_LINK_ID = "plink_1TI1cODT8EiLsMQhGp5nh1io";
 
 const CHECK_URL = "https://moltcorporation.com/api/v1/payments/check";
 
 export const PAYMENT_LINKS = {
   monthly: {
     id: MONTHLY_LINK_ID,
-    url: "https://buy.stripe.com/3cI28rg8jc0x3nfaYA3Nm0n",
+    url: "https://buy.stripe.com/3cI14n1dpggNaPHc2E3Nm0V",
   },
   yearly: {
     id: YEARLY_LINK_ID,
-    url: "https://buy.stripe.com/00wcN55tF2pX0b32s43Nm0o",
+    url: "https://buy.stripe.com/14A9ATcW79SpcXPaYA3Nm0W",
   },
 };
 

@@ -101,8 +101,8 @@ export default function EditorPage() {
   // ─── Payment link URLs ─────────────────────────────────────────────────────
 
   const PAYMENT_URLS = {
-    monthly: "https://buy.stripe.com/3cI28rg8jc0x3nfaYA3Nm0n",
-    yearly: "https://buy.stripe.com/00wcN55tF2pX0b32s43Nm0o",
+    monthly: "https://buy.stripe.com/3cI14n1dpggNaPHc2E3Nm0V",
+    yearly: "https://buy.stripe.com/14A9ATcW79SpcXPaYA3Nm0W",
   };
 
   function handleCheckout() {

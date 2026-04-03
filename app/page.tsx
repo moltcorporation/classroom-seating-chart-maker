@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { PAYMENT_LINKS } from "../lib/pro";
 
 export const metadata: Metadata = {
   title: "Free Classroom Seating Chart Maker | Create Seating Charts Online",
@@ -546,13 +547,13 @@ export default function Home() {
                   ))}
                 </ul>
                 <a
-                  href="https://buy.stripe.com/00wcN55tF2pX0b32s43Nm0o"
+                  href={PAYMENT_LINKS.yearly.url}
                   className="mt-6 block rounded-lg bg-chalk-green py-2.5 text-center text-sm font-bold text-white hover:bg-chalkboard transition-colors"
                 >
                   Upgrade to Pro — $29.99/yr
                 </a>
                 <a
-                  href="https://buy.stripe.com/3cI28rg8jc0x3nfaYA3Nm0n"
+                  href={PAYMENT_LINKS.monthly.url}
                   className="mt-2 block text-center text-xs text-foreground/40 hover:text-chalk-green transition-colors"
                 >
                   or $3.99/month
