@@ -138,13 +138,14 @@ export default function EditorPage() {
     async function loadClassOnMount() {
       setLoading(true);
       try {
-        const res = await fetch("/api/classes");
+        const email = localStorage.getItem("proEmail") || "";
+        const res = await fetch(`/api/classes?email=${encodeURIComponent(email)}`);
         const classList: ClassData[] = await res.json();
         if (classList.length > 0) {
           setCurrentClass(classList[0]);
           const [studRes, seatRes] = await Promise.all([
-            fetch(`/api/students?classId=${classList[0].id}`),
-            fetch(`/api/seating?classId=${classList[0].id}`),
+            fetch(`/api/students?classId=${classList[0].id}&email=${encodeURIComponent(email)}`),
+            fetch(`/api/seating?classId=${classList[0].id}&email=${encodeURIComponent(email)}`),
           ]);
           const studList: Student[] = await studRes.json();
           setStudents(studList);
@@ -221,7 +222,8 @@ export default function EditorPage() {
 
   async function deleteStudent(id: string) {
     if (!currentClass) return;
-    await fetch(`/api/students?id=${id}&classId=${currentClass.id}`, {
+    const email = proEmail || localStorage.getItem("proEmail") || "";
+    await fetch(`/api/students?id=${id}&classId=${currentClass.id}&email=${encodeURIComponent(email)}`, {
       method: "DELETE",
     });
     setStudents((prev) => prev.filter((s) => s.id !== id));
@@ -313,13 +315,14 @@ export default function EditorPage() {
   const saveSeating = useCallback(async () => {
     if (!currentClass) return;
     setSaving(true);
+    const email = proEmail || localStorage.getItem("proEmail") || "";
     await fetch("/api/seating", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ classId: currentClass.id, seats, rows, cols }),
+      body: JSON.stringify({ classId: currentClass.id, seats, rows, cols, email }),
     });
     setSaving(false);
-  }, [currentClass, seats, rows, cols]);
+  }, [currentClass, seats, rows, cols, proEmail]);
 
   // ─── Drag and drop ─────────────────────────────────────────────────────────
 
