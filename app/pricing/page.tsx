@@ -29,10 +29,10 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-chalk-white/10 bg-chalkboard/5">
+      <header className="bg-wood-warm relative">
         <nav className="mx-auto max-w-5xl px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-chalkboard dark:text-white">
-            Classroom Seating Chart Maker
+          <Link href="/" className="font-heading text-xl font-bold text-chalkboard dark:text-white">
+            ✏️ Classroom Seating Chart Maker
           </Link>
           <div className="flex gap-4">
             <Link
@@ -49,16 +49,18 @@ export default function PricingPage() {
             </Link>
           </div>
         </nav>
+        <div className="wood-edge h-2" />
       </header>
 
       {/* Pricing Section */}
-      <main className="mx-auto max-w-5xl px-6 py-16">
+      <main className="mx-auto max-w-5xl px-6 py-20">
         {/* Hero */}
-        <div className="mb-16">
-          <h1 className="font-heading text-center text-4xl font-bold text-chalkboard dark:text-white">
+        <div className="mb-16 text-center">
+          <span className="text-4xl mb-4 inline-block">🍎</span>
+          <h1 className="font-heading text-4xl font-bold text-chalkboard dark:text-white">
             Simple Pricing for Teachers
           </h1>
-          <p className="mt-4 text-center text-lg text-foreground/60">
+          <p className="mt-4 text-lg text-foreground/60">
             Start free. Upgrade when you need more. No credit card required.
           </p>
         </div>
@@ -66,7 +68,7 @@ export default function PricingPage() {
         {/* Pricing Cards */}
         <div className="grid gap-8 sm:grid-cols-2 mb-16">
           {/* Free tier */}
-          <div className="rounded-2xl border border-wood-light/20 bg-white p-8 dark:bg-chalkboard dark:border-chalk-white/10">
+          <div className="card-lift rounded-2xl border border-wood-light/20 bg-white p-8 dark:bg-chalkboard dark:border-chalk-white/10">
             <h2 className="font-heading text-2xl font-semibold text-chalkboard dark:text-white">
               Free
             </h2>
@@ -99,7 +101,7 @@ export default function PricingPage() {
           </div>
 
           {/* Pro tier */}
-          <div className="relative rounded-2xl border-2 border-chalk-green bg-white p-8 shadow-lg dark:bg-chalkboard">
+          <div className="card-lift relative rounded-2xl border-2 border-chalk-green bg-white p-8 shadow-lg dark:bg-chalkboard">
             <span className="absolute -top-4 left-6 rounded-full bg-chalk-green px-4 py-1 text-xs font-bold text-white shadow-sm">
               Most Popular
             </span>
@@ -133,13 +135,13 @@ export default function PricingPage() {
             </ul>
             <div className="mt-8 space-y-2">
               <a
-                href="https://buy.stripe.com/14A9ATcW79SpcXPaYA3Nm0W"
+                href="https://buy.stripe.com/00wcN55tF2pX0b32s43Nm0o"
                 className="block rounded-lg bg-chalk-green py-3 text-center text-sm font-bold text-white hover:bg-chalkboard transition-colors"
               >
                 Upgrade to Pro — $29.99/year
               </a>
               <a
-                href="https://buy.stripe.com/3cI14n1dpggNaPHc2E3Nm0V"
+                href="https://buy.stripe.com/3cI28rg8jc0x3nfaYA3Nm0n"
                 className="block text-center text-xs text-foreground/40 hover:text-chalk-green transition-colors py-2"
               >
                 or $3.99/month
@@ -196,24 +198,28 @@ export default function PricingPage() {
         </section>
 
         {/* CTA */}
-        <section className="mt-20 rounded-2xl bg-chalk-green/10 border border-chalk-green/20 p-10 text-center">
-          <h2 className="font-heading text-2xl font-bold text-chalkboard dark:text-white mb-4">
-            Ready to get started?
-          </h2>
-          <p className="text-foreground/60 mb-6">
-            Create your first seating chart for free. No signup or credit card needed.
-          </p>
-          <Link
-            href="/editor"
-            className="inline-block rounded-lg bg-chalk-green px-6 py-3 text-sm font-bold text-white hover:bg-chalkboard transition-colors"
-          >
-            Open the Editor
-          </Link>
+        <section className="mt-20 chalkboard-bg rounded-2xl p-12 text-center relative overflow-hidden">
+          <div className="absolute inset-0 opacity-[0.03]" style={{backgroundImage: 'radial-gradient(circle, #f0ede8 1px, transparent 1px)', backgroundSize: '16px 16px'}} />
+          <div className="relative">
+            <h2 className="font-heading chalk-text text-2xl font-bold mb-4">
+              Ready to get started?
+            </h2>
+            <p className="text-chalk-white/70 mb-6">
+              Create your first seating chart for free. No signup or credit card needed.
+            </p>
+            <Link
+              href="/editor"
+              className="cta-pulse inline-block rounded-lg bg-pencil-yellow px-8 py-3.5 text-sm font-bold text-chalkboard hover:bg-pencil-yellow/90 transition-colors shadow-lg"
+            >
+              Open the Editor →
+            </Link>
+          </div>
+          <div className="chalk-tray mt-8 -mx-12 -mb-12 h-5 rounded-b-2xl" />
         </section>
       </main>
 
       {/* Footer */}
-      <footer className="mt-20 border-t border-chalk-white/10 bg-chalkboard/5">
+      <footer className="mt-20 border-t border-wood-light/20 bg-wood-warm dark:bg-chalkboard dark:border-chalk-white/10">
         <div className="mx-auto max-w-5xl px-6 py-8 text-center text-sm text-foreground/50">
           <p>
             <Link href="/" className="hover:text-chalk-green transition-colors">
@@ -224,6 +230,7 @@ export default function PricingPage() {
               Privacy
             </Link>
           </p>
+          <p className="mt-2 text-xs text-foreground/30">Classroom Seating Chart Maker — Free for teachers.</p>
         </div>
       </footer>
     </div>
