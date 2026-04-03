@@ -367,7 +367,7 @@ export default function EditorPage() {
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <p className="text-zinc-500">Loading...</p>
+        <p className="text-foreground/60">Loading...</p>
       </div>
     );
   }
@@ -376,16 +376,16 @@ export default function EditorPage() {
 
   const upgradeModal = showUpgrade && (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="mx-4 w-full max-w-md rounded-xl bg-white p-6 dark:bg-zinc-900">
-        <h2 className="text-xl font-bold text-zinc-900 dark:text-white">
+      <div className="mx-4 w-full max-w-md rounded-xl bg-white p-6 dark:bg-chalkboard/40">
+        <h2 className="text-xl font-bold text-zinc-900 dark:text-chalk-white">
           Upgrade to Pro
         </h2>
-        <p className="mt-2 text-sm text-zinc-500">
+        <p className="mt-2 text-sm text-foreground/60">
           Unlimited classes, all layouts, clean PDF, student notes, and more.
         </p>
 
         <div className="mt-4">
-          <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
+          <label className="block text-sm font-medium text-foreground dark:text-wood/30">
             Email address
           </label>
           <input
@@ -393,7 +393,7 @@ export default function EditorPage() {
             value={upgradeEmail}
             onChange={(e) => setUpgradeEmail(e.target.value)}
             placeholder="you@school.edu"
-            className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
+            className="mt-1 w-full rounded-lg border border-wood/20 px-3 py-2 text-sm dark:border-chalk-green/40 dark:bg-chalkboard/30 dark:text-chalk-white"
           />
         </div>
 
@@ -402,41 +402,41 @@ export default function EditorPage() {
             onClick={() => setUpgradePlan("yearly")}
             className={`flex-1 rounded-lg border-2 p-3 text-left text-sm ${
               upgradePlan === "yearly"
-                ? "border-blue-600 bg-blue-50 dark:bg-blue-900/20"
-                : "border-zinc-200 dark:border-zinc-700"
+                ? "border-blue-600 bg-pencil-yellow/10 dark:bg-chalkboard/20"
+                : "border-wood/10 dark:border-chalk-green/40"
             }`}
           >
-            <div className="font-semibold text-zinc-900 dark:text-white">
+            <div className="font-semibold text-zinc-900 dark:text-chalk-white">
               $29.99/year
             </div>
-            <div className="text-xs text-zinc-500">Save 37%</div>
+            <div className="text-xs text-foreground/60">Save 37%</div>
           </button>
           <button
             onClick={() => setUpgradePlan("monthly")}
             className={`flex-1 rounded-lg border-2 p-3 text-left text-sm ${
               upgradePlan === "monthly"
-                ? "border-blue-600 bg-blue-50 dark:bg-blue-900/20"
-                : "border-zinc-200 dark:border-zinc-700"
+                ? "border-blue-600 bg-pencil-yellow/10 dark:bg-chalkboard/20"
+                : "border-wood/10 dark:border-chalk-green/40"
             }`}
           >
-            <div className="font-semibold text-zinc-900 dark:text-white">
+            <div className="font-semibold text-zinc-900 dark:text-chalk-white">
               $3.99/month
             </div>
-            <div className="text-xs text-zinc-500">Flexible</div>
+            <div className="text-xs text-foreground/60">Flexible</div>
           </button>
         </div>
 
         <div className="mt-6 flex gap-2">
           <button
             onClick={() => setShowUpgrade(false)}
-            className="flex-1 rounded-lg border border-zinc-300 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300"
+            className="flex-1 rounded-lg border border-wood/20 py-2 text-sm font-medium text-foreground hover:bg-chalk-green-light dark:border-chalk-green/40 dark:text-wood/30"
           >
             Cancel
           </button>
           <button
             onClick={handleCheckout}
             disabled={checkoutLoading || !upgradeEmail.trim()}
-            className="flex-1 rounded-lg bg-blue-600 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+            className="flex-1 rounded-lg bg-chalk-green py-2 text-sm font-medium text-white hover:bg-chalkboard disabled:opacity-50"
           >
             {checkoutLoading ? "Redirecting..." : "Continue to Payment"}
           </button>
@@ -445,7 +445,7 @@ export default function EditorPage() {
         <button
           onClick={handleVerifyAccess}
           disabled={!upgradeEmail.trim()}
-          className="mt-3 w-full text-center text-sm text-blue-600 hover:underline disabled:opacity-50 disabled:no-underline"
+          className="mt-3 w-full text-center text-sm text-chalk-green hover:underline disabled:opacity-50 disabled:no-underline"
         >
           Already purchased? Verify access
         </button>
@@ -457,11 +457,11 @@ export default function EditorPage() {
     return (
       <div className="flex h-screen items-center justify-center">
         {upgradeModal}
-        <div className="w-full max-w-md rounded-xl border border-zinc-200 bg-white p-8 dark:border-zinc-800 dark:bg-zinc-900">
-          <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">
+        <div className="w-full max-w-md rounded-xl border border-wood/10 bg-white p-8 dark:border-chalk-green/30 dark:bg-chalkboard/40">
+          <h1 className="text-2xl font-bold text-zinc-900 dark:text-chalk-white">
             Create Your Class
           </h1>
-          <p className="mt-2 text-sm text-zinc-500">
+          <p className="mt-2 text-sm text-foreground/60">
             {isPro ? "Pro: Unlimited classes" : "Free tier: 1 class, up to 25 students"}
           </p>
           {error && (
@@ -474,11 +474,11 @@ export default function EditorPage() {
               value={className}
               onChange={(e) => setClassName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && createClass()}
-              className="flex-1 rounded-lg border border-zinc-300 px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
+              className="flex-1 rounded-lg border border-wood/20 px-3 py-2 text-sm dark:border-chalk-green/40 dark:bg-chalkboard/30 dark:text-chalk-white"
             />
             <button
               onClick={createClass}
-              className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+              className="rounded-lg bg-chalk-green px-4 py-2 text-sm font-medium text-white hover:bg-chalkboard"
             >
               Create
             </button>
@@ -486,7 +486,7 @@ export default function EditorPage() {
           {!isPro && (
             <button
               onClick={() => setShowUpgrade(true)}
-              className="mt-4 w-full text-center text-sm text-blue-600 hover:underline"
+              className="mt-4 w-full text-center text-sm text-chalk-green hover:underline"
             >
               Upgrade to Pro for unlimited classes
             </button>
@@ -501,15 +501,15 @@ export default function EditorPage() {
       {upgradeModal}
 
       {/* Header */}
-      <header className="flex items-center justify-between border-b border-zinc-200 px-4 py-3 dark:border-zinc-800 print:hidden">
+      <header className="flex items-center justify-between border-b border-wood/10 px-4 py-3 dark:border-chalk-green/30 print:hidden">
         <div>
-          <h1 className="text-lg font-bold text-zinc-900 dark:text-white">
+          <h1 className="text-lg font-bold text-zinc-900 dark:text-chalk-white">
             {currentClass.name}
           </h1>
-          <p className="text-xs text-zinc-500">
+          <p className="text-xs text-foreground/60">
             {students.length}{isPro ? "" : "/25"} students &middot; {seatedIds.size} seated
             {isPro && (
-              <span className="ml-2 rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
+              <span className="ml-2 rounded-full bg-pencil-yellow/20 px-2 py-0.5 text-xs font-medium text-wood dark:bg-chalkboard/30 dark:text-pencil-yellow">
                 Pro
               </span>
             )}
@@ -519,27 +519,27 @@ export default function EditorPage() {
           {!isPro && (
             <button
               onClick={() => setShowUpgrade(true)}
-              className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-600 hover:bg-blue-100 dark:border-blue-800 dark:bg-blue-900/20 dark:text-blue-400"
+              className="rounded-lg border border-chalk-green/20 bg-pencil-yellow/10 px-3 py-1.5 text-sm font-medium text-chalk-green hover:bg-pencil-yellow/20 dark:border-chalk-green/40 dark:bg-chalkboard/20 dark:text-pencil-yellow"
             >
               Upgrade
             </button>
           )}
           <button
             onClick={shuffleStudents}
-            className="rounded-lg border border-zinc-300 px-3 py-1.5 text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+            className="rounded-lg border border-wood/20 px-3 py-1.5 text-sm font-medium text-foreground hover:bg-chalk-green-light/70 dark:border-chalk-green/40 dark:text-wood/30 dark:hover:bg-chalkboard/50"
           >
             Shuffle
           </button>
           <button
             onClick={saveSeating}
             disabled={saving}
-            className="rounded-lg bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+            className="rounded-lg bg-chalk-green px-3 py-1.5 text-sm font-medium text-white hover:bg-chalkboard disabled:opacity-50"
           >
             {saving ? "Saving..." : "Save"}
           </button>
           <button
             onClick={handlePrint}
-            className="rounded-lg border border-zinc-300 px-3 py-1.5 text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+            className="rounded-lg border border-wood/20 px-3 py-1.5 text-sm font-medium text-foreground hover:bg-chalk-green-light/70 dark:border-chalk-green/40 dark:text-wood/30 dark:hover:bg-chalkboard/50"
           >
             Print / PDF
           </button>
@@ -560,9 +560,9 @@ export default function EditorPage() {
 
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar — Student Roster */}
-        <aside className="flex w-72 flex-col border-r border-zinc-200 dark:border-zinc-800 print:hidden">
-          <div className="border-b border-zinc-200 p-3 dark:border-zinc-800">
-            <h2 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+        <aside className="flex w-72 flex-col border-r border-wood/10 dark:border-chalk-green/30 print:hidden">
+          <div className="border-b border-wood/10 p-3 dark:border-chalk-green/30">
+            <h2 className="text-sm font-semibold text-foreground dark:text-wood/30">
               Student Roster
             </h2>
             <div className="mt-2 flex gap-1">
@@ -572,18 +572,18 @@ export default function EditorPage() {
                 value={newStudentName}
                 onChange={(e) => setNewStudentName(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && addStudent()}
-                className="flex-1 rounded border border-zinc-300 px-2 py-1 text-sm dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
+                className="flex-1 rounded border border-wood/20 px-2 py-1 text-sm dark:border-chalk-green/40 dark:bg-chalkboard/30 dark:text-chalk-white"
               />
               <button
                 onClick={addStudent}
-                className="rounded bg-blue-600 px-2 py-1 text-sm text-white hover:bg-blue-700"
+                className="rounded bg-chalk-green px-2 py-1 text-sm text-white hover:bg-chalkboard"
               >
                 +
               </button>
             </div>
             <button
               onClick={importCSV}
-              className="mt-2 w-full rounded border border-dashed border-zinc-300 py-1 text-xs text-zinc-500 hover:border-zinc-400 hover:text-zinc-600 dark:border-zinc-700"
+              className="mt-2 w-full rounded border border-dashed border-wood/20 py-1 text-xs text-foreground/60 hover:border-zinc-400 hover:text-foreground/70 dark:border-chalk-green/40"
             >
               Import CSV
             </button>
@@ -603,7 +603,7 @@ export default function EditorPage() {
                 className={`mb-1 flex items-center justify-between rounded px-2 py-1.5 text-sm cursor-grab active:cursor-grabbing ${
                   seatedIds.has(student.id)
                     ? "bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400"
-                    : "bg-zinc-50 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
+                    : "bg-chalk-green-light text-foreground dark:bg-chalkboard/30 dark:text-wood/30"
                 }`}
               >
                 {editingId === student.id ? (
@@ -654,9 +654,9 @@ export default function EditorPage() {
         </aside>
 
         {/* Main Canvas */}
-        <main className="flex-1 overflow-auto bg-zinc-50 dark:bg-zinc-950 relative">
+        <main className="flex-1 overflow-auto bg-chalk-green-light dark:bg-zinc-950 relative">
           {/* Grid size controls */}
-          <div className="absolute top-3 right-3 flex items-center gap-2 text-xs text-zinc-500 print:hidden z-10">
+          <div className="absolute top-3 right-3 flex items-center gap-2 text-xs text-foreground/60 print:hidden z-10">
             <label>
               Rows:
               <input
@@ -665,7 +665,7 @@ export default function EditorPage() {
                 max={10}
                 value={rows}
                 onChange={(e) => applyGridSize(Number(e.target.value), cols)}
-                className="ml-1 w-12 rounded border px-1 py-0.5 text-center dark:border-zinc-700 dark:bg-zinc-800"
+                className="ml-1 w-12 rounded border px-1 py-0.5 text-center dark:border-chalk-green/40 dark:bg-chalkboard/30"
               />
             </label>
             <label>
@@ -676,7 +676,7 @@ export default function EditorPage() {
                 max={10}
                 value={cols}
                 onChange={(e) => applyGridSize(rows, Number(e.target.value))}
-                className="ml-1 w-12 rounded border px-1 py-0.5 text-center dark:border-zinc-700 dark:bg-zinc-800"
+                className="ml-1 w-12 rounded border px-1 py-0.5 text-center dark:border-chalk-green/40 dark:bg-chalkboard/30"
               />
             </label>
           </div>
@@ -688,7 +688,7 @@ export default function EditorPage() {
               width={svgW}
               height={svgH}
               viewBox={`0 0 ${svgW} ${svgH}`}
-              className="bg-white rounded-xl border border-zinc-200 shadow-sm dark:bg-zinc-900 dark:border-zinc-800"
+              className="bg-white rounded-xl border border-wood/10 shadow-sm dark:bg-chalkboard/40 dark:border-chalk-green/30"
             >
               {/* "Front of room" label */}
               <text
