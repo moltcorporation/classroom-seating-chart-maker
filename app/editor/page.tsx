@@ -54,7 +54,7 @@ export default function EditorPage() {
   const [showUpgrade, setShowUpgrade] = useState(false);
   const [upgradeEmail, setUpgradeEmail] = useState("");
   const [upgradePlan, setUpgradePlan] = useState<"monthly" | "yearly">("yearly");
-  const checkoutLoading = false;
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
 
   const isPro = tier === "pro";
 
@@ -101,8 +101,8 @@ export default function EditorPage() {
   // ─── Payment link URLs ─────────────────────────────────────────────────────
 
   const PAYMENT_URLS = {
-    monthly: "https://buy.stripe.com/3cI28rg8jc0x3nfaYA3Nm0n",
-    yearly: "https://buy.stripe.com/00wcN55tF2pX0b32s43Nm0o",
+    monthly: "https://buy.stripe.com/6oU9AT4pB3u1f5X8Qs3Nm14",
+    yearly: "https://buy.stripe.com/7sY14nbS3aWt7Dv0jW3Nm13",
   };
 
   function handleCheckout() {
@@ -110,6 +110,7 @@ export default function EditorPage() {
     const email = upgradeEmail.toLowerCase().trim();
     localStorage.setItem("proEmail", email);
     setProEmail(email);
+    setCheckoutLoading(true);
     const url = `${PAYMENT_URLS[upgradePlan]}?prefilled_email=${encodeURIComponent(email)}`;
     window.location.href = url;
   }

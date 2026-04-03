@@ -16,6 +16,28 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://classroomseatingchartmaker.com",
   },
+  openGraph: {
+    title: "Free Classroom Seating Chart Maker",
+    description:
+      "Create and manage classroom seating charts instantly. Free tier: 1 class, 25 students. Pro: unlimited classes, all layouts, PDF export.",
+    url: "https://classroomseatingchartmaker.com",
+    type: "website",
+    images: [
+      {
+        url: "https://classroomseatingchartmaker.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Classroom Seating Chart Maker",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Classroom Seating Chart Maker",
+    description:
+      "Create and manage classroom seating charts instantly. Free tier: 1 class, 25 students. Pro: unlimited classes, all layouts, PDF export.",
+    images: ["https://classroomseatingchartmaker.com/og-image.png"],
+  },
 };
 
 function JsonLd() {
@@ -546,13 +568,13 @@ export default function Home() {
                   ))}
                 </ul>
                 <a
-                  href="https://buy.stripe.com/00wcN55tF2pX0b32s43Nm0o"
+                  href="https://buy.stripe.com/7sY14nbS3aWt7Dv0jW3Nm13"
                   className="mt-6 block rounded-lg bg-chalk-green py-2.5 text-center text-sm font-bold text-white hover:bg-chalkboard transition-colors"
                 >
                   Upgrade to Pro — $29.99/yr
                 </a>
                 <a
-                  href="https://buy.stripe.com/3cI28rg8jc0x3nfaYA3Nm0n"
+                  href="https://buy.stripe.com/6oU9AT4pB3u1f5X8Qs3Nm14"
                   className="mt-2 block text-center text-xs text-foreground/40 hover:text-chalk-green transition-colors"
                 >
                   or $3.99/month
