@@ -54,7 +54,7 @@ export default function EditorPage() {
   const [showUpgrade, setShowUpgrade] = useState(false);
   const [upgradeEmail, setUpgradeEmail] = useState("");
   const [upgradePlan, setUpgradePlan] = useState<"monthly" | "yearly">("yearly");
-  const checkoutLoading = false;
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
 
   const isPro = tier === "pro";
 
@@ -376,16 +376,51 @@ export default function EditorPage() {
 
   const upgradeModal = showUpgrade && (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="mx-4 w-full max-w-md rounded-xl bg-white p-6 dark:bg-zinc-900">
-        <h2 className="text-xl font-bold text-zinc-900 dark:text-white">
-          Upgrade to Pro
-        </h2>
-        <p className="mt-2 text-sm text-zinc-500">
-          Unlimited classes, all layouts, clean PDF, student notes, and more.
-        </p>
+      <div className="mx-4 w-full max-w-2xl rounded-xl bg-white dark:bg-slate-900 p-8 shadow-2xl">
+        <div className="flex items-start justify-between mb-6">
+          <div>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+              Unlock Pro Features
+            </h2>
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+              Everything you need for unlimited classroom management
+            </p>
+          </div>
+          <button
+            onClick={() => setShowUpgrade(false)}
+            className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+          >
+            ✕
+          </button>
+        </div>
 
-        <div className="mt-4">
-          <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
+        {/* Pro Feature Previews */}
+        <div className="grid grid-cols-2 gap-4 mb-6">
+          <div className="rounded-lg bg-emerald-50 dark:bg-emerald-900/20 p-4 border border-emerald-200 dark:border-emerald-800">
+            <div className="text-2xl mb-2">♾️</div>
+            <p className="text-sm font-semibold text-slate-900 dark:text-white">Unlimited Classes</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Create as many classes as you need</p>
+          </div>
+          <div className="rounded-lg bg-blue-50 dark:bg-blue-900/20 p-4 border border-blue-200 dark:border-blue-800">
+            <div className="text-2xl mb-2">📐</div>
+            <p className="text-sm font-semibold text-slate-900 dark:text-white">All Layouts</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">U-shape, groups, lab, orchestra</p>
+          </div>
+          <div className="rounded-lg bg-amber-50 dark:bg-amber-900/20 p-4 border border-amber-200 dark:border-amber-800">
+            <div className="text-2xl mb-2">📄</div>
+            <p className="text-sm font-semibold text-slate-900 dark:text-white">Clean PDFs</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">No watermarks, ready to print</p>
+          </div>
+          <div className="rounded-lg bg-purple-50 dark:bg-purple-900/20 p-4 border border-purple-200 dark:border-purple-800">
+            <div className="text-2xl mb-2">🔗</div>
+            <p className="text-sm font-semibold text-slate-900 dark:text-white">Share Links</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">For subs, admins, and parents</p>
+          </div>
+        </div>
+
+        {/* Email & Plan Selection */}
+        <div className="mb-6">
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
             Email address
           </label>
           <input
@@ -393,59 +428,58 @@ export default function EditorPage() {
             value={upgradeEmail}
             onChange={(e) => setUpgradeEmail(e.target.value)}
             placeholder="you@school.edu"
-            className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
+            className="w-full rounded-lg border border-slate-300 dark:border-slate-700 px-4 py-2 text-sm dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
           />
         </div>
 
-        <div className="mt-4 flex gap-3">
+        <div className="grid grid-cols-2 gap-3 mb-6">
           <button
             onClick={() => setUpgradePlan("yearly")}
-            className={`flex-1 rounded-lg border-2 p-3 text-left text-sm ${
+            className={`rounded-lg border-2 p-4 text-left transition ${
               upgradePlan === "yearly"
-                ? "border-blue-600 bg-blue-50 dark:bg-blue-900/20"
-                : "border-zinc-200 dark:border-zinc-700"
+                ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20"
+                : "border-slate-200 dark:border-slate-700 hover:border-emerald-300"
             }`}
           >
-            <div className="font-semibold text-zinc-900 dark:text-white">
-              $29.99/year
-            </div>
-            <div className="text-xs text-zinc-500">Save 37%</div>
+            <div className="font-bold text-slate-900 dark:text-white text-lg">$29.99</div>
+            <div className="text-xs text-slate-600 dark:text-slate-400">per year</div>
+            <div className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">💰 Save 37%</div>
           </button>
           <button
             onClick={() => setUpgradePlan("monthly")}
-            className={`flex-1 rounded-lg border-2 p-3 text-left text-sm ${
+            className={`rounded-lg border-2 p-4 text-left transition ${
               upgradePlan === "monthly"
-                ? "border-blue-600 bg-blue-50 dark:bg-blue-900/20"
-                : "border-zinc-200 dark:border-zinc-700"
+                ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20"
+                : "border-slate-200 dark:border-slate-700 hover:border-emerald-300"
             }`}
           >
-            <div className="font-semibold text-zinc-900 dark:text-white">
-              $3.99/month
-            </div>
-            <div className="text-xs text-zinc-500">Flexible</div>
+            <div className="font-bold text-slate-900 dark:text-white text-lg">$3.99</div>
+            <div className="text-xs text-slate-600 dark:text-slate-400">per month</div>
+            <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">Flexible billing</div>
           </button>
         </div>
 
-        <div className="mt-6 flex gap-2">
+        {/* Action Buttons */}
+        <div className="flex gap-3 mb-3">
           <button
             onClick={() => setShowUpgrade(false)}
-            className="flex-1 rounded-lg border border-zinc-300 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300"
+            className="flex-1 rounded-lg border border-slate-300 dark:border-slate-700 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
           >
             Cancel
           </button>
           <button
             onClick={handleCheckout}
             disabled={checkoutLoading || !upgradeEmail.trim()}
-            className="flex-1 rounded-lg bg-blue-600 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+            className="flex-1 rounded-lg bg-emerald-600 py-2 text-sm font-bold text-white hover:bg-emerald-700 disabled:opacity-50 transition"
           >
-            {checkoutLoading ? "Redirecting..." : "Continue to Payment"}
+            {checkoutLoading ? "Redirecting..." : "Upgrade Now"}
           </button>
         </div>
 
         <button
           onClick={handleVerifyAccess}
           disabled={!upgradeEmail.trim()}
-          className="mt-3 w-full text-center text-sm text-blue-600 hover:underline disabled:opacity-50 disabled:no-underline"
+          className="w-full text-center text-xs text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 disabled:opacity-50 disabled:no-underline"
         >
           Already purchased? Verify access
         </button>
