@@ -51,3 +51,102 @@ body {
 .font-heading {
   font-family: var(--font-fredoka), var(--font-geist-sans), sans-serif;
 }
+
+/* ── Chalkboard texture overlay ── */
+.chalkboard-bg {
+  background-color: var(--chalkboard);
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(35, 77, 56, 0.6) 0%, transparent 70%),
+    radial-gradient(ellipse at 80% 20%, rgba(35, 77, 56, 0.4) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* ── Chalk-style text (slightly rough, translucent edges) ── */
+.chalk-text {
+  color: var(--chalk-white);
+  text-shadow:
+    0 0 3px rgba(240, 237, 232, 0.3),
+    1px 1px 0 rgba(240, 237, 232, 0.1);
+}
+
+/* ── Chalk line divider ── */
+.chalk-divider {
+  border: none;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(240, 237, 232, 0.4) 0px,
+    rgba(240, 237, 232, 0.4) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+/* ── Wood grain bottom edge ── */
+.wood-edge {
+  background: linear-gradient(
+    180deg,
+    var(--wood) 0%,
+    #7a5c12 40%,
+    var(--wood-light) 50%,
+    #7a5c12 60%,
+    var(--wood) 100%
+  );
+}
+
+/* ── Notebook paper lines background ── */
+.notebook-bg {
+  background-color: #fff;
+  background-image:
+    linear-gradient(#e8d4d4 1px, transparent 1px),
+    linear-gradient(90deg, #fce4e4 1px, transparent 0);
+  background-size: 100% 28px, 80px 100%;
+  background-position: 0 60px;
+}
+
+/* ── Feature card hover lift ── */
+.card-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 24px -8px rgba(45, 90, 39, 0.15),
+    0 4px 8px -2px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Pencil-yellow CTA pulse ── */
+@keyframes pencil-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(244, 208, 63, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(244, 208, 63, 0); }
+}
+.cta-pulse {
+  animation: pencil-pulse 2.5s ease-in-out infinite;
+}
+
+/* ── Step number bounce on scroll ── */
+@keyframes step-pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.step-pop {
+  animation: step-pop 0.4s ease-out both;
+}
+
+/* ── Apple emoji float ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(3deg); }
+}
+.float-slow {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ── Tray / shelf shadow ── */
+.chalk-tray {
+  background: linear-gradient(180deg, #5a4a2a 0%, #3d3420 100%);
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.1),
+    0 4px 8px rgba(0, 0, 0, 0.3);
+}

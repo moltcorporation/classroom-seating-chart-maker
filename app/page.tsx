@@ -266,31 +266,39 @@ export default function Home() {
       <JsonLd />
       <FaqJsonLd />
 
-      {/* Header — wood-toned warm bar */}
-      <header className="border-b border-wood-light/30 bg-wood-warm">
+      {/* Header — wood-toned warm bar with chalk tray edge */}
+      <header className="bg-wood-warm relative">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-2">
-            <DeskIcon className="h-6 w-6 text-chalk-green" />
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-chalkboard">
+              <DeskIcon className="h-5 w-5 text-pencil-yellow" />
+            </div>
             <h1 className="font-heading text-xl font-bold text-chalkboard">
               Classroom Seating Chart Maker
             </h1>
           </div>
           <Link
             href="/editor"
-            className="rounded-lg bg-chalk-green px-4 py-2 text-sm font-semibold text-white hover:bg-chalkboard transition-colors"
+            className="rounded-lg bg-chalk-green px-5 py-2.5 text-sm font-semibold text-white hover:bg-chalkboard transition-colors shadow-md hover:shadow-lg"
           >
             Open Editor
           </Link>
         </div>
+        {/* Wood grain tray edge */}
+        <div className="wood-edge h-2" />
       </header>
 
       <main>
-        {/* Hero — chalkboard-style */}
-        <section className="bg-chalkboard text-white">
-          <div className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
+        {/* Hero — chalkboard with texture */}
+        <section className="chalkboard-bg text-white relative overflow-hidden">
+          {/* Subtle chalk dust particles */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{backgroundImage: 'radial-gradient(circle, #f0ede8 1px, transparent 1px)', backgroundSize: '20px 20px'}} />
+          <div className="mx-auto max-w-5xl px-6 py-16 sm:py-24 relative">
             <div className="grid gap-10 sm:grid-cols-2 items-center">
               <div>
-                <h2 className="font-heading text-4xl font-bold tracking-tight sm:text-5xl leading-tight">
+                {/* Apple emoji accent */}
+                <span className="float-slow inline-block text-3xl mb-4" role="img" aria-label="apple">🍎</span>
+                <h2 className="font-heading chalk-text text-4xl font-bold tracking-tight sm:text-5xl leading-tight">
                   Free Classroom Seating Chart Maker
                 </h2>
                 <p className="mt-4 text-lg text-chalk-white/80 leading-relaxed">
@@ -301,42 +309,46 @@ export default function Home() {
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Link
                     href="/editor"
-                    className="rounded-lg bg-pencil-yellow px-6 py-3 text-base font-bold text-chalkboard hover:bg-pencil-yellow/90 transition-colors"
+                    className="cta-pulse rounded-lg bg-pencil-yellow px-6 py-3 text-base font-bold text-chalkboard hover:bg-pencil-yellow/90 transition-colors shadow-lg"
                   >
-                    Create Your Seating Chart
+                    Create Your Seating Chart →
                   </Link>
                   <a
                     href="#pricing"
-                    className="rounded-lg border-2 border-chalk-white/30 px-6 py-3 text-base font-semibold text-white hover:border-chalk-white/60 transition-colors"
+                    className="rounded-lg border-2 border-chalk-white/30 px-6 py-3 text-base font-semibold text-white hover:border-chalk-white/60 hover:bg-chalk-white/5 transition-colors"
                   >
                     View Pricing
                   </a>
                 </div>
                 <p className="mt-4 text-sm text-chalk-white/60">
-                  Free forever: 1 class, 25 students. No signup required.
+                  ✏️ Free forever: 1 class, 25 students. No signup required.
                 </p>
               </div>
 
               {/* Visual classroom layout demo */}
               <div className="hidden sm:block">
-                <div className="rounded-xl bg-chalkboard-light/50 border border-chalk-white/10 p-4">
+                <div className="rounded-xl border-2 border-chalk-white/15 p-5 relative" style={{background: 'linear-gradient(135deg, rgba(35,77,56,0.7) 0%, rgba(26,58,42,0.9) 100%)'}}>
+                  {/* Chalk tray at the bottom */}
                   <div className="grid grid-cols-3 gap-3">
-                    <div className="rounded-lg bg-chalkboard-light border border-chalk-white/10 p-3">
-                      <p className="mb-2 text-center text-xs font-medium text-chalk-white/60">Rows</p>
+                    <div className="card-lift rounded-lg border border-chalk-white/10 p-3" style={{background: 'rgba(26,58,42,0.6)'}}>
+                      <p className="mb-2 text-center text-xs font-bold text-pencil-yellow/80 tracking-wide uppercase">Rows</p>
                       <RowLayout />
                     </div>
-                    <div className="rounded-lg bg-chalkboard-light border border-chalk-white/10 p-3">
-                      <p className="mb-2 text-center text-xs font-medium text-chalk-white/60">Groups</p>
+                    <div className="card-lift rounded-lg border border-chalk-white/10 p-3" style={{background: 'rgba(26,58,42,0.6)'}}>
+                      <p className="mb-2 text-center text-xs font-bold text-pencil-yellow/80 tracking-wide uppercase">Groups</p>
                       <GroupLayout />
                     </div>
-                    <div className="rounded-lg bg-chalkboard-light border border-chalk-white/10 p-3">
-                      <p className="mb-2 text-center text-xs font-medium text-chalk-white/60">U-Shape</p>
+                    <div className="card-lift rounded-lg border border-chalk-white/10 p-3" style={{background: 'rgba(26,58,42,0.6)'}}>
+                      <p className="mb-2 text-center text-xs font-bold text-pencil-yellow/80 tracking-wide uppercase">U-Shape</p>
                       <UShapeLayout />
                     </div>
                   </div>
-                  <p className="mt-3 text-center text-xs text-chalk-white/40">
-                    Drag & drop students into any layout
-                  </p>
+                  {/* Chalk tray */}
+                  <div className="chalk-tray mt-4 rounded-md h-4 flex items-center justify-center">
+                    <p className="text-[9px] text-chalk-white/40 font-medium tracking-wider uppercase">
+                      Drag & drop students into any layout
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -344,18 +356,19 @@ export default function Home() {
         </section>
 
         {/* Features — on warm paper background */}
-        <section className="mx-auto max-w-5xl px-6 py-16">
-          <h3 className="font-heading text-center text-2xl font-bold text-chalkboard sm:text-3xl">
+        <section className="mx-auto max-w-5xl px-6 py-20">
+          <h3 className="font-heading text-center text-2xl font-bold text-chalkboard sm:text-3xl dark:text-white">
             Everything You Need to Arrange Your Classroom
           </h3>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <p className="mt-3 text-center text-foreground/50 text-sm">Built by teachers, for teachers. No learning curve.</p>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((f) => (
               <div
                 key={f.title}
-                className="rounded-xl border border-wood-light/20 bg-white p-6 shadow-sm hover:shadow-md transition-shadow dark:bg-chalkboard dark:border-chalk-white/10"
+                className="card-lift rounded-xl border border-wood-light/20 bg-white p-6 dark:bg-chalkboard dark:border-chalk-white/10"
               >
                 <div
-                  className={`flex h-11 w-11 items-center justify-center rounded-lg ${f.accent}`}
+                  className={`flex h-12 w-12 items-center justify-center rounded-xl ${f.accent} shadow-sm`}
                 >
                   {f.icon}
                 </div>
@@ -370,40 +383,48 @@ export default function Home() {
           </div>
         </section>
 
-        {/* How it works — numbered steps with wood accents */}
-        <section className="bg-wood-warm dark:bg-chalkboard/50">
-          <div className="mx-auto max-w-5xl px-6 py-16">
+        {/* How it works — numbered steps with chalk line connectors */}
+        <section className="bg-wood-warm dark:bg-chalkboard/50 relative">
+          <div className="mx-auto max-w-5xl px-6 py-20">
             <h3 className="font-heading text-center text-2xl font-bold text-chalkboard dark:text-white sm:text-3xl">
               How to Make a Classroom Seating Chart
             </h3>
-            <div className="mt-10 grid gap-8 sm:grid-cols-4">
+            <p className="mt-3 text-center text-foreground/50 text-sm">Ready in under 2 minutes</p>
+            <div className="mt-12 grid gap-8 sm:grid-cols-4 relative">
+              {/* Connecting line between steps (desktop only) */}
+              <div className="hidden sm:block absolute top-6 left-[12.5%] right-[12.5%] h-0.5 bg-chalk-green/20" />
               {[
                 {
                   step: "1",
                   title: "Create a class",
                   desc: "Name your class to get started",
+                  emoji: "📋",
                 },
                 {
                   step: "2",
                   title: "Add students",
                   desc: "Type names or import from CSV",
+                  emoji: "👦",
                 },
                 {
                   step: "3",
                   title: "Arrange seats",
                   desc: "Drag students to desks or shuffle",
+                  emoji: "🪑",
                 },
                 {
                   step: "4",
                   title: "Print",
                   desc: "Print or save as PDF",
+                  emoji: "🖨️",
                 },
               ].map((item) => (
-                <div key={item.step} className="text-center">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-chalk-green font-heading text-lg font-bold text-white shadow-md">
+                <div key={item.step} className="text-center relative">
+                  <div className="step-pop mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-chalk-green font-heading text-lg font-bold text-white shadow-lg ring-4 ring-wood-warm dark:ring-chalkboard/50 relative z-10">
                     {item.step}
                   </div>
-                  <h4 className="mt-4 font-heading font-semibold text-chalkboard dark:text-white">
+                  <p className="mt-2 text-lg">{item.emoji}</p>
+                  <h4 className="mt-1 font-heading font-semibold text-chalkboard dark:text-white">
                     {item.title}
                   </h4>
                   <p className="mt-1 text-sm text-foreground/60">{item.desc}</p>
@@ -413,77 +434,57 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Why teachers love it */}
-        <section className="mx-auto max-w-5xl px-6 py-16">
+        {/* Why teachers love it — with emojis and personality */}
+        <section className="mx-auto max-w-5xl px-6 py-20">
           <h3 className="font-heading text-center text-2xl font-bold text-chalkboard dark:text-white sm:text-3xl">
             Why Teachers Love This Tool
           </h3>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {[
               {
-                icon: "M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z",
+                emoji: "⚡",
                 title: "Instant Setup",
                 desc: "Create your seating chart in minutes, not hours.",
-                bg: "bg-pencil-yellow/20",
-                iconColor: "text-wood",
+                border: "border-pencil-yellow/30",
               },
               {
-                icon: "M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zm0 9.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6z",
+                emoji: "🧩",
                 title: "Flexible Layouts",
                 desc: "Row, group, or U-shape arrangements for any classroom.",
-                bg: "bg-chalk-green-light",
-                iconColor: "text-chalk-green",
+                border: "border-chalk-green/30",
               },
               {
-                icon: "M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5",
+                emoji: "🔄",
                 title: "Easy Updates",
                 desc: "Drag and drop to rearrange when students move.",
-                bg: "bg-pencil-yellow/20",
-                iconColor: "text-wood",
+                border: "border-pencil-yellow/30",
               },
               {
-                icon: "M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z",
+                emoji: "🎁",
                 title: "Free for Teachers",
                 desc: "Core features always free, no credit card required.",
-                bg: "bg-chalk-green-light",
-                iconColor: "text-chalk-green",
+                border: "border-chalk-green/30",
               },
             ].map((item) => (
-              <div key={item.title} className="text-center">
-                <div
-                  className={`mx-auto flex h-14 w-14 items-center justify-center rounded-2xl ${item.bg}`}
-                >
-                  <svg
-                    className={`h-7 w-7 ${item.iconColor}`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1.5}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d={item.icon}
-                    />
-                  </svg>
-                </div>
-                <h4 className="mt-4 font-heading font-semibold text-chalkboard dark:text-white">
+              <div key={item.title} className={`card-lift text-center rounded-2xl border-2 ${item.border} bg-white p-6 dark:bg-chalkboard`}>
+                <span className="text-3xl">{item.emoji}</span>
+                <h4 className="mt-3 font-heading font-semibold text-chalkboard dark:text-white">
                   {item.title}
                 </h4>
-                <p className="mt-1 text-sm text-foreground/60">{item.desc}</p>
+                <p className="mt-2 text-sm text-foreground/60">{item.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* Pricing */}
-        <section className="bg-wood-warm dark:bg-chalkboard/50" id="pricing">
-          <div className="mx-auto max-w-3xl px-6 py-16">
+        <section className="bg-wood-warm dark:bg-chalkboard/50 relative" id="pricing">
+          <div className="mx-auto max-w-3xl px-6 py-20">
             <h3 className="font-heading text-center text-2xl font-bold text-chalkboard dark:text-white sm:text-3xl">
               Simple Pricing for Teachers
             </h3>
-            <p className="mt-2 text-center text-foreground/60">
-              Start free. Upgrade when you need more.
+            <p className="mt-3 text-center text-foreground/60">
+              Start free. Upgrade when you need more. ✏️
             </p>
             <div className="mt-10 grid gap-6 sm:grid-cols-2">
               {/* Free tier */}
@@ -569,72 +570,64 @@ export default function Home() {
         </section>
 
         {/* Audience */}
-        <section className="mx-auto max-w-5xl px-6 py-16">
+        <section className="mx-auto max-w-5xl px-6 py-20">
           <h3 className="font-heading text-center text-2xl font-bold text-chalkboard dark:text-white sm:text-3xl">
             Built for Every Classroom
           </h3>
-          <div className="mt-10 grid gap-6 sm:grid-cols-3">
+          <div className="mt-12 grid gap-6 sm:grid-cols-3">
             {[
               {
                 title: "Elementary Teachers",
                 desc: "Arrange desks for reading groups, centers, and whole-class instruction.",
-                icon: (
-                  <svg className="h-8 w-8 text-chalk-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                  </svg>
-                ),
+                emoji: "📚",
               },
               {
                 title: "Band & Orchestra Directors",
                 desc: "Seat musicians by section. Rearrange for concerts, rehearsals, and auditions.",
-                icon: (
-                  <svg className="h-8 w-8 text-wood" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 11-.99-3.467l2.31-.66a2.25 2.25 0 001.632-2.163zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 01-.99-3.467l2.31-.66A2.25 2.25 0 009 15.553z" />
-                  </svg>
-                ),
+                emoji: "🎵",
               },
               {
                 title: "School Admins",
                 desc: "Help teachers set up classrooms. Share seating charts with substitutes and staff.",
-                icon: (
-                  <svg className="h-8 w-8 text-chalk-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                  </svg>
-                ),
+                emoji: "👩‍💼",
               },
             ].map((item) => (
               <div
                 key={item.title}
-                className="rounded-2xl border border-wood-light/20 bg-white p-6 text-center shadow-sm dark:bg-chalkboard dark:border-chalk-white/10"
+                className="card-lift rounded-2xl border border-wood-light/20 bg-white p-8 text-center dark:bg-chalkboard dark:border-chalk-white/10"
               >
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-chalk-green-light dark:bg-chalk-green/20">
-                  {item.icon}
-                </div>
-                <h4 className="mt-4 font-heading font-semibold text-chalkboard dark:text-white">
+                <span className="text-4xl">{item.emoji}</span>
+                <h4 className="mt-4 font-heading text-lg font-semibold text-chalkboard dark:text-white">
                   {item.title}
                 </h4>
-                <p className="mt-2 text-sm text-foreground/60">{item.desc}</p>
+                <p className="mt-2 text-sm text-foreground/60 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="mx-auto max-w-5xl px-6 pb-16">
-          <div className="rounded-2xl bg-chalkboard p-10 text-center shadow-lg">
-            <h3 className="font-heading text-2xl font-bold text-white sm:text-3xl">
-              Ready to organize your classroom?
-            </h3>
-            <p className="mt-3 text-chalk-white/70">
-              Create your first classroom seating chart in under 2 minutes. No
-              signup, no credit card.
-            </p>
-            <Link
-              href="/editor"
-              className="mt-6 inline-block rounded-lg bg-pencil-yellow px-8 py-3 text-base font-bold text-chalkboard hover:bg-pencil-yellow/90 transition-colors"
-            >
-              Create Your Seating Chart
-            </Link>
+        {/* CTA — chalkboard with texture */}
+        <section className="mx-auto max-w-5xl px-6 pb-20">
+          <div className="chalkboard-bg rounded-2xl p-12 text-center shadow-xl relative overflow-hidden">
+            {/* Subtle chalk dust */}
+            <div className="absolute inset-0 opacity-[0.03]" style={{backgroundImage: 'radial-gradient(circle, #f0ede8 1px, transparent 1px)', backgroundSize: '16px 16px'}} />
+            <div className="relative">
+              <h3 className="font-heading chalk-text text-2xl font-bold sm:text-3xl">
+                Ready to organize your classroom?
+              </h3>
+              <p className="mt-3 text-chalk-white/70">
+                Create your first classroom seating chart in under 2 minutes. No
+                signup, no credit card. 🍎
+              </p>
+              <Link
+                href="/editor"
+                className="cta-pulse mt-6 inline-block rounded-lg bg-pencil-yellow px-8 py-3.5 text-base font-bold text-chalkboard hover:bg-pencil-yellow/90 transition-colors shadow-lg"
+              >
+                Create Your Seating Chart →
+              </Link>
+            </div>
+            {/* Chalk tray at bottom */}
+            <div className="chalk-tray mt-8 -mx-12 -mb-12 h-5 rounded-b-2xl" />
           </div>
         </section>
 
