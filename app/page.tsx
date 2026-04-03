@@ -222,16 +222,6 @@ const features = [
     accent: "bg-pencil-yellow/20 text-wood",
   },
   {
-    title: "Multiple Layouts",
-    desc: "Rows, groups, U-shape, horseshoe, lab benches, and orchestra seating. Match your actual classroom.",
-    icon: (
-      <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zm0 9.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zm0 9.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25a2.25 2.25 0 01-2.25-2.25v-2.25z" />
-      </svg>
-    ),
-    accent: "bg-chalk-green-light text-chalk-green",
-  },
-  {
     title: "Cloud Save",
     desc: "Your seating arrangements save automatically. Come back later and pick up where you left off.",
     icon: (
@@ -253,11 +243,7 @@ const freeFeatures = [
 ];
 const proFeatures = [
   "Unlimited classes",
-  "All layouts: groups, U-shape, horseshoe, lab, orchestra",
-  "Shuffle with separation constraints",
   "Clean PDF (no watermark)",
-  "Share links for subs & admins",
-  "Student notes & multiple periods",
 ];
 
 export default function Home() {

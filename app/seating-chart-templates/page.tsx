@@ -2,9 +2,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Free Seating Chart Templates for Classroom | Row, Grid, U-Shape & Groups",
+  title: "Free Row Layout Seating Chart Template | Classroom Seating Chart Maker",
   description:
-    "Free seating chart templates for classroom use. Choose from row, grid, U-shape, and group templates. Customize layouts, add students, and print. No signup required.",
+    "Free seating chart template for classroom use. Create row layout seating charts with drag-and-drop, add students, and export to PDF. No signup required.",
   keywords: [
     "seating chart template classroom",
     "template for classroom seating chart",
@@ -26,7 +26,7 @@ function JsonLd() {
     operatingSystem: "Web",
     url: "https://classroomseatingchartmaker.com/seating-chart-templates",
     description:
-      "Free seating chart templates for classroom use. Row, grid, U-shape, and group layouts ready to customize.",
+      "Free row layout seating chart template for classroom use. Drag-and-drop, customize with students, and export to PDF.",
     offers: {
       "@type": "Offer",
       price: "0",
@@ -146,7 +146,7 @@ export default function SeatingChartTemplates() {
             Free Seating Chart Templates for Classroom
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
-            Start with a ready-made classroom seating chart template. Choose rows, grid, U-shape, or group layouts — then customize with drag-and-drop to fit your room.
+            Start with a free row layout template. Customize with drag-and-drop, add your students, and print. Upgrade to Pro to unlock grid, U-shape, and group layouts.
           </p>
           <div className="mt-8">
             <Link href="/editor" className="rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">
@@ -192,16 +192,13 @@ export default function SeatingChartTemplates() {
         </section>
 
         <section className="mt-20">
-          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Choosing the Right Template</h2>
+          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Row Layout Template</h2>
           <div className="mx-auto mt-8 max-w-3xl space-y-6 text-zinc-600 dark:text-zinc-400">
             <p>
-              The best seating chart template depends on how you teach. Traditional rows work well for direct instruction and testing — students face forward with minimal distractions. Grid layouts offer similar structure with more even spacing, making it easier to walk between desks during independent work.
+              The row layout template works well for direct instruction and testing — students face forward with minimal distractions. Easy to customize with drag-and-drop for any classroom size.
             </p>
             <p>
-              If your classroom relies on discussion, the U-shape template puts every student face-to-face. Socratic seminars, read-alouds, and class debates all benefit from this arrangement. Students can see who&apos;s speaking, which encourages participation and accountability.
-            </p>
-            <p>
-              Group templates cluster desks for collaborative learning. Place 4–6 students together for projects, peer review, or lab work. Many teachers use groups early in the week for teamwork and switch to rows for Friday assessments — our editor lets you save both configurations and switch between them in seconds.
+              <strong>Want more layouts?</strong> Upgrade to Pro to unlock grid, U-shape, and group templates designed for different teaching styles — from lectures to collaborative projects.
             </p>
           </div>
         </section>

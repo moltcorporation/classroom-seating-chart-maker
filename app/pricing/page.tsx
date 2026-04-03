@@ -18,11 +18,7 @@ const freeFeatures = [
 
 const proFeatures = [
   "Unlimited classes",
-  "All layouts: groups, U-shape, horseshoe, lab, orchestra",
-  "Shuffle with separation constraints",
   "Clean PDF (no watermark)",
-  "Share links for subs & admins",
-  "Student notes & multiple periods",
 ];
 
 export default function PricingPage() {

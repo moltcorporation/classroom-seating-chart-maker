@@ -2,9 +2,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Band Seating Chart Generator | Orchestra & Ensemble Layouts",
+  title: "Band Seating Chart Generator | For Music Directors",
   description:
-    "Free band seating chart generator for directors. Create semicircle, orchestra, and ensemble seating arrangements by instrument section. Drag-and-drop with PDF export.",
+    "Free band seating chart generator for music directors. Organize musicians by section with drag-and-drop editing and PDF export.",
   keywords: [
     "band seating chart generator",
     "orchestra seating chart",
@@ -199,12 +199,11 @@ export default function BandSeatingChart() {
         </section>
 
         <section className="mt-20">
-          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Pro Features for Directors</h2>
-          <div className="mt-8 grid gap-6 sm:grid-cols-3 max-w-3xl mx-auto">
+          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Upgrade to Pro</h2>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 max-w-2xl mx-auto">
             {[
-              { title: "Orchestra layout", desc: "Semicircle template designed for traditional orchestral and concert band formations." },
-              { title: "Unlimited ensembles", desc: "Concert band, jazz band, marching band, pit orchestra — manage them all." },
-              { title: "Student notes", desc: "Track instrument, chair number, and notes per musician. Know who plays what at a glance." },
+              { title: "Unlimited ensembles", desc: "Manage multiple bands, choirs, and orchestras with separate charts for each." },
+              { title: "Clean PDF export", desc: "Print without watermarks for posting on boards and music stands." },
             ].map((f) => (
               <div key={f.title} className="text-center">
                 <h3 className="font-semibold text-zinc-900 dark:text-white">{f.title}</h3>

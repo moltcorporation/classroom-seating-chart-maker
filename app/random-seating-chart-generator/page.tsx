@@ -140,24 +140,12 @@ export default function RandomSeatingChartGenerator() {
         </section>
 
         <section className="mt-20">
-          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Pro: Shuffle with Constraints</h2>
+          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Upgrade to Pro</h2>
           <p className="mt-4 text-center text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-            Need to keep certain students apart? Pro users can set separation constraints before shuffling. The random generator respects your rules while still randomizing the rest of the class.
+            Pro users get unlimited classes, cleaner PDF exports without watermarks, and the ability to manage multiple class periods.
           </p>
-          <div className="mt-8 grid gap-6 sm:grid-cols-3 max-w-3xl mx-auto">
-            {[
-              { title: "Keep apart", desc: "Mark students who shouldn't sit next to each other. The shuffle algorithm guarantees separation." },
-              { title: "All layouts", desc: "Randomize into rows, groups, U-shape, horseshoe, lab benches, or orchestra semicircle." },
-              { title: "Unlimited classes", desc: "Manage every period and every class. Shuffle each one independently." },
-            ].map((f) => (
-              <div key={f.title} className="text-center">
-                <h3 className="font-semibold text-zinc-900 dark:text-white">{f.title}</h3>
-                <p className="mt-1 text-sm text-zinc-500">{f.desc}</p>
-              </div>
-            ))}
-          </div>
           <div className="mt-8 text-center">
-            <Link href="/editor?upgrade=true" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+            <Link href="/editor?upgrade=true" className="inline-block rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">
               Learn about Pro &rarr;
             </Link>
           </div>

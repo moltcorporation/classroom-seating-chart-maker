@@ -2,9 +2,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Classroom Seating Arrangement Ideas & Templates | Free for Teachers",
+  title: "Classroom Seating Arrangement Generator | Free for Teachers",
   description:
-    "Explore classroom seating arrangement ideas: rows, clusters, U-shape, horseshoe, pairs, and lab layouts. Find the best seating arrangement for your classroom and create it with our free generator.",
+    "Create classroom seating arrangements with our free generator. Row layout included free. Upgrade to Pro for more arrangement options.",
   keywords: [
     "classroom seating arrangement templates",
     "classroom seating arrangement generator",
@@ -27,7 +27,7 @@ function JsonLd() {
     operatingSystem: "Web",
     url: "https://classroomseatingchartmaker.com/classroom-seating-arrangement",
     description:
-      "Free classroom seating arrangement tool for teachers. Choose from rows, clusters, U-shape, horseshoe, and more layouts.",
+      "Free classroom seating arrangement tool for teachers. Row layout included free. Drag-and-drop customization and PDF export.",
     offers: {
       "@type": "Offer",
       price: "0",
@@ -51,7 +51,7 @@ function JsonLd() {
         name: "What is the best seating arrangement for a classroom?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "The best seating arrangement depends on your teaching style. Traditional rows work best for lectures and testing. Cluster groups are ideal for collaborative projects. U-shape or horseshoe layouts promote class discussions. Most teachers switch between arrangements depending on the activity.",
+          text: "The best seating arrangement depends on your teaching style. Traditional rows work well for lectures and testing. Our free row layout gets you started. Upgrade to Pro to unlock more arrangement options.",
         },
       },
       {
@@ -75,7 +75,7 @@ function JsonLd() {
         name: "How do I create a seating arrangement for my classroom?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Use our free Classroom Seating Chart Maker to create your arrangement. Choose a layout (rows, clusters, U-shape, or custom), add your students, and drag desks into position. You can save multiple arrangements for the same class and export to PDF.",
+          text: "Use our free Classroom Seating Chart Maker to create your arrangement. Add your students and drag desks into position with our row layout. Export to PDF and print for your classroom. Upgrade to Pro for more layout options.",
         },
       },
       {
