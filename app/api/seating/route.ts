@@ -1,13 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
-import { seatingArrangements } from "@/db/schema";
+import { seatingArrangements, classes } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const classId = searchParams.get("classId");
-  if (!classId) {
-    return NextResponse.json({ error: "classId required" }, { status: 400 });
+  const email = searchParams.get("email");
+  if (!classId || !email) {
+    return NextResponse.json({ error: "classId and email required" }, { status: 400 });
+  }
+  const classData = await db.select().from(classes).where(eq(classes.id, classId));
+  if (classData.length === 0) {
+    return NextResponse.json({ error: "Class not found" }, { status: 404 });
+  }
+  if (classData[0].ownerEmail !== email.toLowerCase().trim()) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }
   const [arrangement] = await db
     .select()
@@ -18,9 +26,17 @@ export async function GET(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   const body = await req.json();
-  const { classId, seats, rows, cols, layout } = body;
-  if (!classId) {
-    return NextResponse.json({ error: "classId required" }, { status: 400 });
+  const { classId, seats, rows, cols, layout, email } = body;
+  if (!classId || !email) {
+    return NextResponse.json({ error: "classId and email required" }, { status: 400 });
+  }
+
+  const classData = await db.select().from(classes).where(eq(classes.id, classId));
+  if (classData.length === 0) {
+    return NextResponse.json({ error: "Class not found" }, { status: 404 });
+  }
+  if (classData[0].ownerEmail !== email.toLowerCase().trim()) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }
 
   const existing = await db

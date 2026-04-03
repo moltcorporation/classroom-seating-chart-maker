@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
-import { students } from "@/db/schema";
+import { students, classes } from "@/db/schema";
 import { eq, and } from "drizzle-orm";
 import { checkProAccess } from "@/lib/pro";
 
@@ -9,8 +9,16 @@ const FREE_STUDENT_LIMIT = 25;
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const classId = searchParams.get("classId");
-  if (!classId) {
-    return NextResponse.json({ error: "classId required" }, { status: 400 });
+  const email = searchParams.get("email");
+  if (!classId || !email) {
+    return NextResponse.json({ error: "classId and email required" }, { status: 400 });
+  }
+  const classData = await db.select().from(classes).where(eq(classes.id, classId));
+  if (classData.length === 0) {
+    return NextResponse.json({ error: "Class not found" }, { status: 404 });
+  }
+  if (classData[0].ownerEmail !== email.toLowerCase().trim()) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }
   const list = await db
     .select()
@@ -99,8 +107,16 @@ export async function DELETE(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id");
   const classId = searchParams.get("classId");
-  if (!id || !classId) {
-    return NextResponse.json({ error: "id and classId required" }, { status: 400 });
+  const email = searchParams.get("email");
+  if (!id || !classId || !email) {
+    return NextResponse.json({ error: "id, classId, and email required" }, { status: 400 });
+  }
+  const classData = await db.select().from(classes).where(eq(classes.id, classId));
+  if (classData.length === 0) {
+    return NextResponse.json({ error: "Class not found" }, { status: 404 });
+  }
+  if (classData[0].ownerEmail !== email.toLowerCase().trim()) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }
   await db
     .delete(students)
