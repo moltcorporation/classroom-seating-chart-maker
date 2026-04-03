@@ -45,6 +45,7 @@ export default function EditorPage() {
   const [dragStudentId, setDragStudentId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [className, setClassName] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const svgRef = useRef<SVGSVGElement>(null);
 
   // ─── Pro tier state ─────────────────────────────────────────────────────────
@@ -502,18 +503,29 @@ export default function EditorPage() {
 
       {/* Header */}
       <header className="flex items-center justify-between border-b border-zinc-200 px-4 py-3 dark:border-zinc-800 print:hidden">
-        <div>
-          <h1 className="text-lg font-bold text-zinc-900 dark:text-white">
-            {currentClass.name}
-          </h1>
-          <p className="text-xs text-zinc-500">
-            {students.length}{isPro ? "" : "/25"} students &middot; {seatedIds.size} seated
-            {isPro && (
-              <span className="ml-2 rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
-                Pro
-              </span>
-            )}
-          </p>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="md:hidden rounded-lg p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+            title="Toggle student roster"
+          >
+            <svg className="w-5 h-5 text-zinc-700 dark:text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          <div>
+            <h1 className="text-lg font-bold text-zinc-900 dark:text-white">
+              {currentClass.name}
+            </h1>
+            <p className="text-xs text-zinc-500">
+              {students.length}{isPro ? "" : "/25"} students &middot; {seatedIds.size} seated
+              {isPro && (
+                <span className="ml-2 rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
+                  Pro
+                </span>
+              )}
+            </p>
+          </div>
         </div>
         <div className="flex items-center gap-2">
           {!isPro && (
@@ -558,9 +570,19 @@ export default function EditorPage() {
         </div>
       )}
 
-      <div className="flex flex-1 overflow-hidden">
+      {/* Mobile overlay backdrop */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      <div className="flex flex-1 overflow-hidden relative">
         {/* Sidebar — Student Roster */}
-        <aside className="flex w-72 flex-col border-r border-zinc-200 dark:border-zinc-800 print:hidden">
+        <aside className={`flex w-72 flex-col border-r border-zinc-200 dark:border-zinc-800 print:hidden transition-all duration-200 ${
+          sidebarOpen ? 'fixed inset-y-16 left-0 z-50 md:relative md:inset-auto' : 'hidden md:flex'
+        }`}>
           <div className="border-b border-zinc-200 p-3 dark:border-zinc-800">
             <h2 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
               Student Roster
