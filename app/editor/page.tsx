@@ -376,8 +376,8 @@ export default function EditorPage() {
 
   const upgradeModal = showUpgrade && (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="mx-4 w-full max-w-md rounded-xl bg-white p-6 dark:bg-chalkboard/40">
-        <h2 className="text-xl font-bold text-zinc-900 dark:text-chalk-white">
+      <div className="mx-4 w-full max-w-md rounded-xl bg-chalk-white p-6 dark:bg-chalkboard/40">
+        <h2 className="text-xl font-bold text-chalkboard dark:text-chalk-white">
           Upgrade to Pro
         </h2>
         <p className="mt-2 text-sm text-foreground/60">
@@ -406,7 +406,7 @@ export default function EditorPage() {
                 : "border-wood/10 dark:border-chalk-green/40"
             }`}
           >
-            <div className="font-semibold text-zinc-900 dark:text-chalk-white">
+            <div className="font-semibold text-chalkboard dark:text-chalk-white">
               $29.99/year
             </div>
             <div className="text-xs text-foreground/60">Save 37%</div>
@@ -419,7 +419,7 @@ export default function EditorPage() {
                 : "border-wood/10 dark:border-chalk-green/40"
             }`}
           >
-            <div className="font-semibold text-zinc-900 dark:text-chalk-white">
+            <div className="font-semibold text-chalkboard dark:text-chalk-white">
               $3.99/month
             </div>
             <div className="text-xs text-foreground/60">Flexible</div>
@@ -457,8 +457,8 @@ export default function EditorPage() {
     return (
       <div className="flex h-screen items-center justify-center">
         {upgradeModal}
-        <div className="w-full max-w-md rounded-xl border border-wood/10 bg-white p-8 dark:border-chalk-green/30 dark:bg-chalkboard/40">
-          <h1 className="text-2xl font-bold text-zinc-900 dark:text-chalk-white">
+        <div className="w-full max-w-md rounded-xl border border-wood/10 bg-chalk-white p-8 dark:border-chalk-green/30 dark:bg-chalkboard/40">
+          <h1 className="text-2xl font-bold text-chalkboard dark:text-chalk-white">
             Create Your Class
           </h1>
           <p className="mt-2 text-sm text-foreground/60">
@@ -503,7 +503,7 @@ export default function EditorPage() {
       {/* Header */}
       <header className="flex items-center justify-between border-b border-wood/10 px-4 py-3 dark:border-chalk-green/30 print:hidden">
         <div>
-          <h1 className="text-lg font-bold text-zinc-900 dark:text-chalk-white">
+          <h1 className="text-lg font-bold text-chalkboard dark:text-chalk-white">
             {currentClass.name}
           </h1>
           <p className="text-xs text-foreground/60">
@@ -583,7 +583,7 @@ export default function EditorPage() {
             </div>
             <button
               onClick={importCSV}
-              className="mt-2 w-full rounded border border-dashed border-wood/20 py-1 text-xs text-foreground/60 hover:border-zinc-400 hover:text-foreground/70 dark:border-chalk-green/40"
+              className="mt-2 w-full rounded border border-dashed border-wood/20 py-1 text-xs text-foreground/60 hover:border-chalk-green/60 hover:text-foreground/70 dark:border-chalk-green/40"
             >
               Import CSV
             </button>
@@ -591,7 +591,7 @@ export default function EditorPage() {
 
           <div className="flex-1 overflow-y-auto p-2">
             {students.length === 0 && (
-              <p className="mt-4 text-center text-xs text-zinc-400">
+              <p className="mt-4 text-center text-xs text-foreground/60">
                 No students yet. Add students above or import a CSV.
               </p>
             )}
@@ -616,7 +616,7 @@ export default function EditorPage() {
                       if (e.key === "Enter") updateStudent(student.id, editName);
                       if (e.key === "Escape") setEditingId(null);
                     }}
-                    className="flex-1 rounded border px-1 py-0.5 text-xs dark:bg-zinc-700 dark:border-zinc-600"
+                    className="flex-1 rounded border border-wood/20 px-1 py-0.5 text-xs dark:bg-chalkboard/30 dark:border-chalk-green/40"
                   />
                 ) : (
                   <span
@@ -634,7 +634,7 @@ export default function EditorPage() {
                   {seatedIds.has(student.id) && (
                     <button
                       onClick={() => handleUnseat(student.id)}
-                      className="text-xs text-zinc-400 hover:text-orange-500"
+                      className="text-xs text-foreground/50 hover:text-orange-500"
                       title="Remove from seat"
                     >
                       &times;
@@ -642,7 +642,7 @@ export default function EditorPage() {
                   )}
                   <button
                     onClick={() => deleteStudent(student.id)}
-                    className="text-xs text-zinc-400 hover:text-red-500"
+                    className="text-xs text-foreground/50 hover:text-red-500"
                     title="Delete student"
                   >
                     &minus;
