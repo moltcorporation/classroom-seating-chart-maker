@@ -133,13 +133,13 @@ export default function PricingPage() {
             </ul>
             <div className="mt-8 space-y-2">
               <a
-                href="https://buy.stripe.com/14A9ATcW79SpcXPaYA3Nm0W"
+                href="https://buy.stripe.com/7sY14nbS3aWt7Dv0jW3Nm13"
                 className="block rounded-lg bg-chalk-green py-3 text-center text-sm font-bold text-white hover:bg-chalkboard transition-colors"
               >
                 Upgrade to Pro — $29.99/year
               </a>
               <a
-                href="https://buy.stripe.com/3cI14n1dpggNaPHc2E3Nm0V"
+                href="https://buy.stripe.com/6oU9AT4pB3u1f5X8Qs3Nm14"
                 className="block text-center text-xs text-foreground/40 hover:text-chalk-green transition-colors py-2"
               >
                 or $3.99/month
