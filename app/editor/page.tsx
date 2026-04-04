@@ -332,6 +332,7 @@ export default function EditorPage() {
       body: JSON.stringify({ classId: currentClass.id, seats, rows, cols }),
     });
     setSaving(false);
+    window.umami?.track("chart_created");
   }, [currentClass, seats, rows, cols]);
 
   // ─── Drag and drop ─────────────────────────────────────────────────────────
@@ -361,6 +362,8 @@ export default function EditorPage() {
   // ─── Print ─────────────────────────────────────────────────────────────────
 
   function handlePrint() {
+    window.umami?.track("pdf_exported");
+    // TODO: Add export_limit_hit tracking when free tier export cap is implemented (task 3Bt5YvN5kCL8FLzIgYPwQDVWaR0)
     window.print();
   }
 
@@ -531,7 +534,10 @@ export default function EditorPage() {
           </div>
           {!isPro && (
             <button
-              onClick={() => setShowUpgrade(true)}
+              onClick={() => {
+                window.umami?.track("pro_upgrade_clicked");
+                setShowUpgrade(true);
+              }}
               className="mt-4 w-full text-center text-sm text-chalk-green hover:underline"
             >
               Upgrade to Pro for unlimited classes
@@ -574,7 +580,10 @@ export default function EditorPage() {
         <div className="flex items-center gap-2">
           {!isPro && (
             <button
-              onClick={() => setShowUpgrade(true)}
+              onClick={() => {
+                window.umami?.track("pro_upgrade_clicked");
+                setShowUpgrade(true);
+              }}
               className="rounded-xl border-2 border-pencil-yellow/40 bg-pencil-yellow/10 px-3 py-1.5 text-sm font-bold text-wood hover:bg-pencil-yellow/20 transition-colors"
             >
               <svg className="inline-block h-3.5 w-3.5 mr-1 -mt-0.5" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
