@@ -137,55 +137,57 @@ const arrangements = [
 
 export default function ClassroomSeatingArrangement() {
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950">
+    <div className="min-h-screen bg-background">
       <JsonLd />
-      <header className="border-b border-zinc-200 dark:border-zinc-800">
+      <header className="relative bg-wood-warm border-b-4 border-wood/60">
+        <div className="wood-strip" />
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <Link href="/" className="text-xl font-bold text-zinc-900 dark:text-white">Classroom Seating Chart Maker</Link>
-          <Link href="/editor" className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">Open Editor</Link>
+          <Link href="/" className="font-heading text-xl font-bold text-chalkboard">Classroom Seating Chart Maker</Link>
+          <Link href="/editor" className="rounded-lg bg-chalk-green px-5 py-2.5 text-sm font-bold text-white shadow-md hover:bg-chalkboard transition-all">Open Editor</Link>
         </div>
       </header>
 
       <main className="mx-auto max-w-5xl px-6 py-16">
-        <section className="text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-5xl">
+        <section className="chalkboard-texture bg-chalkboard text-white rounded-2xl p-12 text-center -mx-6 -mt-16 mb-16">
+          <h1 className="font-heading text-4xl font-bold tracking-tight text-white sm:text-5xl">
             Classroom Seating Arrangement Ideas & Templates
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-chalk-white/70">
             The right seating arrangement transforms classroom behavior and engagement. Explore layouts for every teaching style, then build your arrangement with our free drag-and-drop tool.
           </p>
           <div className="mt-8">
-            <Link href="/editor" className="rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">
+            <Link href="/editor" className="rounded-xl bg-pencil-yellow px-8 py-3.5 text-base font-bold text-chalkboard shadow-lg shadow-pencil-yellow/20 hover:shadow-xl hover:scale-[1.02] transition-all">
               Build Your Arrangement
             </Link>
           </div>
-          <p className="mt-3 text-sm text-zinc-500">Free to use. No signup required.</p>
+          <p className="mt-3 text-sm text-chalk-white/50">Free to use. No signup required.</p>
+          <div className="wood-strip" />
         </section>
 
-        <section className="mt-20">
-          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Choose Your Layout</h2>
-          <p className="mt-2 text-center text-zinc-600 dark:text-zinc-400">
+        <section className="mt-20 bg-wood-warm/30 dark:bg-chalkboard/20 rounded-2xl p-8 -mx-6">
+          <h2 className="font-heading text-center text-2xl font-bold text-chalkboard dark:text-white">Choose Your Layout</h2>
+          <p className="mt-2 text-center text-foreground/60">
             Each arrangement has trade-offs. The best choice depends on your teaching goals, class size, and room shape.
           </p>
           <div className="mt-8 space-y-8">
             {arrangements.map((a) => (
-              <div key={a.title} className="rounded-xl border border-zinc-200 p-6 dark:border-zinc-800">
+              <div key={a.title} className="rounded-2xl border border-wood-light/15 p-6 dark:border-chalk-white/10">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                  <h3 className="text-xl font-semibold text-zinc-900 dark:text-white">{a.title}</h3>
-                  <span className="mt-1 text-sm text-blue-600 dark:text-blue-400 sm:mt-0">Best for: {a.bestFor}</span>
+                  <h3 className="text-xl font-semibold text-chalkboard dark:text-white">{a.title}</h3>
+                  <span className="mt-1 text-sm text-chalk-green sm:mt-0">Best for: {a.bestFor}</span>
                 </div>
-                <p className="mt-3 text-zinc-600 dark:text-zinc-400">{a.desc}</p>
+                <p className="mt-3 text-foreground/60">{a.desc}</p>
                 <div className="mt-4 grid gap-4 sm:grid-cols-2">
                   <div>
-                    <h4 className="text-sm font-medium text-green-600 dark:text-green-400">Advantages</h4>
-                    <ul className="mt-1 space-y-1 text-sm text-zinc-600 dark:text-zinc-400">
-                      {a.pros.map((p) => <li key={p} className="flex items-start gap-2"><span className="mt-0.5 text-green-500">+</span>{p}</li>)}
+                    <h4 className="text-sm font-medium text-chalk-green">Advantages</h4>
+                    <ul className="mt-1 space-y-1 text-sm text-foreground/60">
+                      {a.pros.map((p) => <li key={p} className="flex items-start gap-2"><span className="mt-0.5 text-chalk-green">+</span>{p}</li>)}
                     </ul>
                   </div>
                   <div>
-                    <h4 className="text-sm font-medium text-amber-600 dark:text-amber-400">Trade-offs</h4>
-                    <ul className="mt-1 space-y-1 text-sm text-zinc-600 dark:text-zinc-400">
-                      {a.cons.map((c) => <li key={c} className="flex items-start gap-2"><span className="mt-0.5 text-amber-500">-</span>{c}</li>)}
+                    <h4 className="text-sm font-medium text-wood">Trade-offs</h4>
+                    <ul className="mt-1 space-y-1 text-sm text-foreground/60">
+                      {a.cons.map((c) => <li key={c} className="flex items-start gap-2"><span className="mt-0.5 text-pencil-yellow">-</span>{c}</li>)}
                     </ul>
                   </div>
                 </div>
@@ -195,8 +197,8 @@ export default function ClassroomSeatingArrangement() {
         </section>
 
         <section className="mt-20">
-          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">How to Choose the Right Arrangement</h2>
-          <div className="mx-auto mt-8 max-w-3xl space-y-6 text-zinc-600 dark:text-zinc-400">
+          <h2 className="font-heading text-center text-2xl font-bold text-chalkboard dark:text-white">How to Choose the Right Arrangement</h2>
+          <div className="mx-auto mt-8 max-w-3xl space-y-6 text-foreground/60">
             <p>
               Start with your primary teaching method. If most instruction is teacher-led with lectures and demonstrations, rows give every student a clear view and minimize distractions. If you run a discussion-heavy class with Socratic seminars or debates, the U-shape lets students see and respond to each other directly.
             </p>
@@ -205,14 +207,14 @@ export default function ClassroomSeatingArrangement() {
             </p>
             <p>
               Think about the mix. Many teachers use different arrangements for different activities — rows for testing days, clusters for project work, U-shape for Friday discussions. Our editor lets you save multiple arrangements for the same class so you can switch layouts without rebuilding from scratch. Browse our{" "}
-              <Link href="/seating-chart-templates" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline">seating chart templates</Link>{" "}
+              <Link href="/seating-chart-templates" className="text-chalk-green hover:text-chalkboard underline">seating chart templates</Link>{" "}
               for ready-made layouts you can customize.
             </p>
           </div>
         </section>
 
-        <section className="mt-20">
-          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Tips for Better Seating Arrangements</h2>
+        <section className="mt-20 bg-chalk-green-light/20 dark:bg-chalk-green/5 rounded-2xl p-8 -mx-6">
+          <h2 className="font-heading text-center text-2xl font-bold text-chalkboard dark:text-white">Tips for Better Seating Arrangements</h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 max-w-3xl mx-auto">
             {[
               { title: "Rotate regularly", desc: "Change seating every 4-6 weeks. Students build new relationships and avoid the rut of permanent spots." },
@@ -220,29 +222,29 @@ export default function ClassroomSeatingArrangement() {
               { title: "Plan traffic flow", desc: "Leave clear paths between desks. Students should reach the door, pencil sharpener, and materials without climbing over each other." },
               { title: "Use data", desc: "Track which arrangements lead to better participation and fewer disruptions. Let results guide your layout choices." },
             ].map((tip) => (
-              <div key={tip.title} className="rounded-xl border border-zinc-200 p-6 dark:border-zinc-800">
-                <h3 className="font-semibold text-zinc-900 dark:text-white">{tip.title}</h3>
-                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{tip.desc}</p>
+              <div key={tip.title} className="rounded-2xl border border-wood-light/15 p-6 dark:border-chalk-white/10">
+                <h3 className="font-semibold text-chalkboard dark:text-white">{tip.title}</h3>
+                <p className="mt-2 text-sm text-foreground/60">{tip.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
         <section className="mt-20">
-          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">All Layouts with Pro</h2>
-          <p className="mt-4 text-center text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
+          <h2 className="font-heading text-center text-2xl font-bold text-chalkboard dark:text-white">All Layouts with Pro</h2>
+          <p className="mt-4 text-center text-foreground/60 max-w-2xl mx-auto">
             Free users get the row layout. Pro unlocks every arrangement — clusters, U-shape, horseshoe, lab, and orchestra — plus unlimited classes and clean PDF export.
           </p>
           <div className="mt-6 text-center">
-            <Link href="/#pricing" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+            <Link href="/#pricing" className="text-chalk-green hover:text-chalkboard text-sm font-medium">
               See pricing &rarr;
             </Link>
           </div>
         </section>
 
-        <section className="mt-20">
-          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Frequently Asked Questions</h2>
-          <div className="mt-8 max-w-3xl mx-auto space-y-6">
+        <section className="mt-20 bg-wood-warm/30 dark:bg-chalkboard/20 rounded-2xl p-8 -mx-6">
+          <h2 className="font-heading text-center text-2xl font-bold text-chalkboard dark:text-white">Frequently Asked Questions</h2>
+          <div className="mt-8 max-w-3xl mx-auto space-y-3">
             {[
               { q: "What is the best seating arrangement for a classroom?", a: "The best seating arrangement depends on your teaching style. Traditional rows work best for lectures and testing. Cluster groups are ideal for collaborative projects. U-shape or horseshoe layouts promote class discussions. Most teachers switch between arrangements depending on the activity." },
               { q: "How often should I change my classroom seating arrangement?", a: "Most teachers change seating every 4-6 weeks. Regular rotation helps students build new relationships, prevents cliques from forming, and gives everyone a chance at different spots in the room." },
@@ -250,32 +252,32 @@ export default function ClassroomSeatingArrangement() {
               { q: "How do I create a seating arrangement for my classroom?", a: "Use our free Classroom Seating Chart Maker to create your arrangement. Choose a layout, add your students, and drag desks into position. You can save multiple arrangements and export to PDF." },
               { q: "What seating arrangement is best for classroom management?", a: "Traditional rows are generally best for classroom management because students face forward with limited peer interaction. The U-shape gives the teacher access to every student while maintaining structure." },
             ].map((item) => (
-              <details key={item.q} className="group rounded-xl border border-zinc-200 dark:border-zinc-800">
-                <summary className="cursor-pointer px-6 py-4 font-medium text-zinc-900 dark:text-white">
+              <details key={item.q} className="group rounded-xl bg-white border border-wood-light/15 p-5 shadow-sm dark:bg-chalkboard dark:border-chalk-white/10">
+                <summary className="cursor-pointer font-medium text-chalkboard dark:text-white">
                   {item.q}
                 </summary>
-                <p className="px-6 pb-4 text-sm text-zinc-600 dark:text-zinc-400">{item.a}</p>
+                <p className="mt-3 text-sm text-foreground/60">{item.a}</p>
               </details>
             ))}
           </div>
         </section>
 
-        <section className="mt-20 rounded-xl border border-zinc-200 bg-zinc-50 p-8 text-center dark:border-zinc-800 dark:bg-zinc-900">
-          <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">Build your classroom arrangement</h2>
-          <p className="mt-2 text-zinc-600 dark:text-zinc-400">Pick a layout, add your students, and arrange desks with drag-and-drop. Free, no signup.</p>
-          <Link href="/editor" className="mt-6 inline-block rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">
+        <section className="mt-20 chalkboard-texture rounded-3xl bg-chalkboard p-12 text-center shadow-2xl relative overflow-hidden">
+          <h2 className="font-heading text-2xl font-bold text-white">Build your classroom arrangement</h2>
+          <p className="mt-2 text-chalk-white/70">Pick a layout, add your students, and arrange desks with drag-and-drop. Free, no signup.</p>
+          <Link href="/editor" className="mt-6 inline-block rounded-xl bg-pencil-yellow px-8 py-3.5 text-base font-bold text-chalkboard shadow-lg shadow-pencil-yellow/20 hover:shadow-xl hover:scale-[1.02] transition-all">
             Create Your Arrangement
           </Link>
         </section>
       </main>
 
-      <footer className="mt-16 border-t border-zinc-200 dark:border-zinc-800">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
-          <p className="text-sm text-zinc-500">Classroom Seating Chart Maker — Free for teachers.</p>
-          <p className="mt-1 text-xs text-zinc-400">From the makers of <a href="https://nametracingmaker.com" className="underline hover:text-zinc-600 dark:hover:text-zinc-300">Tracing Worksheet Maker</a></p>
-          <div className="flex gap-4">
-            <Link href="/" className="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">Home</Link>
-            <Link href="/privacy-policy" className="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">Privacy Policy</Link>
+      <footer className="border-t-4 border-wood/40 bg-chalkboard text-chalk-white/50">
+        <div className="wood-strip" />
+        <div className="mx-auto max-w-5xl px-6 py-8 flex flex-wrap items-center justify-between gap-4">
+          <p className="text-sm">Classroom Seating Chart Maker — Free for teachers.</p>
+          <div className="flex gap-4 text-sm">
+            <Link href="/" className="hover:text-pencil-yellow transition-colors">Home</Link>
+            <Link href="/privacy-policy" className="hover:text-pencil-yellow transition-colors">Privacy Policy</Link>
           </div>
         </div>
       </footer>
