@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { PAYMENT_LINKS } from "@/lib/pro";
+import { canExport, incrementExport, getExportCount, FREE_LIMITS } from "@/lib/free-tier";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -361,6 +362,13 @@ export default function EditorPage() {
   // ─── Print ─────────────────────────────────────────────────────────────────
 
   function handlePrint() {
+    if (!isPro && !canExport()) {
+      setShowUpgrade(true);
+      return;
+    }
+    if (!isPro) {
+      incrementExport();
+    }
     window.print();
   }
 
@@ -369,6 +377,7 @@ export default function EditorPage() {
   const seatedIds = new Set(seats.filter((s) => s.studentId).map((s) => s.studentId));
   const unseatedStudents = students.filter((s) => !seatedIds.has(s.id));
   const studentMap = Object.fromEntries(students.map((s) => [s.id, s]));
+  const remainingExports = FREE_LIMITS.maxExportsPerDay - getExportCount();
 
   const svgW = PADDING * 2 + cols * DESK_W + (cols - 1) * GAP_X;
   const svgH = PADDING * 2 + rows * DESK_H + (rows - 1) * GAP_Y + 30;
@@ -407,7 +416,7 @@ export default function EditorPage() {
           </div>
         </div>
         <p className="text-sm text-foreground/60">
-          Unlimited classes, all layouts, clean PDF, student notes, and more.
+          Unlimited classes, all layouts, unlimited prints, clean PDF, student notes, and more.
         </p>
 
         <div className="mt-4">
@@ -600,15 +609,22 @@ export default function EditorPage() {
           >
             {saving ? "Saving..." : "Save"}
           </button>
-          <button
-            onClick={handlePrint}
-            className="rounded-xl border-2 border-wood/15 bg-white px-3 py-1.5 text-sm font-medium text-foreground hover:bg-chalk-green-light hover:border-chalk-green/20 transition-colors dark:border-chalk-green/40 dark:text-wood/30 dark:hover:bg-chalkboard/50"
-          >
-            <svg className="inline-block h-4 w-4 mr-1 -mt-0.5 text-foreground/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2" /><rect x="6" y="14" width="12" height="8" />
-            </svg>
-            Print / PDF
-          </button>
+          <div className="relative">
+            <button
+              onClick={handlePrint}
+              className="rounded-xl border-2 border-wood/15 bg-white px-3 py-1.5 text-sm font-medium text-foreground hover:bg-chalk-green-light hover:border-chalk-green/20 transition-colors dark:border-chalk-green/40 dark:text-wood/30 dark:hover:bg-chalkboard/50"
+            >
+              <svg className="inline-block h-4 w-4 mr-1 -mt-0.5 text-foreground/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2" /><rect x="6" y="14" width="12" height="8" />
+              </svg>
+              Print / PDF
+            </button>
+            {!isPro && (
+              <span className="absolute -top-2 -right-2 bg-chalk-green text-white text-xs font-bold px-2 py-1 rounded-full whitespace-nowrap">
+                {remainingExports} left
+              </span>
+            )}
+          </div>
         </div>
       </header>
 
