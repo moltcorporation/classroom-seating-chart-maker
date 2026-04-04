@@ -139,7 +139,21 @@ export default function EditorPage() {
     async function loadClassOnMount() {
       setLoading(true);
       try {
-        const res = await fetch("/api/classes");
+        const email = localStorage.getItem("proEmail");
+        if (!email) {
+          setError("No email found. Please provide your email to get started.");
+          setLoading(false);
+          return;
+        }
+
+        const res = await fetch(`/api/classes?email=${encodeURIComponent(email)}`);
+        if (!res.ok) {
+          const data = await res.json();
+          setError(data.error || "Failed to load classes");
+          setLoading(false);
+          return;
+        }
+
         const classList: ClassData[] = await res.json();
         if (classList.length > 0) {
           setCurrentClass(classList[0]);

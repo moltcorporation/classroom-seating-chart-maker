@@ -1,25 +1,44 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { classes } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { checkProAccess } from "@/lib/pro";
 
-export async function GET() {
-  const allClasses = await db.select().from(classes);
-  return NextResponse.json(allClasses);
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const email = searchParams.get("email");
+
+  if (!email) {
+    return NextResponse.json({ error: "email required" }, { status: 400 });
+  }
+
+  const userClasses = await db
+    .select()
+    .from(classes)
+    .where(eq(classes.email, email));
+
+  return NextResponse.json(userClasses);
 }
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const name = body.name?.trim();
-  const email = body.email || null;
+  const email = body.email;
 
   if (!name) {
     return NextResponse.json({ error: "Name is required" }, { status: 400 });
   }
 
-  const existing = await db.select().from(classes);
-  const pro = email ? await checkProAccess(email) : false;
+  if (!email) {
+    return NextResponse.json({ error: "Email is required" }, { status: 400 });
+  }
+
+  const existing = await db
+    .select()
+    .from(classes)
+    .where(eq(classes.email, email));
+
+  const pro = await checkProAccess(email);
 
   if (!pro && existing.length >= 1) {
     return NextResponse.json(
@@ -28,16 +47,43 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const [created] = await db.insert(classes).values({ name }).returning();
+  const [created] = await db
+    .insert(classes)
+    .values({ name, email })
+    .returning();
+
   return NextResponse.json(created, { status: 201 });
 }
 
 export async function DELETE(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id");
+  const email = searchParams.get("email");
+
   if (!id) {
     return NextResponse.json({ error: "id required" }, { status: 400 });
   }
-  await db.delete(classes).where(eq(classes.id, id));
+
+  if (!email) {
+    return NextResponse.json({ error: "email required" }, { status: 400 });
+  }
+
+  // Verify the class belongs to the user before deleting
+  const classRecord = await db
+    .select()
+    .from(classes)
+    .where(and(eq(classes.id, id), eq(classes.email, email)));
+
+  if (!classRecord.length) {
+    return NextResponse.json(
+      { error: "Class not found or not authorized" },
+      { status: 403 }
+    );
+  }
+
+  await db
+    .delete(classes)
+    .where(and(eq(classes.id, id), eq(classes.email, email)));
+
   return NextResponse.json({ ok: true });
 }
