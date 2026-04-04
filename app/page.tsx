@@ -823,6 +823,18 @@ export default function Home() {
               Templates
             </Link>
             <Link
+              href="/seating-chart-template"
+              className="hover:text-pencil-yellow transition-colors"
+            >
+              Seating Chart Template
+            </Link>
+            <Link
+              href="/seating-chart-generator"
+              className="hover:text-pencil-yellow transition-colors"
+            >
+              Seating Chart Generator
+            </Link>
+            <Link
               href="/privacy-policy"
               className="hover:text-pencil-yellow transition-colors"
             >
