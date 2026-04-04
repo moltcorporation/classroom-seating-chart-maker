@@ -72,9 +72,35 @@ export default function EditorPage() {
   const [showUpgrade, setShowUpgrade] = useState(false);
   const [upgradeEmail, setUpgradeEmail] = useState("");
   const [upgradePlan, setUpgradePlan] = useState<"monthly" | "yearly">("yearly");
+  const [showExportCapModal, setShowExportCapModal] = useState(false);
   const checkoutLoading = false;
 
   const isPro = tier === "pro";
+
+  // ─── Daily export cap tracking ─────────────────────────────────────────────
+
+  const PDF_EXPORT_CAP = 3;
+
+  function getDailyExportKey(): string {
+    const today = new Date().toISOString().split("T")[0];
+    return `pdf_exports_${today}`;
+  }
+
+  function getRemainingExports(): number {
+    if (isPro) return Infinity;
+    const key = getDailyExportKey();
+    const count = parseInt(localStorage.getItem(key) || "0", 10);
+    return Math.max(0, PDF_EXPORT_CAP - count);
+  }
+
+  function trackExport(): boolean {
+    if (isPro) return true;
+    const key = getDailyExportKey();
+    const count = parseInt(localStorage.getItem(key) || "0", 10);
+    if (count >= PDF_EXPORT_CAP) return false;
+    localStorage.setItem(key, String(count + 1));
+    return true;
+  }
 
   // ─── Check license on mount ─────────────────────────────────────────────────
 
@@ -361,6 +387,10 @@ export default function EditorPage() {
   // ─── Print ─────────────────────────────────────────────────────────────────
 
   function handlePrint() {
+    if (!isPro && !trackExport()) {
+      setShowExportCapModal(true);
+      return;
+    }
     window.print();
   }
 
@@ -479,6 +509,97 @@ export default function EditorPage() {
     </div>
   );
 
+  // ─── Export Cap Modal ──────────────────────────────────────────────────────
+
+  const exportCapModal = showExportCapModal && (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+      <div className="mx-4 w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl dark:bg-chalkboard/40 border border-wood/20">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-pencil-yellow">
+            <svg className="h-5 w-5 text-chalkboard" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" />
+            </svg>
+          </div>
+          <div>
+            <h2 className="text-xl font-heading font-bold text-chalkboard dark:text-chalk-white">
+              Daily Export Limit Reached
+            </h2>
+            <p className="text-xs text-foreground/50">Free tier: 3 exports per day</p>
+          </div>
+        </div>
+        <p className="text-sm text-foreground/60">
+          You've used your 3 daily PDF exports. Upgrade to Pro for unlimited exports and other features.
+        </p>
+
+        <div className="mt-4">
+          <label className="block text-sm font-medium text-foreground dark:text-wood/30">
+            Email address
+          </label>
+          <input
+            type="email"
+            value={upgradeEmail}
+            onChange={(e) => setUpgradeEmail(e.target.value)}
+            placeholder="you@school.edu"
+            className="mt-1 w-full rounded-lg border border-wood/20 px-3 py-2 text-sm dark:border-chalk-green/40 dark:bg-chalkboard/30 dark:text-chalk-white"
+          />
+        </div>
+
+        <div className="mt-4 flex gap-3">
+          <button
+            onClick={() => setUpgradePlan("yearly")}
+            className={`flex-1 rounded-xl border-2 p-3 text-left text-sm transition-colors ${
+              upgradePlan === "yearly"
+                ? "border-chalk-green bg-chalk-green-light/50 dark:bg-chalkboard/20"
+                : "border-wood/10 dark:border-chalk-green/40"
+            }`}
+          >
+            <div className="font-semibold text-chalkboard dark:text-chalk-white">
+              $29.99/year
+            </div>
+            <div className="text-xs text-foreground/60">Save 37%</div>
+          </button>
+          <button
+            onClick={() => setUpgradePlan("monthly")}
+            className={`flex-1 rounded-xl border-2 p-3 text-left text-sm transition-colors ${
+              upgradePlan === "monthly"
+                ? "border-chalk-green bg-chalk-green-light/50 dark:bg-chalkboard/20"
+                : "border-wood/10 dark:border-chalk-green/40"
+            }`}
+          >
+            <div className="font-semibold text-chalkboard dark:text-chalk-white">
+              $3.99/month
+            </div>
+            <div className="text-xs text-foreground/60">Flexible</div>
+          </button>
+        </div>
+
+        <div className="mt-6 flex gap-2">
+          <button
+            onClick={() => setShowExportCapModal(false)}
+            className="flex-1 rounded-xl border border-wood/20 py-2.5 text-sm font-medium text-foreground hover:bg-wood-warm transition-colors dark:border-chalk-green/40 dark:text-wood/30"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleCheckout}
+            disabled={checkoutLoading || !upgradeEmail.trim()}
+            className="flex-1 rounded-xl bg-chalk-green py-2.5 text-sm font-bold text-white hover:bg-chalkboard disabled:opacity-50 transition-colors"
+          >
+            {checkoutLoading ? "Redirecting..." : "Continue to Payment"}
+          </button>
+        </div>
+
+        <button
+          onClick={handleVerifyAccess}
+          disabled={!upgradeEmail.trim()}
+          className="mt-3 w-full text-center text-sm text-chalk-green hover:underline disabled:opacity-50 disabled:no-underline"
+        >
+          Already purchased? Verify access
+        </button>
+      </div>
+    </div>
+  );
+
   if (!currentClass) {
     return (
       <div className="flex h-screen items-center justify-center bg-wood-warm/30">
@@ -545,6 +666,7 @@ export default function EditorPage() {
   return (
     <div className="flex h-screen flex-col bg-wood-warm/20">
       {upgradeModal}
+      {exportCapModal}
 
       {/* Header — warm classroom header bar */}
       <header className="flex items-center justify-between border-b-2 border-wood/15 bg-white px-4 py-3 shadow-sm print:hidden">
@@ -600,15 +722,22 @@ export default function EditorPage() {
           >
             {saving ? "Saving..." : "Save"}
           </button>
-          <button
-            onClick={handlePrint}
-            className="rounded-xl border-2 border-wood/15 bg-white px-3 py-1.5 text-sm font-medium text-foreground hover:bg-chalk-green-light hover:border-chalk-green/20 transition-colors dark:border-chalk-green/40 dark:text-wood/30 dark:hover:bg-chalkboard/50"
-          >
-            <svg className="inline-block h-4 w-4 mr-1 -mt-0.5 text-foreground/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2" /><rect x="6" y="14" width="12" height="8" />
-            </svg>
-            Print / PDF
-          </button>
+          <div className="flex flex-col items-end">
+            <button
+              onClick={handlePrint}
+              className="rounded-xl border-2 border-wood/15 bg-white px-3 py-1.5 text-sm font-medium text-foreground hover:bg-chalk-green-light hover:border-chalk-green/20 transition-colors dark:border-chalk-green/40 dark:text-wood/30 dark:hover:bg-chalkboard/50"
+            >
+              <svg className="inline-block h-4 w-4 mr-1 -mt-0.5 text-foreground/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2" /><rect x="6" y="14" width="12" height="8" />
+              </svg>
+              Print / PDF
+            </button>
+            {!isPro && (
+              <div className="mt-1 text-xs text-foreground/50 text-right">
+                {getRemainingExports()} of {PDF_EXPORT_CAP} exports left
+              </div>
+            )}
+          </div>
         </div>
       </header>
 
