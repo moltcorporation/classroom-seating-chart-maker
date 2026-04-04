@@ -70,33 +70,33 @@ const useCases = [
 
 export default function RandomSeatingChartGenerator() {
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-cyan-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
       <JsonLd />
-      <header className="border-b border-zinc-200 dark:border-zinc-800">
+      <header className="border-b border-emerald-200/30 dark:border-slate-700/30 backdrop-blur-sm bg-white/40 dark:bg-slate-900/40">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <Link href="/" className="text-xl font-bold text-zinc-900 dark:text-white">Classroom Seating Chart Maker</Link>
-          <Link href="/editor" className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">Open Editor</Link>
+          <Link href="/" className="text-xl font-bold text-emerald-950 dark:text-emerald-50">Classroom Seating Chart Maker</Link>
+          <Link href="/editor" className="rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 px-4 py-2 text-sm font-medium text-white shadow-md hover:shadow-lg transform hover:scale-105">Open Editor</Link>
         </div>
       </header>
 
       <main className="mx-auto max-w-5xl px-6 py-16">
         <section className="text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-5xl">
+          <h1 className="text-4xl font-bold tracking-tight text-emerald-950 dark:text-emerald-50 sm:text-5xl">
             Random Seating Chart Generator
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
             Shuffle your students into new seats with one click. Our random seating chart generator assigns seats fairly and instantly — no more counting heads or drawing names from a hat.
           </p>
           <div className="mt-8">
-            <Link href="/editor" className="rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">
+            <Link href="/editor" className="rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 px-6 py-3 text-base font-medium text-white shadow-lg hover:shadow-xl transform hover:scale-105">
               Randomize Your Seating Chart
             </Link>
           </div>
-          <p className="mt-3 text-sm text-zinc-500">Free to use. No signup required.</p>
+          <p className="mt-3 text-sm text-slate-600">Free to use. No signup required.</p>
         </section>
 
         <section className="mt-20">
-          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">How Random Shuffle Works</h2>
+          <h2 className="text-center text-2xl font-bold text-emerald-950 dark:text-emerald-50">How Random Shuffle Works</h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-3">
             {[
               { step: "1", title: "Add your students", desc: "Type student names or import a class roster from CSV. Your list stays saved for next time." },
@@ -105,28 +105,28 @@ export default function RandomSeatingChartGenerator() {
             ].map((item) => (
               <div key={item.step} className="text-center">
                 <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">{item.step}</div>
-                <h3 className="mt-3 font-semibold text-zinc-900 dark:text-white">{item.title}</h3>
-                <p className="mt-1 text-sm text-zinc-500">{item.desc}</p>
+                <h3 className="mt-3 font-semibold text-emerald-950 dark:text-emerald-50">{item.title}</h3>
+                <p className="mt-1 text-sm text-slate-600">{item.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
         <section className="mt-20">
-          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">When to Use Random Seating</h2>
+          <h2 className="text-center text-2xl font-bold text-emerald-950 dark:text-emerald-50">When to Use Random Seating</h2>
           <div className="mt-8 grid gap-8 sm:grid-cols-2">
             {useCases.map((uc) => (
               <div key={uc.title} className="rounded-xl border border-zinc-200 p-6 dark:border-zinc-800">
-                <h3 className="text-lg font-semibold text-zinc-900 dark:text-white">{uc.title}</h3>
-                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{uc.desc}</p>
+                <h3 className="text-lg font-semibold text-emerald-950 dark:text-emerald-50">{uc.title}</h3>
+                <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">{uc.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
         <section className="mt-20">
-          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Why Teachers Use Random Seating Charts</h2>
-          <div className="mx-auto mt-8 max-w-3xl space-y-6 text-zinc-600 dark:text-zinc-400">
+          <h2 className="text-center text-2xl font-bold text-emerald-950 dark:text-emerald-50">Why Teachers Use Random Seating Charts</h2>
+          <div className="mx-auto mt-8 max-w-3xl space-y-6 text-slate-700 dark:text-slate-300">
             <p>
               Research shows that changing seating arrangements improves student engagement and reduces behavioral issues. When students sit next to different classmates, they build a wider social network and are exposed to diverse perspectives.
             </p>
@@ -140,8 +140,8 @@ export default function RandomSeatingChartGenerator() {
         </section>
 
         <section className="mt-20">
-          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Pro: Shuffle with Constraints</h2>
-          <p className="mt-4 text-center text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
+          <h2 className="text-center text-2xl font-bold text-emerald-950 dark:text-emerald-50">Pro: Shuffle with Constraints</h2>
+          <p className="mt-4 text-center text-slate-700 dark:text-slate-300 max-w-2xl mx-auto">
             Need to keep certain students apart? Pro users can set separation constraints before shuffling. The random generator respects your rules while still randomizing the rest of the class.
           </p>
           <div className="mt-8 grid gap-6 sm:grid-cols-3 max-w-3xl mx-auto">
@@ -151,34 +151,34 @@ export default function RandomSeatingChartGenerator() {
               { title: "Unlimited classes", desc: "Manage every period and every class. Shuffle each one independently." },
             ].map((f) => (
               <div key={f.title} className="text-center">
-                <h3 className="font-semibold text-zinc-900 dark:text-white">{f.title}</h3>
-                <p className="mt-1 text-sm text-zinc-500">{f.desc}</p>
+                <h3 className="font-semibold text-emerald-950 dark:text-emerald-50">{f.title}</h3>
+                <p className="mt-1 text-sm text-slate-600">{f.desc}</p>
               </div>
             ))}
           </div>
           <div className="mt-8 text-center">
-            <Link href="/editor?upgrade=true" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+            <Link href="/editor?upgrade=true" className="text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 text-sm font-medium">
               Learn about Pro &rarr;
             </Link>
           </div>
         </section>
 
-        <section className="mt-20 rounded-xl border border-zinc-200 bg-zinc-50 p-8 text-center dark:border-zinc-800 dark:bg-zinc-900">
-          <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">Ready to shuffle?</h2>
-          <p className="mt-2 text-zinc-600 dark:text-zinc-400">Generate a random seating chart for your class in under a minute. Free, no signup.</p>
-          <Link href="/editor" className="mt-6 inline-block rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">
+        <section className="mt-20 rounded-3xl border-2 border-emerald-500 bg-gradient-to-br from-emerald-50 to-cyan-50 dark:from-emerald-900/20 dark:to-cyan-900/20 p-12 text-center">
+          <h2 className="text-2xl font-bold text-emerald-950 dark:text-emerald-50">Ready to shuffle?</h2>
+          <p className="mt-2 text-slate-700 dark:text-slate-300">Generate a random seating chart for your class in under a minute. Free, no signup.</p>
+          <Link href="/editor" className="mt-6 inline-block rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 px-6 py-3 text-base font-medium text-white shadow-lg hover:shadow-xl transform hover:scale-105">
             Create Random Seating Chart
           </Link>
         </section>
       </main>
 
-      <footer className="mt-16 border-t border-zinc-200 dark:border-zinc-800">
+      <footer className="mt-16 border-t border-emerald-200/30 dark:border-slate-700/30 bg-white dark:bg-slate-800">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
-          <p className="text-sm text-zinc-500">Classroom Seating Chart Maker — Free for teachers.</p>
-          <p className="mt-1 text-xs text-zinc-400">From the makers of <a href="https://nametracingmaker.com" className="underline hover:text-zinc-600 dark:hover:text-zinc-300">Tracing Worksheet Maker</a></p>
+          <p className="text-sm text-slate-600">Classroom Seating Chart Maker — Free for teachers.</p>
+          <p className="mt-1 text-xs text-slate-400">From the makers of <a href="https://nametracingmaker.com" className="underline hover:text-slate-700 dark:hover:text-zinc-300">Tracing Worksheet Maker</a></p>
           <div className="flex gap-4">
-            <Link href="/" className="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">Home</Link>
-            <Link href="/privacy-policy" className="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">Privacy Policy</Link>
+            <Link href="/" className="text-sm text-slate-400 hover:text-slate-700 dark:hover:text-zinc-300">Home</Link>
+            <Link href="/privacy-policy" className="text-sm text-slate-400 hover:text-slate-700 dark:hover:text-zinc-300">Privacy Policy</Link>
           </div>
         </div>
       </footer>

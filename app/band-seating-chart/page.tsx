@@ -121,64 +121,64 @@ const directorNeeds = [
 
 export default function BandSeatingChart() {
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-cyan-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
       <JsonLd />
-      <header className="border-b border-zinc-200 dark:border-zinc-800">
+      <header className="border-b border-emerald-200/30 dark:border-slate-700/30 backdrop-blur-sm bg-white/40 dark:bg-slate-900/40">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <Link href="/" className="text-xl font-bold text-zinc-900 dark:text-white">Classroom Seating Chart Maker</Link>
-          <Link href="/editor" className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">Open Editor</Link>
+          <Link href="/" className="text-xl font-bold text-emerald-900 dark:text-emerald-100">🎓 Classroom Seating Chart Maker</Link>
+          <Link href="/editor" className="rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 px-4 py-2 text-sm font-medium text-white shadow-md hover:shadow-lg transform hover:scale-105">Open Editor</Link>
         </div>
       </header>
 
       <main className="mx-auto max-w-5xl px-6 py-16">
         <section className="text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-5xl">
+          <h1 className="text-4xl font-bold tracking-tight text-emerald-950 dark:text-emerald-50 sm:text-5xl">
             Band Seating Chart Generator
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
             Create seating charts for concert band, orchestra, jazz ensemble, and choir. Arrange musicians by section with our drag-and-drop editor built for music directors.
           </p>
           <div className="mt-8">
-            <Link href="/editor" className="rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">
+            <Link href="/editor" className="rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 px-6 py-3 text-base font-medium text-white shadow-lg hover:shadow-xl transform hover:scale-105">
               Create Band Seating Chart
             </Link>
           </div>
-          <p className="mt-3 text-sm text-zinc-500">Free to use. No signup required.</p>
+          <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">Free to use. No signup required.</p>
         </section>
 
         <section className="mt-20">
-          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Ensemble Types</h2>
-          <p className="mt-2 text-center text-zinc-600 dark:text-zinc-400">
+          <h2 className="text-center text-2xl font-bold text-emerald-950 dark:text-emerald-50">Ensemble Types</h2>
+          <p className="mt-2 text-center text-slate-700 dark:text-slate-300">
             Different ensembles need different layouts. Our editor adapts to how your group actually performs.
           </p>
           <div className="mt-8 grid gap-8 sm:grid-cols-2">
             {sections.map((s) => (
-              <div key={s.title} className="rounded-xl border border-zinc-200 p-6 dark:border-zinc-800">
-                <h3 className="text-lg font-semibold text-zinc-900 dark:text-white">{s.title}</h3>
-                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{s.desc}</p>
+              <div key={s.title} className="rounded-xl border border-emerald-200/50 dark:border-emerald-900/30 bg-white dark:bg-slate-800 p-6 hover:border-emerald-400/50 dark:hover:border-emerald-700/50 shadow-sm hover:shadow-lg transition">
+                <h3 className="text-lg font-semibold text-emerald-950 dark:text-emerald-50">{s.title}</h3>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{s.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
         <section className="mt-20">
-          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Built for Music Directors</h2>
-          <p className="mt-2 text-center text-zinc-600 dark:text-zinc-400">
+          <h2 className="text-center text-2xl font-bold text-emerald-950 dark:text-emerald-50">Built for Music Directors</h2>
+          <p className="mt-2 text-center text-slate-700 dark:text-slate-300">
             Band directors face unique seating challenges that generic chart makers don&apos;t address.
           </p>
           <div className="mt-8 grid gap-8 sm:grid-cols-2">
             {directorNeeds.map((n) => (
-              <div key={n.title} className="rounded-xl border border-zinc-200 p-6 dark:border-zinc-800">
-                <h3 className="text-lg font-semibold text-zinc-900 dark:text-white">{n.title}</h3>
-                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{n.desc}</p>
+              <div key={n.title} className="rounded-xl border border-emerald-200/50 dark:border-emerald-900/30 bg-white dark:bg-slate-800 p-6 hover:border-emerald-400/50 dark:hover:border-emerald-700/50 shadow-sm hover:shadow-lg transition">
+                <h3 className="text-lg font-semibold text-emerald-950 dark:text-emerald-50">{n.title}</h3>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{n.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
         <section className="mt-20">
-          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Band vs. Classroom Seating</h2>
-          <div className="mx-auto mt-8 max-w-3xl space-y-6 text-zinc-600 dark:text-zinc-400">
+          <h2 className="text-center text-2xl font-bold text-emerald-950 dark:text-emerald-50">Band vs. Classroom Seating</h2>
+          <div className="mx-auto mt-8 max-w-3xl space-y-6 text-slate-700 dark:text-slate-300">
             <p>
               Band seating charts differ fundamentally from regular classroom charts. In a classroom, you place students at desks in rows or clusters. In band, the arrangement follows instrument families in curved formations — woodwinds front-left, brass center-right, percussion in back.
             </p>
@@ -189,7 +189,7 @@ export default function BandSeatingChart() {
               Many directors maintain multiple charts: one for concert formation, one for rehearsal, one for marching warmups, and sometimes individual section charts for sectionals. With our tool, each configuration saves separately so you can switch between them in seconds. Browse our{" "}
               <Link
                 href="/seating-chart-templates"
-                className="text-blue-600 underline hover:text-blue-700 dark:text-blue-400"
+                className="text-emerald-600 underline hover:text-emerald-700 dark:text-emerald-400"
               >
                 seating chart templates
               </Link>{" "}
@@ -199,7 +199,7 @@ export default function BandSeatingChart() {
         </section>
 
         <section className="mt-20">
-          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Pro Features for Directors</h2>
+          <h2 className="text-center text-2xl font-bold text-emerald-950 dark:text-emerald-50">Pro Features for Directors</h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-3 max-w-3xl mx-auto">
             {[
               { title: "Orchestra layout", desc: "Semicircle template designed for traditional orchestral and concert band formations." },
@@ -207,30 +207,31 @@ export default function BandSeatingChart() {
               { title: "Student notes", desc: "Track instrument, chair number, and notes per musician. Know who plays what at a glance." },
             ].map((f) => (
               <div key={f.title} className="text-center">
-                <h3 className="font-semibold text-zinc-900 dark:text-white">{f.title}</h3>
-                <p className="mt-1 text-sm text-zinc-500">{f.desc}</p>
+                <h3 className="font-semibold text-emerald-950 dark:text-emerald-50">{f.title}</h3>
+                <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">{f.desc}</p>
               </div>
             ))}
           </div>
           <div className="mt-8 text-center">
-            <Link href="/editor?upgrade=true" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+            <Link href="/editor?upgrade=true" className="text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 text-sm font-medium">
               Learn about Pro &rarr;
             </Link>
           </div>
         </section>
 
         <section className="mt-20">
-          <h2 className="text-center text-2xl font-bold text-zinc-900 dark:text-white">Frequently Asked Questions</h2>
+          <h2 className="text-center text-2xl font-bold text-emerald-950 dark:text-emerald-50">Frequently Asked Questions</h2>
           <div className="mx-auto mt-8 max-w-3xl space-y-4">
             {faqItems.map((item) => (
               <details
                 key={item.q}
-                className="group rounded-xl border border-zinc-200 dark:border-zinc-800"
+                className="group rounded-xl border border-emerald-200/50 dark:border-emerald-900/30 bg-white dark:bg-slate-800 hover:border-emerald-400/50 dark:hover:border-emerald-700/50 transition"
               >
-                <summary className="cursor-pointer px-6 py-4 font-medium text-zinc-900 dark:text-white">
+                <summary className="cursor-pointer px-6 py-4 font-medium text-emerald-950 dark:text-emerald-50">
                   {item.q}
+                  <span className="ml-4 shrink-0 text-emerald-600 dark:text-emerald-400 group-open:rotate-45 transition-transform float-right">+</span>
                 </summary>
-                <p className="px-6 pb-4 text-sm text-zinc-600 dark:text-zinc-400">
+                <p className="px-6 pb-4 text-sm text-slate-600 dark:text-slate-400 border-t border-emerald-200/50 dark:border-emerald-900/30">
                   {item.a}
                 </p>
               </details>
@@ -238,24 +239,31 @@ export default function BandSeatingChart() {
           </div>
         </section>
 
-        <section className="mt-20 rounded-xl border border-zinc-200 bg-zinc-50 p-8 text-center dark:border-zinc-800 dark:bg-zinc-900">
-          <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">Ready to seat your ensemble?</h2>
-          <p className="mt-2 text-zinc-600 dark:text-zinc-400">Create a band seating chart in minutes. Free for directors — no signup needed.</p>
-          <Link href="/editor" className="mt-6 inline-block rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">
+        <section className="mt-20 rounded-3xl border-2 border-emerald-500 bg-gradient-to-br from-emerald-50 to-cyan-50 dark:from-emerald-900/20 dark:to-cyan-900/20 p-12 text-center">
+          <h2 className="text-2xl font-bold text-emerald-950 dark:text-emerald-50">Ready to seat your ensemble?</h2>
+          <p className="mt-2 text-emerald-700 dark:text-emerald-300">Create a band seating chart in minutes. Free for directors — no signup needed.</p>
+          <Link href="/editor" className="mt-6 inline-block rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 px-6 py-3 text-base font-medium text-white shadow-lg hover:shadow-xl transform hover:scale-105">
             Create Band Seating Chart
           </Link>
         </section>
       </main>
 
-      <footer className="mt-16 border-t border-zinc-200 dark:border-zinc-800">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
-          <p className="text-sm text-zinc-500">Classroom Seating Chart Maker — Free for teachers.</p>
-          <p className="mt-1 text-xs text-zinc-400">From the makers of <a href="https://nametracingmaker.com" className="underline hover:text-zinc-600 dark:hover:text-zinc-300">Tracing Worksheet Maker</a></p>
-          <div className="flex gap-4">
-            <Link href="/" className="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">Home</Link>
-            <Link href="/seating-chart-templates" className="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">Seating Chart Templates</Link>
-            <Link href="/classroom-seating-arrangement" className="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">Seating Arrangements</Link>
-            <Link href="/privacy-policy" className="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">Privacy Policy</Link>
+      <footer className="mt-16 border-t border-emerald-200/30 dark:border-slate-700/30 bg-white dark:bg-slate-800">
+        <div className="mx-auto max-w-5xl px-6 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <p className="text-sm text-emerald-900 dark:text-emerald-100 font-semibold">Classroom Seating Chart Maker</p>
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Free seating chart tools for teachers.</p>
+            </div>
+            <div>
+              <p className="text-xs text-slate-500 dark:text-slate-500">From the makers of <a href="https://nametracingmaker.com" className="text-emerald-600 dark:text-emerald-400 hover:underline">Tracing Worksheet Maker</a></p>
+            </div>
+            <div className="flex gap-4">
+              <Link href="/" className="text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400">Home</Link>
+              <Link href="/seating-chart-templates" className="text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400">Templates</Link>
+              <Link href="/classroom-seating-arrangement" className="text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400">Arrangements</Link>
+              <Link href="/privacy-policy" className="text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400">Privacy</Link>
+            </div>
           </div>
         </div>
       </footer>
