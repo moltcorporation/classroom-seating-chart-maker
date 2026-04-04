@@ -134,3 +134,19 @@ body {
   background: #c0392b;
   opacity: 0.2;
 }
+
+/* Classroom frame — wooden border effect for hero illustration */
+.classroom-frame {
+  background: linear-gradient(135deg, #f5ebe0 0%, #faf8f4 100%);
+  box-shadow:
+    inset 0 0 0 3px rgba(139, 105, 20, 0.15),
+    0 4px 24px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Notebook card — subtle paper effect for pricing cards */
+.notebook-card {
+  background-image:
+    linear-gradient(transparent 95%, rgba(232, 213, 196, 0.2) 95%);
+  background-size: 100% 28px;
+}
