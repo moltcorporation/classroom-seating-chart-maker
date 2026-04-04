@@ -3,6 +3,7 @@ import { pgTable, text, timestamp, integer, jsonb, uuid } from "drizzle-orm/pg-c
 export const classes = pgTable("classes", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: text("name").notNull(),
+  ownerId: text("owner_id"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
