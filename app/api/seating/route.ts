@@ -1,14 +1,33 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
-import { seatingArrangements } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { seatingArrangements, classes } from "@/db/schema";
+import { eq, and } from "drizzle-orm";
+import { getOwnerId } from "@/lib/owner";
+
+async function verifyClassOwnership(classId: string, ownerId: string): Promise<boolean> {
+  const [cls] = await db
+    .select({ id: classes.id })
+    .from(classes)
+    .where(and(eq(classes.id, classId), eq(classes.ownerId, ownerId)));
+  return !!cls;
+}
 
 export async function GET(req: NextRequest) {
+  const ownerId = await getOwnerId();
+  if (!ownerId) {
+    return NextResponse.json({ error: "Session required" }, { status: 401 });
+  }
+
   const { searchParams } = new URL(req.url);
   const classId = searchParams.get("classId");
   if (!classId) {
     return NextResponse.json({ error: "classId required" }, { status: 400 });
   }
+
+  if (!(await verifyClassOwnership(classId, ownerId))) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+
   const [arrangement] = await db
     .select()
     .from(seatingArrangements)
@@ -17,10 +36,19 @@ export async function GET(req: NextRequest) {
 }
 
 export async function PUT(req: NextRequest) {
+  const ownerId = await getOwnerId();
+  if (!ownerId) {
+    return NextResponse.json({ error: "Session required" }, { status: 401 });
+  }
+
   const body = await req.json();
   const { classId, seats, rows, cols, layout } = body;
   if (!classId) {
     return NextResponse.json({ error: "classId required" }, { status: 400 });
+  }
+
+  if (!(await verifyClassOwnership(classId, ownerId))) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
   const existing = await db
