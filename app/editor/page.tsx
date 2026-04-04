@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { PAYMENT_LINKS } from "@/lib/pro";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -101,8 +102,8 @@ export default function EditorPage() {
   // ─── Payment link URLs ─────────────────────────────────────────────────────
 
   const PAYMENT_URLS = {
-    monthly: "https://buy.stripe.com/3cI28rg8jc0x3nfaYA3Nm0n",
-    yearly: "https://buy.stripe.com/00wcN55tF2pX0b32s43Nm0o",
+    monthly: PAYMENT_LINKS.monthly.url,
+    yearly: PAYMENT_LINKS.yearly.url,
   };
 
   function handleCheckout() {

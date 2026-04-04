@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { PAYMENT_LINKS } from "@/lib/pro";
 
 export const metadata: Metadata = {
   title: "Pricing | Classroom Seating Chart Maker",
@@ -133,13 +134,13 @@ export default function PricingPage() {
             </ul>
             <div className="mt-8 space-y-2">
               <a
-                href="https://buy.stripe.com/14A9ATcW79SpcXPaYA3Nm0W"
+                href={PAYMENT_LINKS.yearly.url}
                 className="block rounded-lg bg-chalk-green py-3 text-center text-sm font-bold text-white hover:bg-chalkboard transition-colors"
               >
                 Upgrade to Pro — $29.99/year
               </a>
               <a
-                href="https://buy.stripe.com/3cI14n1dpggNaPHc2E3Nm0V"
+                href={PAYMENT_LINKS.monthly.url}
                 className="block text-center text-xs text-foreground/40 hover:text-chalk-green transition-colors py-2"
               >
                 or $3.99/month
