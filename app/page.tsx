@@ -102,6 +102,37 @@ function DeskIcon({ className }: { className?: string }) {
   );
 }
 
+/* Decorative chalk doodles for visual personality */
+function ChalkStar({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 40 40" fill="none">
+      <path d="M20 4l4.5 11.5L36 18l-9 7 2.5 11L20 30l-9.5 6L13 25l-9-7 11.5-2.5z"
+        stroke="#f4d03f" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
+    </svg>
+  );
+}
+
+function ChalkApple({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 32 32" fill="none">
+      <path d="M16 6c-1-3-4-3-4-3s1 2 0 3c-4 0-7 4-7 9s4 11 8 14c1.5 1 2.5 1 3 0 4-3 8-9 8-14s-3-9-7-9c-1-1 0-3 0-3s-3 0-4 3z"
+        stroke="#c0392b" strokeWidth="1.2" strokeLinecap="round" opacity="0.5" />
+      <path d="M16 6c0-2 2-4 4-4" stroke="#2d5a27" strokeWidth="1.2" strokeLinecap="round" opacity="0.5" />
+    </svg>
+  );
+}
+
+function ChalkPencil({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 40 40" fill="none">
+      <rect x="8" y="5" width="6" height="28" rx="1" transform="rotate(-15 11 19)"
+        stroke="#f4d03f" strokeWidth="1.2" opacity="0.5" />
+      <polygon points="8,33 11,38 14,33" transform="rotate(-15 11 19)"
+        stroke="#f4d03f" strokeWidth="1.2" opacity="0.5" />
+    </svg>
+  );
+}
+
 /* Mini classroom layout SVGs for the hero */
 function RowLayout() {
   return (
@@ -267,103 +298,146 @@ export default function Home() {
       <JsonLd />
       <FaqJsonLd />
 
-      {/* Header — wood-toned warm bar */}
-      <header className="border-b border-wood-light/30 bg-wood-warm">
+      {/* Header — wood shelf with chalk accents */}
+      <header className="relative bg-wood-warm border-b-4 border-wood/60">
+        <div className="wood-strip" />
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-2">
-            <DeskIcon className="h-6 w-6 text-chalk-green" />
-            <h1 className="font-heading text-xl font-bold text-chalkboard">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-chalkboard shadow-md">
+              <DeskIcon className="h-5 w-5 text-pencil-yellow" />
+            </div>
+            <h1 className="font-heading text-xl font-bold text-chalkboard tracking-tight">
               Classroom Seating Chart Maker
             </h1>
           </div>
-          <Link
-            href="/editor"
-            className="rounded-lg bg-chalk-green px-4 py-2 text-sm font-semibold text-white hover:bg-chalkboard transition-colors"
-          >
-            Open Editor
-          </Link>
+          <div className="flex items-center gap-3">
+            <a href="#pricing" className="hidden sm:inline text-sm font-medium text-wood hover:text-chalkboard transition-colors">
+              Pricing
+            </a>
+            <Link
+              href="/editor"
+              className="rounded-lg bg-chalk-green px-5 py-2.5 text-sm font-bold text-white shadow-md hover:bg-chalkboard hover:shadow-lg transition-all"
+            >
+              Open Editor
+            </Link>
+          </div>
         </div>
       </header>
 
       <main>
-        {/* Hero — chalkboard-style */}
-        <section className="bg-chalkboard text-white">
-          <div className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
-            <div className="grid gap-10 sm:grid-cols-2 items-center">
+        {/* Hero — chalkboard with chalk texture and floating doodles */}
+        <section className="chalkboard-texture bg-chalkboard text-white overflow-hidden relative">
+          {/* Floating chalk doodles */}
+          <div className="absolute top-8 right-8 doodle-float opacity-40 hidden lg:block">
+            <ChalkStar className="w-10 h-10" />
+          </div>
+          <div className="absolute bottom-12 left-12 doodle-float-delay opacity-30 hidden lg:block">
+            <ChalkApple className="w-8 h-8" />
+          </div>
+          <div className="absolute top-1/2 right-[5%] doodle-float-slow opacity-20 hidden lg:block">
+            <ChalkPencil className="w-9 h-9" />
+          </div>
+
+          <div className="mx-auto max-w-5xl px-6 py-20 sm:py-24 relative z-10">
+            <div className="grid gap-12 sm:grid-cols-2 items-center">
               <div>
-                <h2 className="font-heading text-4xl font-bold tracking-tight sm:text-5xl leading-tight">
-                  Free Classroom Seating Chart Maker
+                <div className="inline-flex items-center gap-2 rounded-full bg-chalk-green/20 border border-chalk-green/30 px-4 py-1.5 mb-6">
+                  <span className="h-2 w-2 rounded-full bg-pencil-yellow animate-pulse" />
+                  <span className="text-xs font-semibold text-chalk-white/70 tracking-wide uppercase">Free for teachers</span>
+                </div>
+                <h2 className="font-heading text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl leading-[1.1]">
+                  Seating charts,{" "}
+                  <span className="chalk-underline text-pencil-yellow">sorted</span>
                 </h2>
-                <p className="mt-4 text-lg text-chalk-white/80 leading-relaxed">
-                  The easiest seating chart generator for teachers. Add your
-                  students, drag them to desks, shuffle for random seating
-                  arrangements, and print beautiful classroom seating charts.
+                <p className="mt-5 text-lg text-chalk-white/70 leading-relaxed max-w-lg">
+                  Add students, drag them to desks, shuffle for random seating
+                  arrangements, and print beautiful charts. Takes 2 minutes, not 2 hours.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Link
                     href="/editor"
-                    className="rounded-lg bg-pencil-yellow px-6 py-3 text-base font-bold text-chalkboard hover:bg-pencil-yellow/90 transition-colors"
+                    className="group rounded-xl bg-pencil-yellow px-7 py-3.5 text-base font-bold text-chalkboard shadow-lg shadow-pencil-yellow/20 hover:shadow-xl hover:shadow-pencil-yellow/30 hover:scale-[1.02] transition-all"
                   >
                     Create Your Seating Chart
+                    <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">&rarr;</span>
                   </Link>
                   <a
                     href="#pricing"
-                    className="rounded-lg border-2 border-chalk-white/30 px-6 py-3 text-base font-semibold text-white hover:border-chalk-white/60 transition-colors"
+                    className="rounded-xl border-2 border-chalk-white/20 px-6 py-3.5 text-base font-semibold text-white hover:border-chalk-white/50 hover:bg-chalk-white/5 transition-all"
                   >
                     View Pricing
                   </a>
                 </div>
-                <p className="mt-4 text-sm text-chalk-white/60">
-                  Free forever: 1 class, 25 students. No signup required.
-                </p>
+                <div className="mt-6 flex items-center gap-4 text-sm text-chalk-white/50">
+                  <span className="flex items-center gap-1.5">
+                    <svg className="h-4 w-4 text-chalk-green" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                    No signup
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <svg className="h-4 w-4 text-chalk-green" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                    No credit card
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <svg className="h-4 w-4 text-chalk-green" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                    Free forever
+                  </span>
+                </div>
               </div>
 
-              {/* Visual classroom layout demo */}
+              {/* Visual classroom layout demo — framed like a chalkboard */}
               <div className="hidden sm:block">
-                <div className="rounded-xl bg-chalkboard-light/50 border border-chalk-white/10 p-4">
+                <div className="rounded-2xl bg-chalkboard-light/60 border-2 border-wood/40 p-5 shadow-2xl relative">
+                  {/* Chalk tray at bottom */}
+                  <div className="absolute -bottom-2 left-4 right-4 h-3 bg-wood/80 rounded-b-lg shadow-md" />
                   <div className="grid grid-cols-3 gap-3">
-                    <div className="rounded-lg bg-chalkboard-light border border-chalk-white/10 p-3">
-                      <p className="mb-2 text-center text-xs font-medium text-chalk-white/60">Rows</p>
+                    <div className="rounded-lg bg-chalkboard border border-chalk-white/10 p-3 hover:border-pencil-yellow/30 transition-colors">
+                      <p className="mb-2 text-center text-xs font-bold text-pencil-yellow/70 tracking-wide uppercase">Rows</p>
                       <RowLayout />
                     </div>
-                    <div className="rounded-lg bg-chalkboard-light border border-chalk-white/10 p-3">
-                      <p className="mb-2 text-center text-xs font-medium text-chalk-white/60">Groups</p>
+                    <div className="rounded-lg bg-chalkboard border border-chalk-white/10 p-3 hover:border-pencil-yellow/30 transition-colors">
+                      <p className="mb-2 text-center text-xs font-bold text-pencil-yellow/70 tracking-wide uppercase">Groups</p>
                       <GroupLayout />
                     </div>
-                    <div className="rounded-lg bg-chalkboard-light border border-chalk-white/10 p-3">
-                      <p className="mb-2 text-center text-xs font-medium text-chalk-white/60">U-Shape</p>
+                    <div className="rounded-lg bg-chalkboard border border-chalk-white/10 p-3 hover:border-pencil-yellow/30 transition-colors">
+                      <p className="mb-2 text-center text-xs font-bold text-pencil-yellow/70 tracking-wide uppercase">U-Shape</p>
                       <UShapeLayout />
                     </div>
                   </div>
-                  <p className="mt-3 text-center text-xs text-chalk-white/40">
-                    Drag & drop students into any layout
+                  <p className="mt-4 text-center text-xs text-chalk-white/40 font-medium">
+                    Drag &amp; drop students into any layout
                   </p>
                 </div>
               </div>
             </div>
           </div>
+          {/* Bottom edge — wood strip transition */}
+          <div className="wood-strip" />
         </section>
 
-        {/* Features — on warm paper background */}
-        <section className="mx-auto max-w-5xl px-6 py-16">
-          <h3 className="font-heading text-center text-2xl font-bold text-chalkboard sm:text-3xl">
-            Everything You Need to Arrange Your Classroom
+        {/* Features — notebook-style paper background */}
+        <section className="relative mx-auto max-w-5xl px-6 py-20">
+          <h3 className="font-heading text-center text-3xl font-bold text-chalkboard sm:text-4xl">
+            Everything You Need to{" "}
+            <span className="text-chalk-green">Arrange Your Classroom</span>
           </h3>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((f) => (
+          <p className="mt-3 text-center text-foreground/50 max-w-lg mx-auto">
+            Built specifically for teachers — not a generic chart tool with classroom features bolted on.
+          </p>
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {features.map((f, i) => (
               <div
                 key={f.title}
-                className="rounded-xl border border-wood-light/20 bg-white p-6 shadow-sm hover:shadow-md transition-shadow dark:bg-chalkboard dark:border-chalk-white/10"
+                className="group rounded-2xl border-2 border-wood-light/15 bg-white p-6 shadow-sm hover:shadow-lg hover:border-chalk-green/30 hover:-translate-y-1 transition-all duration-200 dark:bg-chalkboard dark:border-chalk-white/10"
               >
                 <div
-                  className={`flex h-11 w-11 items-center justify-center rounded-lg ${f.accent}`}
+                  className={`flex h-12 w-12 items-center justify-center rounded-xl ${f.accent} shadow-sm group-hover:scale-110 transition-transform`}
                 >
                   {f.icon}
                 </div>
-                <h4 className="mt-4 font-heading text-lg font-semibold text-chalkboard dark:text-white">
+                <h4 className="mt-4 font-heading text-lg font-bold text-chalkboard dark:text-white">
                   {f.title}
                 </h4>
-                <p className="mt-2 text-sm leading-relaxed text-foreground/70">
+                <p className="mt-2 text-sm leading-relaxed text-foreground/60">
                   {f.desc}
                 </p>
               </div>
@@ -371,40 +445,118 @@ export default function Home() {
           </div>
         </section>
 
-        {/* How it works — numbered steps with wood accents */}
-        <section className="bg-wood-warm dark:bg-chalkboard/50">
-          <div className="mx-auto max-w-5xl px-6 py-16">
-            <h3 className="font-heading text-center text-2xl font-bold text-chalkboard dark:text-white sm:text-3xl">
-              How to Make a Classroom Seating Chart
+        {/* How it works — chalkboard steps with connecting line */}
+        <section className="bg-chalkboard chalkboard-texture text-white relative overflow-hidden">
+          <div className="wood-strip" />
+          <div className="mx-auto max-w-5xl px-6 py-20 relative z-10">
+            <h3 className="font-heading text-center text-3xl font-bold sm:text-4xl">
+              Set Up in <span className="text-pencil-yellow">4 Easy Steps</span>
             </h3>
-            <div className="mt-10 grid gap-8 sm:grid-cols-4">
+            <div className="mt-14 grid gap-8 sm:grid-cols-4 relative">
+              {/* Connecting line between steps */}
+              <div className="hidden sm:block absolute top-6 left-[12.5%] right-[12.5%] h-0.5 bg-chalk-white/15" />
               {[
                 {
                   step: "1",
                   title: "Create a class",
                   desc: "Name your class to get started",
+                  emoji: "📝",
                 },
                 {
                   step: "2",
                   title: "Add students",
                   desc: "Type names or import from CSV",
+                  emoji: "👩‍🎓",
                 },
                 {
                   step: "3",
                   title: "Arrange seats",
                   desc: "Drag students to desks or shuffle",
+                  emoji: "🪑",
                 },
                 {
                   step: "4",
                   title: "Print",
                   desc: "Print or save as PDF",
+                  emoji: "🖨️",
                 },
               ].map((item) => (
-                <div key={item.step} className="text-center">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-chalk-green font-heading text-lg font-bold text-white shadow-md">
+                <div key={item.step} className="text-center relative">
+                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-chalk-green border-2 border-pencil-yellow/30 font-heading text-lg font-bold text-white shadow-lg relative z-10">
                     {item.step}
                   </div>
-                  <h4 className="mt-4 font-heading font-semibold text-chalkboard dark:text-white">
+                  <div className="mt-1 text-2xl">{item.emoji}</div>
+                  <h4 className="mt-2 font-heading text-lg font-bold text-white">
+                    {item.title}
+                  </h4>
+                  <p className="mt-1 text-sm text-chalk-white/60">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="wood-strip" />
+        </section>
+
+        {/* Why teachers love it — warm paper section with colored accent cards */}
+        <section className="bg-wood-warm/50 dark:bg-chalkboard/30">
+          <div className="mx-auto max-w-5xl px-6 py-20">
+            <h3 className="font-heading text-center text-3xl font-bold text-chalkboard dark:text-white sm:text-4xl">
+              Why <span className="text-apple-red">Teachers</span> Love This Tool
+            </h3>
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  icon: "M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z",
+                  title: "Instant Setup",
+                  desc: "Create your seating chart in minutes, not hours.",
+                  border: "border-l-pencil-yellow",
+                  bg: "bg-pencil-yellow/10",
+                  iconColor: "text-wood",
+                },
+                {
+                  icon: "M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zm0 9.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6z",
+                  title: "Flexible Layouts",
+                  desc: "Rows, groups, U-shape — match your actual classroom.",
+                  border: "border-l-chalk-green",
+                  bg: "bg-chalk-green-light",
+                  iconColor: "text-chalk-green",
+                },
+                {
+                  icon: "M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5",
+                  title: "Easy Updates",
+                  desc: "Drag and drop to rearrange when students move.",
+                  border: "border-l-apple-red",
+                  bg: "bg-apple-red/10",
+                  iconColor: "text-apple-red",
+                },
+                {
+                  icon: "M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z",
+                  title: "Free for Teachers",
+                  desc: "Core features always free, no credit card required.",
+                  border: "border-l-pencil-yellow",
+                  bg: "bg-pencil-yellow/10",
+                  iconColor: "text-wood",
+                },
+              ].map((item) => (
+                <div key={item.title} className={`rounded-xl border-l-4 ${item.border} bg-white p-5 shadow-sm dark:bg-chalkboard dark:border-chalk-white/10`}>
+                  <div
+                    className={`flex h-12 w-12 items-center justify-center rounded-xl ${item.bg}`}
+                  >
+                    <svg
+                      className={`h-6 w-6 ${item.iconColor}`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={1.5}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d={item.icon}
+                      />
+                    </svg>
+                  </div>
+                  <h4 className="mt-3 font-heading font-bold text-chalkboard dark:text-white">
                     {item.title}
                   </h4>
                   <p className="mt-1 text-sm text-foreground/60">{item.desc}</p>
@@ -414,141 +566,84 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Why teachers love it */}
-        <section className="mx-auto max-w-5xl px-6 py-16">
-          <h3 className="font-heading text-center text-2xl font-bold text-chalkboard dark:text-white sm:text-3xl">
-            Why Teachers Love This Tool
-          </h3>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                icon: "M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z",
-                title: "Instant Setup",
-                desc: "Create your seating chart in minutes, not hours.",
-                bg: "bg-pencil-yellow/20",
-                iconColor: "text-wood",
-              },
-              {
-                icon: "M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zm0 9.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6z",
-                title: "Flexible Layouts",
-                desc: "Row, group, or U-shape arrangements for any classroom.",
-                bg: "bg-chalk-green-light",
-                iconColor: "text-chalk-green",
-              },
-              {
-                icon: "M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5",
-                title: "Easy Updates",
-                desc: "Drag and drop to rearrange when students move.",
-                bg: "bg-pencil-yellow/20",
-                iconColor: "text-wood",
-              },
-              {
-                icon: "M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z",
-                title: "Free for Teachers",
-                desc: "Core features always free, no credit card required.",
-                bg: "bg-chalk-green-light",
-                iconColor: "text-chalk-green",
-              },
-            ].map((item) => (
-              <div key={item.title} className="text-center">
-                <div
-                  className={`mx-auto flex h-14 w-14 items-center justify-center rounded-2xl ${item.bg}`}
-                >
-                  <svg
-                    className={`h-7 w-7 ${item.iconColor}`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1.5}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d={item.icon}
-                    />
-                  </svg>
-                </div>
-                <h4 className="mt-4 font-heading font-semibold text-chalkboard dark:text-white">
-                  {item.title}
-                </h4>
-                <p className="mt-1 text-sm text-foreground/60">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Pricing */}
-        <section className="bg-wood-warm dark:bg-chalkboard/50" id="pricing">
-          <div className="mx-auto max-w-3xl px-6 py-16">
-            <h3 className="font-heading text-center text-2xl font-bold text-chalkboard dark:text-white sm:text-3xl">
+        {/* Pricing — distinctive cards with personality */}
+        <section className="relative" id="pricing">
+          <div className="mx-auto max-w-3xl px-6 py-20">
+            <h3 className="font-heading text-center text-3xl font-bold text-chalkboard dark:text-white sm:text-4xl">
               Simple Pricing for Teachers
             </h3>
-            <p className="mt-2 text-center text-foreground/60">
+            <p className="mt-3 text-center text-foreground/50">
               Start free. Upgrade when you need more.
             </p>
-            <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            <div className="mt-12 grid gap-6 sm:grid-cols-2">
               {/* Free tier */}
-              <div className="rounded-2xl border border-wood-light/20 bg-white p-7 dark:bg-chalkboard dark:border-chalk-white/10">
-                <h4 className="font-heading text-lg font-semibold text-chalkboard dark:text-white">
-                  Free
-                </h4>
-                <p className="mt-1 text-3xl font-bold text-chalkboard dark:text-white">
+              <div className="rounded-2xl border-2 border-wood-light/20 bg-white p-8 dark:bg-chalkboard dark:border-chalk-white/10">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-chalk-green-light">
+                    <span className="text-lg">✏️</span>
+                  </div>
+                  <h4 className="font-heading text-xl font-bold text-chalkboard dark:text-white">
+                    Free
+                  </h4>
+                </div>
+                <p className="mt-4 text-4xl font-bold text-chalkboard dark:text-white">
                   $0
                 </p>
-                <p className="text-sm text-foreground/50">Forever free</p>
+                <p className="text-sm text-foreground/50">Forever free — no catches</p>
                 <ul className="mt-6 space-y-3 text-sm">
                   {freeFeatures.map((f) => (
                     <li
                       key={f}
-                      className="flex items-start gap-2 text-foreground/70"
+                      className="flex items-start gap-2.5 text-foreground/70"
                     >
-                      <span className="mt-0.5 text-chalk-green font-bold">
-                        &#10003;
-                      </span>
+                      <svg className="mt-0.5 h-4 w-4 shrink-0 text-chalk-green" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                       {f}
                     </li>
                   ))}
                 </ul>
                 <Link
                   href="/editor"
-                  className="mt-6 block rounded-lg border-2 border-chalk-green/20 py-2.5 text-center text-sm font-semibold text-chalk-green hover:bg-chalk-green-light transition-colors"
+                  className="mt-8 block rounded-xl border-2 border-chalk-green/20 py-3 text-center text-sm font-bold text-chalk-green hover:bg-chalk-green-light transition-colors"
                 >
                   Get Started Free
                 </Link>
               </div>
               {/* Pro tier */}
-              <div className="relative rounded-2xl border-2 border-chalk-green bg-white p-7 shadow-lg dark:bg-chalkboard">
-                <span className="absolute -top-3 left-4 rounded-full bg-chalk-green px-3 py-0.5 text-xs font-bold text-white shadow-sm">
-                  Most Popular
+              <div className="relative rounded-2xl border-2 border-chalk-green bg-gradient-to-b from-chalk-green-light/30 to-white p-8 shadow-xl dark:from-chalk-green/10 dark:to-chalkboard dark:bg-chalkboard">
+                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-pencil-yellow px-4 py-1 text-xs font-bold text-chalkboard shadow-md">
+                  Best Value
                 </span>
-                <h4 className="font-heading text-lg font-semibold text-chalkboard dark:text-white">
-                  Pro
-                </h4>
-                <p className="mt-1">
-                  <span className="text-3xl font-bold text-chalkboard dark:text-white">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-chalk-green">
+                    <span className="text-lg">⭐</span>
+                  </div>
+                  <h4 className="font-heading text-xl font-bold text-chalkboard dark:text-white">
+                    Pro
+                  </h4>
+                </div>
+                <p className="mt-4">
+                  <span className="text-4xl font-bold text-chalkboard dark:text-white">
                     $3.99
                   </span>
                   <span className="text-sm text-foreground/50">/month</span>
                 </p>
                 <p className="text-sm text-foreground/50">
-                  or $29.99/year (save 37%)
+                  or <strong>$29.99/year</strong> (save 37%)
                 </p>
                 <ul className="mt-6 space-y-3 text-sm">
                   {proFeatures.map((f) => (
                     <li
                       key={f}
-                      className="flex items-start gap-2 text-foreground/70"
+                      className="flex items-start gap-2.5 text-foreground/70"
                     >
-                      <span className="mt-0.5 text-chalk-green font-bold">
-                        &#10003;
-                      </span>
+                      <svg className="mt-0.5 h-4 w-4 shrink-0 text-chalk-green" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                       {f}
                     </li>
                   ))}
                 </ul>
                 <a
                   href={PAYMENT_LINKS.yearly.url}
-                  className="mt-6 block rounded-lg bg-chalk-green py-2.5 text-center text-sm font-bold text-white hover:bg-chalkboard transition-colors"
+                  className="mt-8 block rounded-xl bg-chalk-green py-3 text-center text-sm font-bold text-white shadow-lg shadow-chalk-green/20 hover:bg-chalkboard hover:shadow-xl transition-all"
                 >
                   Upgrade to Pro — $29.99/yr
                 </a>
@@ -569,117 +664,123 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Audience */}
-        <section className="mx-auto max-w-5xl px-6 py-16">
-          <h3 className="font-heading text-center text-2xl font-bold text-chalkboard dark:text-white sm:text-3xl">
-            Built for Every Classroom
-          </h3>
-          <div className="mt-10 grid gap-6 sm:grid-cols-3">
-            {[
-              {
-                title: "Elementary Teachers",
-                desc: "Arrange desks for reading groups, centers, and whole-class instruction.",
-                icon: (
-                  <svg className="h-8 w-8 text-chalk-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                  </svg>
-                ),
-              },
-              {
-                title: "Band & Orchestra Directors",
-                desc: "Seat musicians by section. Rearrange for concerts, rehearsals, and auditions.",
-                icon: (
-                  <svg className="h-8 w-8 text-wood" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 11-.99-3.467l2.31-.66a2.25 2.25 0 001.632-2.163zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 01-.99-3.467l2.31-.66A2.25 2.25 0 009 15.553z" />
-                  </svg>
-                ),
-              },
-              {
-                title: "School Admins",
-                desc: "Help teachers set up classrooms. Share seating charts with substitutes and staff.",
-                icon: (
-                  <svg className="h-8 w-8 text-chalk-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                  </svg>
-                ),
-              },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="rounded-2xl border border-wood-light/20 bg-white p-6 text-center shadow-sm dark:bg-chalkboard dark:border-chalk-white/10"
-              >
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-chalk-green-light dark:bg-chalk-green/20">
-                  {item.icon}
+        {/* Audience — with themed emoji badges */}
+        <section className="bg-wood-warm/30 dark:bg-chalkboard/30">
+          <div className="mx-auto max-w-5xl px-6 py-20">
+            <h3 className="font-heading text-center text-3xl font-bold text-chalkboard dark:text-white sm:text-4xl">
+              Built for <span className="text-chalk-green">Every</span> Classroom
+            </h3>
+            <div className="mt-12 grid gap-6 sm:grid-cols-3">
+              {[
+                {
+                  title: "Elementary Teachers",
+                  desc: "Arrange desks for reading groups, centers, and whole-class instruction.",
+                  emoji: "📚",
+                  gradient: "from-chalk-green-light to-white dark:from-chalk-green/10 dark:to-chalkboard",
+                },
+                {
+                  title: "Band & Orchestra",
+                  desc: "Seat musicians by section. Rearrange for concerts, rehearsals, and auditions.",
+                  emoji: "🎵",
+                  gradient: "from-pencil-yellow/20 to-white dark:from-pencil-yellow/5 dark:to-chalkboard",
+                },
+                {
+                  title: "School Admins",
+                  desc: "Help teachers set up classrooms. Share seating charts with substitutes and staff.",
+                  emoji: "🏫",
+                  gradient: "from-apple-red/10 to-white dark:from-apple-red/5 dark:to-chalkboard",
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className={`rounded-2xl bg-gradient-to-b ${item.gradient} border-2 border-wood-light/15 p-8 text-center shadow-sm hover:shadow-md transition-shadow dark:border-chalk-white/10`}
+                >
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-sm dark:bg-chalkboard-light">
+                    <span className="text-3xl">{item.emoji}</span>
+                  </div>
+                  <h4 className="mt-5 font-heading text-lg font-bold text-chalkboard dark:text-white">
+                    {item.title}
+                  </h4>
+                  <p className="mt-2 text-sm text-foreground/60 leading-relaxed">{item.desc}</p>
                 </div>
-                <h4 className="mt-4 font-heading font-semibold text-chalkboard dark:text-white">
-                  {item.title}
-                </h4>
-                <p className="mt-2 text-sm text-foreground/60">{item.desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="mx-auto max-w-5xl px-6 pb-16">
-          <div className="rounded-2xl bg-chalkboard p-10 text-center shadow-lg">
-            <h3 className="font-heading text-2xl font-bold text-white sm:text-3xl">
+        {/* CTA — chalkboard with texture */}
+        <section className="mx-auto max-w-5xl px-6 py-16">
+          <div className="chalkboard-texture rounded-3xl bg-chalkboard p-12 sm:p-16 text-center shadow-2xl relative overflow-hidden">
+            <div className="absolute top-4 right-8 doodle-float opacity-30 hidden sm:block">
+              <ChalkStar className="w-8 h-8" />
+            </div>
+            <div className="absolute bottom-6 left-8 doodle-float-delay opacity-20 hidden sm:block">
+              <ChalkApple className="w-7 h-7" />
+            </div>
+            <h3 className="font-heading text-3xl font-bold text-white sm:text-4xl relative z-10">
               Ready to organize your classroom?
             </h3>
-            <p className="mt-3 text-chalk-white/70">
-              Create your first classroom seating chart in under 2 minutes. No
+            <p className="mt-4 text-lg text-chalk-white/60 max-w-md mx-auto relative z-10">
+              Create your first seating chart in under 2 minutes. No
               signup, no credit card.
             </p>
             <Link
               href="/editor"
-              className="mt-6 inline-block rounded-lg bg-pencil-yellow px-8 py-3 text-base font-bold text-chalkboard hover:bg-pencil-yellow/90 transition-colors"
+              className="mt-8 inline-block rounded-xl bg-pencil-yellow px-10 py-4 text-lg font-bold text-chalkboard shadow-lg shadow-pencil-yellow/20 hover:shadow-xl hover:scale-[1.02] transition-all relative z-10"
             >
-              Create Your Seating Chart
+              Create Your Seating Chart &rarr;
             </Link>
           </div>
         </section>
 
         {/* FAQ */}
-        <section className="mx-auto max-w-3xl px-6 pb-16">
-          <h3 className="font-heading text-center text-2xl font-bold text-chalkboard dark:text-white sm:text-3xl">
-            Frequently Asked Questions
-          </h3>
-          <div className="mt-8 divide-y divide-wood-light/20 dark:divide-chalk-white/10">
-            {faqItems.map((item) => (
-              <details key={item.q} className="group py-5">
-                <summary className="flex cursor-pointer items-center justify-between text-left text-base font-medium text-chalkboard dark:text-white">
-                  {item.q}
-                  <span className="ml-4 shrink-0 text-chalk-green group-open:rotate-45 transition-transform text-xl">
-                    +
-                  </span>
-                </summary>
-                <p className="mt-3 text-sm leading-relaxed text-foreground/60">
-                  {item.a}
-                </p>
-              </details>
-            ))}
+        <section className="bg-wood-warm/30 dark:bg-chalkboard/20">
+          <div className="mx-auto max-w-3xl px-6 py-20">
+            <h3 className="font-heading text-center text-3xl font-bold text-chalkboard dark:text-white sm:text-4xl">
+              Frequently Asked Questions
+            </h3>
+            <div className="mt-10 space-y-3">
+              {faqItems.map((item) => (
+                <details key={item.q} className="group rounded-xl bg-white border border-wood-light/15 p-5 shadow-sm dark:bg-chalkboard dark:border-chalk-white/10">
+                  <summary className="flex cursor-pointer items-center justify-between text-left text-base font-semibold text-chalkboard dark:text-white">
+                    {item.q}
+                    <span className="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-chalk-green-light text-chalk-green group-open:rotate-45 transition-transform text-sm font-bold dark:bg-chalk-green/20">
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-3 text-sm leading-relaxed text-foreground/60 border-t border-wood-light/10 pt-3 dark:border-chalk-white/5">
+                    {item.a}
+                  </p>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* More tools */}
-        <section className="mx-auto max-w-xl px-6 pb-16">
+        <section className="mx-auto max-w-xl px-6 py-16">
           <h3 className="font-heading text-center text-2xl font-bold text-chalkboard dark:text-white">
             More Free Teacher Tools
           </h3>
           <div className="mt-6">
             <a
               href="https://nametracingmaker.com"
-              className="block rounded-2xl border border-wood-light/20 bg-white p-6 hover:border-chalk-green/30 hover:shadow-md transition dark:bg-chalkboard dark:border-chalk-white/10"
+              className="group block rounded-2xl border-2 border-wood-light/20 bg-white p-6 hover:border-chalk-green/40 hover:shadow-lg transition-all dark:bg-chalkboard dark:border-chalk-white/10"
             >
-              <h4 className="font-heading text-lg font-semibold text-chalkboard dark:text-white">
-                Tracing Worksheet Maker
-              </h4>
-              <p className="mt-2 text-sm text-foreground/60">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-pencil-yellow/20">
+                  <span className="text-xl">✍️</span>
+                </div>
+                <h4 className="font-heading text-lg font-bold text-chalkboard dark:text-white">
+                  Tracing Worksheet Maker
+                </h4>
+              </div>
+              <p className="mt-3 text-sm text-foreground/60 leading-relaxed">
                 Generate printable name, letter, and number tracing worksheets.
                 Perfect for preschool and kindergarten classrooms.
               </p>
-              <span className="mt-3 inline-block text-sm font-semibold text-chalk-green">
-                Try it free &rarr;
+              <span className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-chalk-green group-hover:gap-2 transition-all">
+                Try it free <span>&rarr;</span>
               </span>
             </a>
           </div>
@@ -687,52 +788,61 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-wood-light/20 bg-wood-warm dark:bg-chalkboard dark:border-chalk-white/10">
-        <div className="mx-auto max-w-5xl px-6 py-8">
-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-foreground/40">
+      <footer className="border-t-4 border-wood/40 bg-chalkboard dark:bg-chalkboard text-chalk-white/50">
+        <div className="wood-strip" />
+        <div className="mx-auto max-w-5xl px-6 py-10">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-chalk-green/20">
+              <DeskIcon className="h-4 w-4 text-pencil-yellow" />
+            </div>
+            <span className="font-heading text-sm font-bold text-chalk-white/70">Classroom Seating Chart Maker</span>
+          </div>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
             <Link
               href="/random-seating-chart-generator"
-              className="hover:text-chalk-green transition-colors"
+              className="hover:text-pencil-yellow transition-colors"
             >
-              Random Seating Chart Generator
+              Random Generator
             </Link>
             <Link
               href="/band-seating-chart"
-              className="hover:text-chalk-green transition-colors"
+              className="hover:text-pencil-yellow transition-colors"
             >
               Band Seating Chart
             </Link>
             <Link
               href="/classroom-seating-arrangement"
-              className="hover:text-chalk-green transition-colors"
+              className="hover:text-pencil-yellow transition-colors"
             >
-              Classroom Seating Arrangements
+              Arrangements
             </Link>
             <Link
               href="/seating-chart-templates"
-              className="hover:text-chalk-green transition-colors"
+              className="hover:text-pencil-yellow transition-colors"
             >
-              Seating Chart Templates
+              Templates
             </Link>
             <Link
               href="/privacy-policy"
-              className="hover:text-chalk-green transition-colors"
+              className="hover:text-pencil-yellow transition-colors"
             >
               Privacy Policy
             </Link>
           </div>
-          <p className="mt-4 text-sm text-foreground/40">
-            Classroom Seating Chart Maker — Free for teachers.
-          </p>
-          <p className="mt-1 text-xs text-foreground/30">
-            From the makers of{" "}
-            <a
-              href="https://nametracingmaker.com"
-              className="underline hover:text-chalk-green transition-colors"
-            >
-              Tracing Worksheet Maker
-            </a>
-          </p>
+          <div className="mt-6 pt-6 border-t border-chalk-white/10 flex flex-wrap items-center justify-between gap-4">
+            <p className="text-xs text-chalk-white/30">
+              Free for teachers. Built with care.
+            </p>
+            <p className="text-xs text-chalk-white/30">
+              From the makers of{" "}
+              <a
+                href="https://nametracingmaker.com"
+                className="underline hover:text-pencil-yellow transition-colors"
+              >
+                Tracing Worksheet Maker
+              </a>
+            </p>
+          </div>
         </div>
       </footer>
     </div>
